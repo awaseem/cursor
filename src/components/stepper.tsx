@@ -1,15 +1,19 @@
 import React from 'react'
-import { StyleSheet, ScrollView, Text, View } from 'react-native'
-import { titleHeading } from '../styles/fonts'
+import { StyleSheet, ScrollView, View } from 'react-native'
 import { StepperButton } from './stepperButton'
 
 export interface StepperProps {
   steps: number
+  activeStep: number
 }
 
-export function Stepper({ steps }: StepperProps) {
+export function Stepper({ steps, activeStep }: StepperProps) {
   const stepButton = Array.from(Array(steps).keys()).map(step => (
-    <StepperButton key={step} text={(step + 1).toString()} />
+    <StepperButton
+      active={activeStep === step}
+      key={step}
+      text={(step + 1).toString()}
+    />
   ))
 
   return (

@@ -7,7 +7,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Header onPress={() => undefined} title="Strings" />
-      <Stepper steps={10} />
+      <Stepper activeStep={1} steps={10} />
     </SafeAreaView>
   )
 }
