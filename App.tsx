@@ -5,6 +5,7 @@ import { Stepper } from './src/components/stepper'
 import { Content } from './src/components/content'
 import { CourseHeader } from './src/components/course/courseHeader'
 import { CourseMessage } from './src/components/course/courseMessage'
+import { CourseButton } from './src/components/course/courseButton'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           }
         />
       </Content>
+      <CourseButton text={'Next 👏'} />
     </SafeAreaView>
   )
 }
