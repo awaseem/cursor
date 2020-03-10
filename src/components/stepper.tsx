@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { StepperButton } from './stepperButton'
+import { colors } from '../styles/color'
 
 export interface StepperProps {
   steps: number
@@ -19,6 +20,7 @@ export function Stepper({ steps, activeStep }: StepperProps) {
   return (
     <View>
       <ScrollView
+        style={styles.Container}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.InnerContainer}
         horizontal={true}
@@ -31,7 +33,11 @@ export function Stepper({ steps, activeStep }: StepperProps) {
 
 export const styles = StyleSheet.create({
   InnerContainer: {
-    paddingTop: 10,
-    paddingBottom: 20,
+    marginBottom: 20,
+  },
+  Container: {
+    marginHorizontal: -20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.separtorColor,
   },
 })
