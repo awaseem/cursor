@@ -6,7 +6,7 @@ export interface CourseHeaderProps {
   title: string
 }
 
-export function CourseHeaderProps({ title }: CourseHeaderProps) {
+export function CourseHeader({ title }: CourseHeaderProps) {
   return (
     <View style={styles.Container}>
       <Text style={courseHeading}>{title}</Text>
@@ -15,7 +15,5 @@ export function CourseHeaderProps({ title }: CourseHeaderProps) {
 }
 
 export const styles = StyleSheet.create({
-  Container: {
-    marginHorizontal: 10,
-  },
+  Container: {},
 })
