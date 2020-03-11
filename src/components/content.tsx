@@ -6,11 +6,14 @@ export interface ContentProps {
 }
 
 export function Content({ children }: ContentProps) {
-  return <ScrollView style={styles.Container}>{children}</ScrollView>
+  return (
+    <ScrollView contentContainerStyle={styles.Container}>{children}</ScrollView>
+  )
 }
 
 const styles = StyleSheet.create({
   Container: {
+    flex: 1,
     paddingTop: 40,
   },
 })
