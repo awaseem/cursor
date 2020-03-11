@@ -11,17 +11,26 @@ import {
 import { iOSUIKit } from 'react-native-typography'
 import { colors } from '../../styles/color'
 
-var ACTION_TIMER = 800
-var COLORS = ['white', '#136D61', colors.buttonSecondaryColor]
+const ACTION_TIMER = 600
+const COLORS = ['white', colors.buttonSelectionColor]
 
 export interface CourseButtonProps {
   text: string
+  marker: string
+  finalColor: string
+  onHold: () => void
 }
 
-export function CourseButton({ text }: CourseButtonProps) {
+export function CourseButton({
+  text,
+  marker,
+  finalColor,
+  onHold,
+}: CourseButtonProps) {
   const _value = useRef(0)
 
   const [pressAction] = useState(new Animated.Value(0))
+  const [completed, setCompleted] = useState(false)
 
   const [buttonWidth, setButtonWidth] = useState(0)
   const [buttonHeight, setButtonHeight] = useState(0)
@@ -56,7 +65,7 @@ export function CourseButton({ text }: CourseButtonProps) {
     })
     const backgroundColor = pressAction.interpolate({
       inputRange: [0, 0.5, 1],
-      outputRange: COLORS,
+      outputRange: [...COLORS, finalColor],
     })
     const scale = pressAction.interpolate({
       inputRange: [0, 0.5, 1],
@@ -71,20 +80,77 @@ export function CourseButton({ text }: CourseButtonProps) {
     }
   }
 
+  function getAnimatedText() {
+    const translateX = pressAction.interpolate({
+      inputRange: [0, 0.5, 0.75, 1],
+      outputRange: [20, 20, 0, 0],
+    })
+
+    return {
+      transform: [
+        {
+          translateX,
+        },
+      ],
+    }
+  }
+
+  function getAnimatedMarker() {
+    const opacity = pressAction.interpolate({
+      inputRange: [0, 0.5, 0.75, 1],
+      outputRange: [0, 0, 1, 1],
+    })
+    const translateY = pressAction.interpolate({
+      inputRange: [0, 0.5, 0.75, 1],
+      outputRange: [5, 5, 0, 0],
+    })
+    const scale = pressAction.interpolate({
+      inputRange: [0, 0.5, 0.75, 1],
+      outputRange: [1, 1, 1.25, 1.25],
+    })
+
+    return {
+      opacity,
+      transform: [
+        {
+          translateY,
+        },
+        { scale },
+      ],
+    }
+  }
+
   function animationActionComplete() {
     if (_value.current === 1) {
+      setCompleted(true)
+      onHold()
     }
   }
 
   return (
     <TouchableWithoutFeedback
       onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
+      onPressOut={completed ? undefined : handlePressOut}
     >
       <View style={styles.Container} onLayout={buttonWidthHeightOnLayout}>
         <Animated.View style={[styles.bgFillLeft, getProgressStyles()]} />
         <Animated.View style={[styles.bgFillRight, getProgressStyles()]} />
-        <Text style={iOSUIKit.bodyEmphasizedWhiteObject}>{text}</Text>
+        <View style={styles.ContentContainer}>
+          <Animated.Text
+            style={[iOSUIKit.bodyEmphasizedWhiteObject, getAnimatedText()]}
+          >
+            {text}
+          </Animated.Text>
+          <Animated.Text
+            style={[
+              iOSUIKit.bodyEmphasizedWhiteObject,
+              getAnimatedMarker(),
+              { paddingHorizontal: 10 },
+            ]}
+          >
+            {` ${marker}`}
+          </Animated.Text>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   )
@@ -98,6 +164,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.buttonMainColor,
     borderRadius: 25,
+  },
+  ContentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   bgFillLeft: {
     position: 'absolute',

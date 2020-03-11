@@ -3,7 +3,11 @@ export const colors = {
 
   separtorColor: '#4C5454',
 
-  buttonMainColor: '#4C5454',
+  buttonMainColor: '#758282',
 
-  buttonSecondaryColor: '#1EA896',
+  buttonSucessColor: '#1EA896',
+
+  buttonSelectionColor: '#105E53',
+
+  buttonErrorColor: '#FF715B',
 }

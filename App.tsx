@@ -6,6 +6,7 @@ import { Content } from './src/components/content'
 import { CourseHeader } from './src/components/course/courseHeader'
 import { CourseMessage } from './src/components/course/courseMessage'
 import { CourseButton } from './src/components/course/courseButton'
+import { colors } from './src/styles/color'
 
 export default function App() {
   return (
@@ -20,7 +21,12 @@ export default function App() {
           }
         />
       </Content>
-      <CourseButton text={'Next 👏'} />
+      <CourseButton
+        finalColor={colors.buttonSucessColor}
+        text={'Next'}
+        marker={'🙌'}
+        onHold={() => undefined}
+      />
     </SafeAreaView>
   )
 }
