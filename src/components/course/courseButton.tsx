@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.buttonMainColor,
-    borderRadius: 25,
+    borderRadius: 10,
   },
   ContentContainer: {
     flexDirection: 'row',
@@ -173,14 +173,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    borderTopLeftRadius: 25,
-    borderBottomLeftRadius: 25,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   bgFillRight: {
     position: 'absolute',
     top: 0,
     right: 0,
-    borderTopRightRadius: 25,
-    borderBottomRightRadius: 25,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
 })
