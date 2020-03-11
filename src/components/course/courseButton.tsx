@@ -10,7 +10,7 @@ import {
 import { iOSUIKit } from 'react-native-typography'
 import { colors } from '../../styles/color'
 
-var ACTION_TIMER = 400
+var ACTION_TIMER = 500
 var COLORS = ['rgb(255,255,255)', colors.buttonSecondaryColor]
 
 export interface CourseButtonProps {
@@ -19,7 +19,7 @@ export interface CourseButtonProps {
 
 export function CourseButton({ text }: CourseButtonProps) {
   const _value = useRef(0)
-  const [pressAction, setPressAction] = useState(new Animated.Value(0))
+  const [pressAction] = useState(new Animated.Value(0))
   const [buttonWidth, setButtonWidth] = useState(0)
   const [buttonHeight, setButtonHeight] = useState(0)
 
@@ -47,18 +47,23 @@ export function CourseButton({ text }: CourseButtonProps) {
   }
 
   function getProgressStyles() {
-    var width = pressAction.interpolate({
+    const width = pressAction.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, buttonWidth],
+      outputRange: [0, buttonWidth / 2],
     })
-    var bgColor = pressAction.interpolate({
+    const backgroundColor = pressAction.interpolate({
       inputRange: [0, 1],
       outputRange: COLORS,
     })
+    const scale = pressAction.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 1.1],
+    })
     return {
-      width: width,
+      width,
       height: buttonHeight,
-      backgroundColor: bgColor,
+      backgroundColor,
+      transform: [{ scale }],
     }
   }
 
@@ -70,7 +75,8 @@ export function CourseButton({ text }: CourseButtonProps) {
       onPressOut={handlePressOut}
     >
       <View style={styles.Container} onLayout={buttonWidthHeightOnLayout}>
-        <Animated.View style={[styles.bgFill, getProgressStyles()]} />
+        <Animated.View style={[styles.bgFillLeft, getProgressStyles()]} />
+        <Animated.View style={[styles.bgFillRight, getProgressStyles()]} />
         <Text style={iOSUIKit.bodyEmphasizedWhiteObject}>{text}</Text>
       </View>
     </TouchableWithoutFeedback>
@@ -86,10 +92,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.buttonMainColor,
     borderRadius: 25,
   },
-  bgFill: {
+  bgFillLeft: {
     position: 'absolute',
     top: 0,
     left: 0,
-    borderRadius: 25,
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+  },
+  bgFillRight: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 25,
   },
 })
