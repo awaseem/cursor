@@ -2,30 +2,20 @@ import React from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 import { Header } from './src/components/header'
 import { Stepper } from './src/components/stepper'
-import { Content } from './src/components/content'
-import { CourseHeader } from './src/components/course/courseHeader'
-import { CourseMessage } from './src/components/course/courseMessage'
-import { CourseButton } from './src/components/course/courseButton'
-import { colors } from './src/styles/color'
+import { CourseContent } from './src/components/course/courseContent'
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Header onPress={() => undefined} title="Strings" />
       <Stepper activeStep={1} steps={10} />
-      <Content>
-        <CourseHeader title={'What is a string?'} />
-        <CourseMessage
-          message={
-            'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.'
-          }
-        />
-      </Content>
-      <CourseButton
-        finalColor={colors.buttonSucessColor}
-        text={'Next'}
-        marker={'🙌'}
-        onHold={() => undefined}
+      <CourseContent
+        title={'What is a string?'}
+        content={
+          'Is a <length> or <percentage> representing the abscissa of the translating vector. A percentage value refers to the width of the reference box defined by the transform-box property.'
+        }
+        buttonTitle={'Next'}
+        buttonMarker={'🙌'}
       />
     </SafeAreaView>
   )
