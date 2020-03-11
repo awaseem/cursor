@@ -6,12 +6,13 @@ import {
   TouchableWithoutFeedback,
   Animated,
   LayoutChangeEvent,
+  Vibration,
 } from 'react-native'
 import { iOSUIKit } from 'react-native-typography'
 import { colors } from '../../styles/color'
 
-var ACTION_TIMER = 500
-var COLORS = ['rgb(255,255,255)', colors.buttonSecondaryColor]
+var ACTION_TIMER = 800
+var COLORS = ['white', '#136D61', colors.buttonSecondaryColor]
 
 export interface CourseButtonProps {
   text: string
@@ -19,7 +20,9 @@ export interface CourseButtonProps {
 
 export function CourseButton({ text }: CourseButtonProps) {
   const _value = useRef(0)
+
   const [pressAction] = useState(new Animated.Value(0))
+
   const [buttonWidth, setButtonWidth] = useState(0)
   const [buttonHeight, setButtonHeight] = useState(0)
 
@@ -48,17 +51,18 @@ export function CourseButton({ text }: CourseButtonProps) {
 
   function getProgressStyles() {
     const width = pressAction.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, buttonWidth / 2],
+      inputRange: [0, 0.5, 1],
+      outputRange: [0, buttonWidth / 2, buttonWidth / 2],
     })
     const backgroundColor = pressAction.interpolate({
-      inputRange: [0, 1],
+      inputRange: [0, 0.5, 1],
       outputRange: COLORS,
     })
     const scale = pressAction.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 1.1],
+      inputRange: [0, 0.5, 1],
+      outputRange: [1, 1.1, 1],
     })
+
     return {
       width,
       height: buttonHeight,
@@ -67,7 +71,10 @@ export function CourseButton({ text }: CourseButtonProps) {
     }
   }
 
-  function animationActionComplete() {}
+  function animationActionComplete() {
+    if (_value.current === 1) {
+    }
+  }
 
   return (
     <TouchableWithoutFeedback
