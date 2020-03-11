@@ -158,7 +158,7 @@ export function CourseButton({
 
 const styles = StyleSheet.create({
   Container: {
-    width: '100%',
+    width: '95%',
     height: 60,
     justifyContent: 'center',
     alignItems: 'center',
