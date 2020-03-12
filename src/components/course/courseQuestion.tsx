@@ -5,19 +5,18 @@ import { CourseHeader } from './courseHeader'
 import { CourseMessage } from './courseMessage'
 import { colors } from '../../styles/color'
 import { StyleSheet, View } from 'react-native'
+import { AnswerButtonProps } from '../answerButton'
 
 export interface CourseQuestionProps {
   title: string
   content: string
-  buttonTitle: string
-  buttonMarker: string
+  answers: AnswerButtonProps[]
 }
 
 export function CourseQuestion({
   title,
   content,
-  buttonTitle,
-  buttonMarker,
+  answers,
 }: CourseQuestionProps) {
   return (
     <>
@@ -27,26 +26,26 @@ export function CourseQuestion({
         <View style={styles.ButtonContainer}>
           <CourseButton
             finalColor={colors.buttonSucessColor}
-            text={buttonTitle}
-            marker={buttonMarker}
+            text={''}
+            marker={''}
             onHold={() => undefined}
           />
           <CourseButton
             finalColor={colors.buttonSucessColor}
-            text={buttonTitle}
-            marker={buttonMarker}
+            text={''}
+            marker={''}
             onHold={() => undefined}
           />
           <CourseButton
             finalColor={colors.buttonSucessColor}
-            text={buttonTitle}
-            marker={buttonMarker}
+            text={''}
+            marker={''}
             onHold={() => undefined}
           />
           <CourseButton
             finalColor={colors.buttonSucessColor}
-            text={buttonTitle}
-            marker={buttonMarker}
+            text={''}
+            marker={''}
             onHold={() => undefined}
           />
         </View>

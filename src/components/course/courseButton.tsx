@@ -19,6 +19,8 @@ export interface CourseButtonProps {
   marker: string
   finalColor: string
   onHold: () => void
+
+  additionalText?: string
 }
 
 export function CourseButton({
@@ -26,12 +28,14 @@ export function CourseButton({
   marker,
   finalColor,
   onHold,
+  additionalText,
 }: CourseButtonProps) {
   const _value = useRef(0)
 
   const [pressAction] = useState(new Animated.Value(0))
-  const [completed, setCompleted] = useState(false)
+  const [completeAction] = useState(new Animated.Value(0))
 
+  const [completed, setCompleted] = useState(false)
   const [buttonWidth, setButtonWidth] = useState(0)
   const [buttonHeight, setButtonHeight] = useState(0)
 
@@ -120,10 +124,53 @@ export function CourseButton({
     }
   }
 
+  function changeHeightForAdditionalText() {
+    const height = completeAction.interpolate({
+      inputRange: [0, 0.25, 0.5, 0.75, 1],
+      outputRange: [60, 80, 100, 125, 160],
+    })
+
+    return {
+      height,
+    }
+  }
+
+  function getAnimatedContentComplete() {
+    const translateY = completeAction.interpolate({
+      inputRange: [0, 0.5, 0.75, 1],
+      outputRange: [20, 20, 15, 10],
+    })
+
+    return {
+      transform: [
+        {
+          translateY,
+        },
+      ],
+    }
+  }
+
+  function showAdditionalText() {
+    const opacity = completeAction.interpolate({
+      inputRange: [0, 0.25, 0.5, 0.75, 1],
+      outputRange: [0, 0, 0, 0, 1],
+    })
+
+    return {
+      opacity,
+    }
+  }
+
   function animationActionComplete() {
     if (_value.current === 1) {
       setCompleted(true)
-      onHold()
+
+      Animated.timing(completeAction, {
+        duration: ACTION_TIMER,
+        toValue: 1,
+      }).start(() => {
+        onHold()
+      })
     }
   }
 
@@ -132,10 +179,15 @@ export function CourseButton({
       onPressIn={handlePressIn}
       onPressOut={completed ? undefined : handlePressOut}
     >
-      <View style={styles.Container} onLayout={buttonWidthHeightOnLayout}>
+      <Animated.View
+        style={[styles.Container, changeHeightForAdditionalText()]}
+        onLayout={buttonWidthHeightOnLayout}
+      >
         <Animated.View style={[styles.bgFillLeft, getProgressStyles()]} />
         <Animated.View style={[styles.bgFillRight, getProgressStyles()]} />
-        <View style={styles.ContentContainer}>
+        <Animated.View
+          style={[styles.ContentContainer, getAnimatedContentComplete()]}
+        >
           <Animated.Text
             style={[iOSUIKit.bodyEmphasizedWhiteObject, getAnimatedText()]}
           >
@@ -150,8 +202,13 @@ export function CourseButton({
           >
             {` ${marker}`}
           </Animated.Text>
-        </View>
-      </View>
+        </Animated.View>
+        {additionalText && (
+          <Animated.Text style={[styles.AdditionalText, showAdditionalText()]}>
+            {additionalText}
+          </Animated.Text>
+        )}
+      </Animated.View>
     </TouchableWithoutFeedback>
   )
 }
@@ -159,8 +216,6 @@ export function CourseButton({
 const styles = StyleSheet.create({
   Container: {
     width: '95%',
-    height: 60,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.buttonMainColor,
     borderRadius: 10,
@@ -168,6 +223,10 @@ const styles = StyleSheet.create({
   ContentContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  AdditionalText: {
+    ...iOSUIKit.bodyWhiteObject,
+    marginTop: 25,
   },
   bgFillLeft: {
     position: 'absolute',
