@@ -1,11 +1,9 @@
 import React from 'react'
-import { CourseButton } from './courseButton'
 import { Content } from '../content'
 import { CourseHeader } from './courseHeader'
 import { CourseMessage } from './courseMessage'
-import { colors } from '../../styles/color'
 import { StyleSheet, View } from 'react-native'
-import { AnswerButtonProps } from '../answerButton'
+import { AnswerButtonProps, AnswerButton } from '../answerButton'
 
 export interface CourseQuestionProps {
   title: string
@@ -18,37 +16,17 @@ export function CourseQuestion({
   content,
   answers,
 }: CourseQuestionProps) {
+  const answerButtons = answers.map((answer, index) => (
+    <View key={index} style={{ marginVertical: 20 }}>
+      <AnswerButton {...answer} />
+    </View>
+  ))
   return (
     <>
       <Content>
         <CourseHeader title={title} />
         <CourseMessage message={content} />
-        <View style={styles.ButtonContainer}>
-          <CourseButton
-            finalColor={colors.buttonSucessColor}
-            text={''}
-            marker={''}
-            onHold={() => undefined}
-          />
-          <CourseButton
-            finalColor={colors.buttonSucessColor}
-            text={''}
-            marker={''}
-            onHold={() => undefined}
-          />
-          <CourseButton
-            finalColor={colors.buttonSucessColor}
-            text={''}
-            marker={''}
-            onHold={() => undefined}
-          />
-          <CourseButton
-            finalColor={colors.buttonSucessColor}
-            text={''}
-            marker={''}
-            onHold={() => undefined}
-          />
-        </View>
+        <View style={styles.ButtonContainer}>{answerButtons}</View>
       </Content>
     </>
   )
@@ -58,7 +36,6 @@ const styles = StyleSheet.create({
   ButtonContainer: {
     flex: 1,
     marginVertical: 40,
-    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
 })

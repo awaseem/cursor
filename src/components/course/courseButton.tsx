@@ -165,12 +165,16 @@ export function CourseButton({
     if (_value.current === 1) {
       setCompleted(true)
 
-      Animated.timing(completeAction, {
-        duration: ACTION_TIMER,
-        toValue: 1,
-      }).start(() => {
+      if (additionalText) {
+        Animated.timing(completeAction, {
+          duration: ACTION_TIMER,
+          toValue: 1,
+        }).start(() => {
+          onHold()
+        })
+      } else {
         onHold()
-      })
+      }
     }
   }
 
@@ -227,6 +231,7 @@ const styles = StyleSheet.create({
   AdditionalText: {
     ...iOSUIKit.bodyWhiteObject,
     marginTop: 25,
+    paddingHorizontal: 20,
   },
   bgFillLeft: {
     position: 'absolute',

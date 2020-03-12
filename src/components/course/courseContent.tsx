@@ -25,9 +25,6 @@ export function CourseContent({
         <CourseMessage message={content} />
       </Content>
       <CourseButton
-        additionalText={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.'
-        }
         finalColor={colors.buttonSucessColor}
         text={buttonTitle}
         marker={buttonMarker}
