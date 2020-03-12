@@ -51,10 +51,12 @@ export function CourseButton({
   }
 
   function handlePressOut() {
-    Animated.timing(pressAction, {
-      duration: _value.current * ACTION_TIMER,
-      toValue: 0,
-    }).start()
+    if (_value.current < 0.55) {
+      Animated.timing(pressAction, {
+        duration: _value.current * ACTION_TIMER,
+        toValue: 0,
+      }).start()
+    }
   }
 
   function buttonWidthHeightOnLayout(e: LayoutChangeEvent) {
