@@ -68,8 +68,8 @@ export function CourseButton({
       outputRange: [...COLORS, finalColor],
     })
     const scale = pressAction.interpolate({
-      inputRange: [0, 0.5, 1],
-      outputRange: [1, 1.1, 1],
+      inputRange: [0, 0.5, 0.75, 1],
+      outputRange: [1, 1.1, 1.25, 1],
     })
 
     return {
