@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Header } from './src/components/header'
 import { Stepper } from './src/components/stepper'
-import { CodingQuestion } from './src/components/course/courseCodingQuestion'
+import { CodingQuestion } from './src/components/course/screens/courseCodingQuestion'
 
 export default function App() {
   return (

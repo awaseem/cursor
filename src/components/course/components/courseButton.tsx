@@ -9,7 +9,7 @@ import {
   Vibration,
 } from 'react-native'
 import { iOSUIKit } from 'react-native-typography'
-import { colors } from '../styles/color'
+import { colors } from '../../../styles/color'
 
 const ACTION_TIMER = 600
 const COLORS = ['white', colors.buttonSelectionColor]

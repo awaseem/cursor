@@ -1,9 +1,9 @@
 import React from 'react'
 import { CourseButtonProps, CourseButton } from './courseButton'
-import { Content } from './content'
+import { Content } from '../../content'
 import { CourseHeader } from './courseHeader'
 import { CourseMessage } from './courseMessage'
-import { colors } from '../styles/color'
+import { colors } from '../../../styles/color'
 
 export interface CourseContentProps {
   title: string

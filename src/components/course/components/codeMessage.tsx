@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { codeMessage } from '../styles/fonts'
+import { codeMessage } from '../../../styles/fonts'
 
 export interface CodeMessageProps {
   message: string

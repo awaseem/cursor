@@ -1,22 +1,21 @@
 import React from 'react'
-import { Content } from '../content'
-import { CourseHeader } from '../courseHeader'
-import { CourseMessage } from '../courseMessage'
+import { Content } from '../../content'
+import { CourseHeader } from '../components/courseHeader'
+import { CourseMessage } from '../components/courseMessage'
 import { StyleSheet, View } from 'react-native'
-import { AnswerButtonProps, AnswerButton } from '../answerButton'
-import { CodeMessage } from '../codeMessage'
+import { AnswerButtonProps, AnswerButton } from '../../answerButton'
 
-export interface CodingQuestionProps {
+export interface CourseQuestionProps {
   title: string
   content: string
   answers: AnswerButtonProps[]
 }
 
-export function CodingQuestion({
+export function CourseQuestion({
   title,
   content,
   answers,
-}: CodingQuestionProps) {
+}: CourseQuestionProps) {
   const answerButtons = answers.map((answer, index) => (
     <View key={index} style={{ marginVertical: 20 }}>
       <AnswerButton {...answer} />
@@ -27,7 +26,6 @@ export function CodingQuestion({
       <Content>
         <CourseHeader title={title} />
         <CourseMessage message={content} />
-        <CodeMessage message={'console.log( BLANK )'} />
         <View style={styles.ButtonContainer}>{answerButtons}</View>
       </Content>
     </>
