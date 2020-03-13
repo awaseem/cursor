@@ -2,8 +2,7 @@ import React from 'react'
 import { StyleSheet, SafeAreaView } from 'react-native'
 import { Header } from './src/components/header'
 import { Stepper } from './src/components/stepper'
-import { CourseQuestion } from './src/components/course/courseQuestion'
-import { CourseContent } from './src/components/course/courseContent'
+import { CourseQuestion } from './src/components/course/courseSimpleQuestion'
 
 export default function App() {
   return (

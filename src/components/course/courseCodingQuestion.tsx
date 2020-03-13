@@ -1,7 +1,7 @@
 import React from 'react'
 import { Content } from '../content'
-import { CourseHeader } from './courseHeader'
-import { CourseMessage } from './courseMessage'
+import { CourseHeader } from '../courseHeader'
+import { CourseMessage } from '../courseMessage'
 import { StyleSheet, View } from 'react-native'
 import { AnswerButtonProps, AnswerButton } from '../answerButton'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { courseHeading } from '../../styles/fonts'
+import { courseHeading } from '../styles/fonts'
 
 export interface CourseHeaderProps {
   title: string

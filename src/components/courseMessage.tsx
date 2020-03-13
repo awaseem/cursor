@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { courseMessage } from '../../styles/fonts'
+import { courseMessage } from '../styles/fonts'
 
 export interface CourseMessageProps {
   message: string
