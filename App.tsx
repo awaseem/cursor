@@ -1,14 +1,14 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Header } from './src/components/header'
 import { Stepper } from './src/components/stepper'
 import { CodingQuestion } from './src/components/course/screens/courseCodingQuestion'
+import { Container } from './src/components/container'
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
+      <Container>
         <Header onPress={() => undefined} title="Strings" />
         <Stepper activeStep={1} steps={10} />
         <CodingQuestion
@@ -47,14 +47,7 @@ export default function App() {
             },
           ]}
         />
-      </SafeAreaView>
+      </Container>
     </SafeAreaProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginHorizontal: 20,
-  },
-})
