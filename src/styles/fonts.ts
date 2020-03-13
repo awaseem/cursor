@@ -1,4 +1,5 @@
 import { iOSUIKit, Style } from 'react-native-typography'
+import { colors } from './color'
 
 export const BASE_FONT_SIZE = 16
 
@@ -16,4 +17,10 @@ export const courseMessage: Style = {
   ...iOSUIKit.bodyObject,
   fontSize: BASE_FONT_SIZE,
   lineHeight: 30,
+}
+
+export const codeMessage: Style = {
+  fontFamily: 'Courier',
+  fontSize: BASE_FONT_SIZE * 1.1,
+  color: colors.codingColor,
 }

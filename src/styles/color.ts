@@ -10,4 +10,6 @@ export const colors = {
   buttonSelectionColor: '#105E53',
 
   buttonErrorColor: '#FF715B',
+
+  codingColor: '#FF715B',
 }
