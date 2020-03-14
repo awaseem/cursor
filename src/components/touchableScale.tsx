@@ -1,5 +1,8 @@
 import React, { useRef } from 'react'
 import { Animated } from 'react-native'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+
+const SCALE_DURATION_ANIMATION = 300
 
 export interface TouchableScaleProps {
   style?: any
@@ -16,8 +19,8 @@ export function TouchableScale({
 
   function scaleAnimation() {
     const scale = scaleAnimatedValue.interpolate({
-      inputRange: [0, 0.25, 0.5, 0.75, 1],
-      outputRange: [1, 1.05, 1.1, 1.05, 1],
+      inputRange: [0, 1],
+      outputRange: [1, 1.1],
     })
 
     return {
@@ -29,12 +32,30 @@ export function TouchableScale({
     }
   }
 
+  function handlePressIn() {
+    Animated.timing(scaleAnimatedValue, {
+      duration: SCALE_DURATION_ANIMATION,
+      toValue: 1,
+    }).start()
+  }
+
+  function handlePressOut() {
+    Animated.timing(scaleAnimatedValue, {
+      duration: SCALE_DURATION_ANIMATION / 2,
+      toValue: 0,
+    }).start(onPress)
+  }
+
   return (
-    <Animated.View
-      style={style ? [style, scaleAnimation()] : scaleAnimation()}
-      onPress={onPress}
+    <TouchableWithoutFeedback
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
     >
-      {children}
-    </Animated.View>
+      <Animated.View
+        style={style ? [style, scaleAnimation()] : scaleAnimation()}
+      >
+        {children}
+      </Animated.View>
+    </TouchableWithoutFeedback>
   )
 }

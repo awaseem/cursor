@@ -38,13 +38,13 @@ export function Home() {
         }}
       />
       <Content>
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
-        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
+        <CourseRow onPress={() => undefined} title={'Numbers'} emoji={'🔢'} />
       </Content>
     </Container>
   )
