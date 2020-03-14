@@ -1,8 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { Header } from './header'
-import { languageHeading, languageAcronym } from '../../../styles/fonts'
 import { TouchableScale } from '../../touchableScale'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface LanguageCardProps {
   color: string
@@ -17,14 +16,15 @@ export function LanguageCard({
   emoji,
   onPress,
 }: LanguageCardProps) {
+  const { font } = useTheme()
   return (
     <TouchableScale
       onPress={onPress}
       style={[styles.CardContainer, { backgroundColor: color }]}
     >
-      <Text style={languageHeading}>{title}</Text>
+      <Text style={font.languageHeading}>{title}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-        <Text style={languageAcronym}>{emoji}</Text>
+        <Text style={font.languageAcronym}>{emoji}</Text>
       </View>
     </TouchableScale>
   )

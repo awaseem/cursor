@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { greetingHeading, subtitleHeading } from '../../../styles/fonts'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface HeaderProps {
   title: string
@@ -8,11 +8,12 @@ export interface HeaderProps {
 }
 
 export function Header({ title, subtitle }: HeaderProps) {
+  const { font } = useTheme()
   return (
     <View style={styles.Container}>
-      <Text style={greetingHeading}>{title}</Text>
+      <Text style={font.greetingHeading}>{title}</Text>
       {subtitle && (
-        <Text style={[subtitleHeading, styles.SubtitleContainer]}>
+        <Text style={[font.subtitleHeading, styles.SubtitleContainer]}>
           {subtitle}
         </Text>
       )}
