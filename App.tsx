@@ -1,11 +1,14 @@
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { Home } from './src/components/home/screens/home'
+import { NavigationContainer } from '@react-navigation/native'
+import { RootStackScreen } from './src/navigation/navigation'
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <Home />
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <SafeAreaProvider>
+        <RootStackScreen />
+      </SafeAreaProvider>
+    </NavigationContainer>
   )
 }
