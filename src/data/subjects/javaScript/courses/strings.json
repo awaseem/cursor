@@ -1,0 +1,49 @@
+[
+  {
+    "type": "outline",
+    "title": "Super simple math!",
+    "code": "2 + 2 = 4",
+    "content": "I'm baby tbh kickstarter meh polaroid forage drinking vinegar. Cliche humblebrag art party celiac venmo microdosing, dreamcatcher everyday carry poke intelligentsia meh. Bitters shaman cloud bread iceland retro.",
+    "buttonText": "Keep going",
+    "marker": "🤓"
+  },
+  {
+    "type": "choice",
+    "title": "Basic math test",
+    "content": "So what is 2 + 1?",
+    "answers": [
+      {
+        "content": "3",
+        "correct": true
+      },
+      {
+        "content": "21",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "codingChoice",
+    "title": "Basic math test cont'd",
+    "content": "So what is the following output?",
+    "code": "2 + BLANK = 4",
+    "answers": [
+      {
+        "content": "2",
+        "correct": true
+      },
+      {
+        "content": "1",
+        "explaination": "I'm baby listicle green juice kogi helvetica",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "type": "codingInputChoice",
+    "title": "Basic math test cont'd",
+    "content": "Why don't you trying typing it out?",
+    "code": "2 + BLANK = 4",
+    "expectedResponse": "2"
+  }
+]

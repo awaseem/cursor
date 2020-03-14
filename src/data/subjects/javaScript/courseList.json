@@ -1,0 +1,14 @@
+[
+  {
+    "id": "numbers",
+    "name": "Numbers",
+    "emoji": "🔢",
+    "path": "./courses/numbers.json"
+  },
+  {
+    "id": "strings",
+    "name": "Strings",
+    "emoji": "🎻",
+    "path": "./courses/strings.json"
+  }
+]
