@@ -1,4 +1,4 @@
-import { combineReducers } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
   courseList,
   CourseList,
@@ -6,16 +6,16 @@ import {
   selectedCourse,
 } from './courseSlices'
 
-export interface RootState {
-  courses: {
-    courseList: CourseList
-    selectedCourse: CourseItems
-  }
-}
-
 export const rootReducer = combineReducers({
   courses: combineReducers({
     courseList: courseList.reducer,
     selectedCourse: selectedCourse.reducer,
   }),
 })
+
+export const store = configureStore({
+  reducer: rootReducer,
+})
+
+export type AppDispatch = typeof store.dispatch
+export type AppState = ReturnType<typeof rootReducer>
