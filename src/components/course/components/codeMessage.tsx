@@ -7,8 +7,10 @@ export interface CodeMessageProps {
 }
 
 export function CodeMessage({ message }: CodeMessageProps) {
-  const { font } = useTheme()
-  const syntaxWithBlank = message.split(' ').map(addBlockToBlank)
+  const { font, colors } = useTheme()
+  const syntaxWithBlank = message
+    .split(' ')
+    .map(addBlockToBlank(colors.primary.separtorColor))
 
   return (
     <View style={styles.Container}>
@@ -17,11 +19,15 @@ export function CodeMessage({ message }: CodeMessageProps) {
   )
 }
 
-function addBlockToBlank(message: string) {
-  if (message === 'BLANK') {
-    return React.createElement(View, { style: styles.Blank })
+function addBlockToBlank(color: string) {
+  return (message: string) => {
+    if (message === 'BLANK') {
+      return React.createElement(View, {
+        style: [styles.Blank, { borderColor: color }],
+      })
+    }
+    return message + ' '
   }
-  return message + ' '
 }
 
 const styles = StyleSheet.create({
@@ -32,6 +38,5 @@ const styles = StyleSheet.create({
     width: 80,
     height: 15,
     borderWidth: 1,
-    borderColor: 'black',
   },
 })
