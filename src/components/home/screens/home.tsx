@@ -16,13 +16,20 @@ export function Home() {
           showsHorizontalScrollIndicator={false}
           horizontal={true}
         >
-          <LanguageCard title={'JavaScript'} emoji={'🤓'} color={'#FED18C'} />
           <LanguageCard
+            onPress={() => undefined}
+            title={'JavaScript'}
+            emoji={'🤓'}
+            color={'#FED18C'}
+          />
+          <LanguageCard
+            onPress={() => alert('Coming soon!')}
             title={'Hypertext Markup Language'}
             emoji={'🖼️'}
             color={'#FF715B'}
           />
           <LanguageCard
+            onPress={() => alert('Coming soon!')}
             title={'Cascading Style Sheets'}
             emoji={'🎨'}
             color={'#414770'}
