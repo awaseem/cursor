@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Home } from '../components/home/screens/home'
 import { AppDispatch, AppState } from '../redux/rootReducer'
 import { bindActionCreators } from '@reduxjs/toolkit'
-import { getCourses } from '../redux/thunks'
+import { getCourses, setSelectedCourse } from '../redux/thunks'
 
 function mapStateToProps(state: AppState) {
   return {
@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch: AppDispatch) {
   return bindActionCreators(
     {
       getCourses,
+      setSelectedCourse,
     },
     dispatch,
   )

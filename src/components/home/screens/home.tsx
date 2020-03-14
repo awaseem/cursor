@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { Content } from '../../content'
 import { Header } from '../components/header'
 import { Container } from '../../container'
 import { LanguageCard } from '../components/languageCard'
@@ -14,9 +13,14 @@ import { FlatList } from 'react-native-gesture-handler'
 export interface ReduxProps {
   courseList: CourseList
   getCourses: () => void
+  setSelectedCourse: (path: string) => void
 }
 
-export function Home({ courseList, getCourses }: ReduxProps) {
+export function Home({
+  courseList,
+  getCourses,
+  setSelectedCourse,
+}: ReduxProps) {
   const navigation = useNavigation()
   const { colors } = useTheme()
 
@@ -68,7 +72,10 @@ export function Home({ courseList, getCourses }: ReduxProps) {
         renderItem={({ item }) => (
           <CourseRow
             borderColor={'#FED18C'}
-            onPress={() => navigation.navigate(Screens.Coures)}
+            onPress={() => {
+              setSelectedCourse(item.path)
+              navigation.navigate(Screens.Coures)
+            }}
             title={item.name}
             emoji={item.emoji}
           />

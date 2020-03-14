@@ -1,10 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import {
-  courseList,
-  CourseList,
-  CourseItems,
-  selectedCourse,
-} from './courseSlices'
+import { courseList, selectedCourse } from './courseSlices'
 
 export const rootReducer = combineReducers({
   courses: combineReducers({
