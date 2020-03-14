@@ -4,6 +4,7 @@ import { Content } from '../../content'
 import { Header } from '../components/header'
 import { Container } from '../../container'
 import { LanguageCard } from '../components/languageCard'
+import { CourseRow } from '../components/courseRow'
 
 export function Home() {
   return (
@@ -29,8 +30,21 @@ export function Home() {
         </ScrollView>
       </View>
       <Header title={'Courses'} />
+      <View
+        style={{
+          borderBottomWidth: StyleSheet.hairlineWidth,
+          marginTop: 20,
+          marginHorizontal: -20,
+        }}
+      />
       <Content>
-        <Text>hello world</Text>
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
+        <CourseRow title={'Numbers'} emoji={'🔢'} />
       </Content>
     </Container>
   )

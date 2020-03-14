@@ -22,7 +22,7 @@ export function Header({ title, subtitle }: HeaderProps) {
 
 const styles = StyleSheet.create({
   Container: {
-    marginTop: 50,
+    marginTop: 40,
   },
   SubtitleContainer: {
     marginTop: 20,

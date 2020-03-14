@@ -30,5 +30,6 @@ const styles = StyleSheet.create({
   },
   Container: {
     paddingTop: 40,
+    paddingBottom: 40,
   },
 })

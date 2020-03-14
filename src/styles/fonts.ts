@@ -35,6 +35,11 @@ export const courseMessage: Style = {
   lineHeight: 30,
 }
 
+export const courseRowText: Style = {
+  ...iOSUIKit.title3Object,
+  fontSize: BASE_FONT_SIZE,
+}
+
 export const codeMessage: Style = {
   fontFamily: 'Courier',
   fontSize: BASE_FONT_SIZE * 1.1,
