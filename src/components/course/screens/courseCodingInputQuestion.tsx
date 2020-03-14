@@ -1,39 +1,68 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Content } from '../../content'
 import { CourseHeader } from '../components/courseHeader'
 import { CourseMessage } from '../components/courseMessage'
 import { StyleSheet, View } from 'react-native'
-import { AnswerButtonProps } from '../../answerButton'
 import { CodeMessage } from '../components/codeMessage'
 import { CourseButton } from '../components/courseButton'
 import { colors } from '../../../styles/color'
 import { useSafeArea } from 'react-native-safe-area-context'
+import { CourseInput } from '../components/courseInput'
+
+const SUBMIT_BUTTON_TEXT = 'Submit'
 
 export interface CodingInputQuestionProps {
   title: string
   content: string
-  answers: AnswerButtonProps[]
+  code: string
+  expectedResponse: string
+  onSuccess: () => void
+
+  placeholder?: string
+  additionalText?: string
 }
 
 export function CodingInputQuestion({
   title,
   content,
+  expectedResponse,
+  code,
+  onSuccess,
+
+  placeholder,
+  additionalText,
 }: CodingInputQuestionProps) {
   const insets = useSafeArea()
+  const [text, setText] = useState('')
+  const [finalColor, setFinalColor] = useState(colors.buttonErrorColor)
+  const [marker, setMarker] = useState('🤔')
+  const [successful, setSuccessful] = useState(false)
+
+  useEffect(() => {
+    if (text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()) {
+      setSuccessful(true)
+      setFinalColor(colors.buttonSucessColor)
+      setMarker('🤗')
+    }
+  }, [text])
 
   return (
     <View style={[styles.Container, { paddingBottom: insets.bottom }]}>
       <Content>
         <CourseHeader title={title} />
         <CourseMessage message={content} />
-        <CodeMessage message={'console.log( BLANK )'} />
+        <CodeMessage message={code} />
+        <CourseInput
+          onChange={text => setText(text)}
+          placeholder={placeholder}
+        />
       </Content>
       <CourseButton
-        finalColor={colors.buttonSucessColor}
-        text={'Submit'}
-        additionalText={'This is a test'}
-        marker={'🤔'}
-        onHold={() => undefined}
+        finalColor={finalColor}
+        text={SUBMIT_BUTTON_TEXT}
+        additionalText={additionalText}
+        marker={marker}
+        onHold={successful ? onSuccess : () => undefined}
       />
     </View>
   )

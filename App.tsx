@@ -16,36 +16,9 @@ export default function App() {
           content={
             'Is a <length> or <percentage> representing the abscissa of the translating vector. A percentage value refers to the width of the reference box defined by the transform-box property.'
           }
-          answers={[
-            {
-              content: 'This is a test',
-              correct: true,
-              explanation:
-                'Is a <length> or <percentage> representing the abscissa of the translating vector.',
-              onHold: () => undefined,
-            },
-            {
-              content: 'This is a test',
-              correct: false,
-              explanation:
-                'Is a <length> or <percentage> representing the abscissa of the translating vector.',
-              onHold: () => undefined,
-            },
-            {
-              content: 'This is a test',
-              correct: false,
-              explanation:
-                'Is a <length> or <percentage> representing the abscissa of the translating vector.',
-              onHold: () => undefined,
-            },
-            {
-              content: 'This is a test',
-              correct: false,
-              explanation:
-                'Is a <length> or <percentage> representing the abscissa of the translating vector.',
-              onHold: () => undefined,
-            },
-          ]}
+          code={'console.log( BLANK )'}
+          expectedResponse={'hello'}
+          onSuccess={() => alert('correct')}
         />
       </Container>
     </SafeAreaProvider>

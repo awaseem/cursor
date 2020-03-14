@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, KeyboardAvoidingView } from 'react-native'
 
 export interface ContentProps {
   children: React.ReactNode
@@ -7,17 +7,27 @@ export interface ContentProps {
 
 export function Content({ children }: ContentProps) {
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={{ flex: 1 }}
-      contentContainerStyle={styles.Container}
+    <KeyboardAvoidingView
+      style={styles.FlexContainer}
+      behavior="padding"
+      enabled
+      keyboardVerticalOffset={100}
     >
-      {children}
-    </ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.FlexContainer}
+        contentContainerStyle={styles.Container}
+      >
+        {children}
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
+  FlexContainer: {
+    flex: 1,
+  },
   Container: {
     paddingTop: 40,
   },
