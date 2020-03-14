@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Header } from './src/components/header'
 import { Stepper } from './src/components/stepper'
-import { CodingQuestion } from './src/components/course/screens/courseCodingChoiceQuestion'
+import { CodingInputQuestion } from './src/components/course/screens/courseCodingInputQuestion'
 import { Container } from './src/components/container'
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
       <Container>
         <Header onPress={() => undefined} title="Strings" />
         <Stepper activeStep={1} steps={10} />
-        <CodingQuestion
+        <CodingInputQuestion
           title={'What is a string?'}
           content={
             'Is a <length> or <percentage> representing the abscissa of the translating vector. A percentage value refers to the width of the reference box defined by the transform-box property.'
