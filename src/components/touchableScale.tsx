@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { Animated } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
-const SCALE_DURATION_ANIMATION = 300
+const SCALE_DURATION_ANIMATION = 200
 
 export interface TouchableScaleProps {
   style?: any
@@ -20,7 +20,7 @@ export function TouchableScale({
   function scaleAnimation() {
     const scale = scaleAnimatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [1, 1.1],
+      outputRange: [1, 0.9],
     })
 
     return {
