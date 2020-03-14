@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Header } from './src/components/header'
 import { Stepper } from './src/components/stepper'
-import { CodingQuestion } from './src/components/course/screens/courseCodingQuestion'
+import { CodingQuestion } from './src/components/course/screens/courseCodingChoiceQuestion'
 import { Container } from './src/components/container'
 
 export default function App() {
