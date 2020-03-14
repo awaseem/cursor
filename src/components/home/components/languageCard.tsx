@@ -7,21 +7,14 @@ export interface LanguageCardProps {
   color: string
   title: string
   emoji: string
-  acronym: string
 }
 
-export function LanguageCard({
-  color,
-  title,
-  acronym,
-  emoji,
-}: LanguageCardProps) {
+export function LanguageCard({ color, title, emoji }: LanguageCardProps) {
   return (
     <View style={[styles.CardContainer, { backgroundColor: color }]}>
       <Text style={languageHeading}>{title}</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
         <Text style={languageAcronym}>{emoji}</Text>
-        <Text style={languageAcronym}>{acronym}</Text>
       </View>
     </View>
   )
@@ -29,7 +22,9 @@ export function LanguageCard({
 
 const styles = StyleSheet.create({
   CardContainer: {
+    width: 350,
     height: 180,
+    marginHorizontal: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 15,

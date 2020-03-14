@@ -8,7 +8,7 @@ export const greetingHeading: Style = {
 }
 
 export const languageHeading: Style = {
-  ...iOSUIKit.largeTitleEmphasizedObject,
+  ...iOSUIKit.largeTitleEmphasizedWhiteObject,
 }
 
 export const languageAcronym: Style = {
