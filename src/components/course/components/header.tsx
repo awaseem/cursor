@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { titleHeading } from '../../../styles/fonts'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface HeaderProps {
   title: string
@@ -8,15 +8,16 @@ export interface HeaderProps {
 }
 
 export function Header({ title, onPress }: HeaderProps) {
+  const { font } = useTheme()
   return (
     <View style={styles.Container}>
       <View>
         <TouchableOpacity onPress={onPress}>
-          <Text style={titleHeading}>{'❎'}</Text>
+          <Text style={font.titleHeading}>{'❎'}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.TitleContainer}>
-        <Text style={titleHeading}>{title}</Text>
+        <Text style={font.titleHeading}>{title}</Text>
       </View>
     </View>
   )

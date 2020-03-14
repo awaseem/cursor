@@ -1,18 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
 import {
   StyleSheet,
-  View,
-  Text,
   TouchableWithoutFeedback,
   Animated,
   LayoutChangeEvent,
-  Vibration,
 } from 'react-native'
 import { iOSUIKit } from 'react-native-typography'
-import { colors } from '../../../styles/color'
+import { useTheme } from '../../../hooks/themeHooks'
 
 const ACTION_TIMER = 600
-const COLORS = ['white', colors.buttonSelectionColor]
 
 export interface CourseButtonProps {
   text: string
@@ -30,6 +26,9 @@ export function CourseButton({
   onHold,
   additionalText,
 }: CourseButtonProps) {
+  const { colors } = useTheme()
+  const COLORS = ['white', colors.primary.buttonSelectionColor]
+
   const _value = useRef(0)
 
   const [pressAction] = useState(new Animated.Value(0))
@@ -186,7 +185,11 @@ export function CourseButton({
       onPressOut={completed ? undefined : handlePressOut}
     >
       <Animated.View
-        style={[styles.Container, changeHeightForAdditionalText()]}
+        style={[
+          styles.Container,
+          { backgroundColor: colors.primary.buttonMainColor },
+          changeHeightForAdditionalText(),
+        ]}
         onLayout={buttonWidthHeightOnLayout}
       >
         <Animated.View style={[styles.bgFillLeft, getProgressStyles()]} />
@@ -223,7 +226,6 @@ const styles = StyleSheet.create({
   Container: {
     width: '95%',
     alignItems: 'center',
-    backgroundColor: colors.buttonMainColor,
     borderRadius: 10,
   },
   ContentContainer: {

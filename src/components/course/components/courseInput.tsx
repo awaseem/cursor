@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
-import { codeMessage } from '../../../styles/fonts'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface CourseInputProps {
   placeholder?: string
@@ -8,10 +8,11 @@ export interface CourseInputProps {
 }
 
 export function CourseInput({ placeholder, onChange }: CourseInputProps) {
+  const { font } = useTheme()
   return (
     <TextInput
       onChangeText={onChange}
-      style={[styles.Input, codeMessage]}
+      style={[styles.Input, font.codeMessage]}
       placeholder={placeholder ?? 'Enter your response here 💁‍♂️'}
     />
   )

@@ -1,17 +1,18 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { codeMessage } from '../../../styles/fonts'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface CodeMessageProps {
   message: string
 }
 
 export function CodeMessage({ message }: CodeMessageProps) {
+  const { font } = useTheme()
   const syntaxWithBlank = message.split(' ').map(addBlockToBlank)
 
   return (
     <View style={styles.Container}>
-      <Text style={codeMessage}>{syntaxWithBlank}</Text>
+      <Text style={font.codeMessage}>{syntaxWithBlank}</Text>
     </View>
   )
 }

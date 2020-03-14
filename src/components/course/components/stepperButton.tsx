@@ -1,7 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
-import { titleHeading } from '../../../styles/fonts'
-import { colors } from '../../../styles/color'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface StepperButtonProps {
   text: string
@@ -9,10 +8,18 @@ export interface StepperButtonProps {
 }
 
 export function StepperButton({ text, active }: StepperButtonProps) {
+  const { colors, font } = useTheme()
   return (
     <TouchableOpacity style={styles.Container}>
-      <Text style={titleHeading}>{text}</Text>
-      {active && <View style={styles.ActiveIndicator}></View>}
+      <Text style={font.titleHeading}>{text}</Text>
+      {active && (
+        <View
+          style={[
+            styles.ActiveIndicator,
+            { backgroundColor: colors.primary.indicatorColor },
+          ]}
+        ></View>
+      )}
     </TouchableOpacity>
   )
 }
@@ -27,7 +34,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 5,
     height: 5,
-    backgroundColor: colors.indicatorColor,
     right: 0,
     borderRadius: 5,
   },

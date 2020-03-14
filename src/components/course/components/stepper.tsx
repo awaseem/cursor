@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { StepperButton } from './stepperButton'
-import { colors } from '../../../styles/color'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface StepperProps {
   steps: number
@@ -9,6 +9,7 @@ export interface StepperProps {
 }
 
 export function Stepper({ steps, activeStep }: StepperProps) {
+  const { colors } = useTheme()
   const stepButton = Array.from(Array(steps).keys()).map(step => (
     <StepperButton
       active={activeStep === step}
@@ -20,7 +21,10 @@ export function Stepper({ steps, activeStep }: StepperProps) {
   return (
     <View>
       <ScrollView
-        style={styles.Container}
+        style={[
+          styles.Container,
+          { borderBottomColor: colors.primary.separtorColor },
+        ]}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.InnerContainer}
         horizontal={true}
@@ -38,6 +42,5 @@ export const styles = StyleSheet.create({
   Container: {
     marginHorizontal: -20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: colors.separtorColor,
   },
 })

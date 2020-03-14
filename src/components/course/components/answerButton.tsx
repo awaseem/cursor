@@ -1,6 +1,6 @@
 import React from 'react'
-import { colors } from '../../../styles/color'
 import { CourseButton } from './courseButton'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface AnswerButtonProps {
   content: string
@@ -16,9 +16,11 @@ export function AnswerButton({
   explanation,
   onHold,
 }: AnswerButtonProps) {
+  const { colors } = useTheme()
+
   const buttonColor = correct
-    ? colors.buttonSucessColor
-    : colors.buttonErrorColor
+    ? colors.primary.buttonSucessColor
+    : colors.primary.buttonErrorColor
   const marker = correct ? '🙌' : '😞'
 
   return (

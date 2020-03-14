@@ -1,9 +1,9 @@
 import React from 'react'
-import { CourseButtonProps, CourseButton } from './courseButton'
+import { CourseButton } from './courseButton'
 import { Content } from '../../content'
 import { CourseHeader } from './courseHeader'
 import { CourseMessage } from './courseMessage'
-import { colors } from '../../../styles/color'
+import { useTheme } from '../../../hooks/themeHooks'
 
 export interface CourseContentProps {
   title: string
@@ -18,6 +18,7 @@ export function CourseContent({
   buttonTitle,
   buttonMarker,
 }: CourseContentProps) {
+  const { colors } = useTheme()
   return (
     <>
       <Content>
@@ -25,7 +26,7 @@ export function CourseContent({
         <CourseMessage message={content} />
       </Content>
       <CourseButton
-        finalColor={colors.buttonSucessColor}
+        finalColor={colors.primary.buttonSucessColor}
         text={buttonTitle}
         marker={buttonMarker}
         onHold={() => undefined}
