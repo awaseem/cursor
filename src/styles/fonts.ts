@@ -20,7 +20,7 @@ export const subtitleHeading: Style = {
 }
 
 export const titleHeading: Style = {
-  ...iOSUIKit.subheadEmphasizedObject,
+  ...iOSUIKit.title3EmphasizedObject,
   fontSize: BASE_FONT_SIZE * 1.25,
 }
 

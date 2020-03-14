@@ -45,7 +45,7 @@ export function TouchableScale({
 
   function handlePressOut() {
     Animated.timing(scaleAnimatedValue, {
-      duration: SCALE_DURATION_ANIMATION,
+      duration: SCALE_DURATION_ANIMATION / 2,
       toValue: 0,
     }).start()
   }

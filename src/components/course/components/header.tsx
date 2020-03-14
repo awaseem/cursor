@@ -12,7 +12,7 @@ export function Header({ title, onPress }: HeaderProps) {
     <View style={styles.Container}>
       <View>
         <TouchableOpacity onPress={onPress}>
-          <Text style={titleHeading}>{'👈'}</Text>
+          <Text style={titleHeading}>{'❎'}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.TitleContainer}>
@@ -28,10 +28,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  buttonContainer: {
-    padding: 10,
-  },
   TitleContainer: {
-    padding: 20,
+    padding: 10,
   },
 })

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Animated, StyleSheet } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { CourseOutline } from './courseOutline'
 import { Container } from '../../container'
 import { Header } from '../components/header'
@@ -35,6 +36,7 @@ export function CourseCarousel() {
     />,
   ]
 
+  const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
   const [index, setIndex] = useState(0)
@@ -98,7 +100,7 @@ export function CourseCarousel() {
 
   return (
     <Container>
-      <Header onPress={() => undefined} title="Strings" />
+      <Header onPress={() => navigation.goBack()} title="Strings" />
       <Stepper activeStep={index} steps={courses.length} />
       <Animated.View
         style={[
