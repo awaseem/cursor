@@ -6,6 +6,6 @@ export function getCourses() {
     const javaScriptCourses = await import(
       '../data/subjects/javaScript/courseList.json'
     )
-    dispatch(courseList.actions.setList(javaScriptCourses))
+    dispatch(courseList.actions.setList(javaScriptCourses.default))
   }
 }

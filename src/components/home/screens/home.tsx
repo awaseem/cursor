@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Content } from '../../content'
@@ -8,10 +8,21 @@ import { LanguageCard } from '../components/languageCard'
 import { CourseRow } from '../components/courseRow'
 import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
+import { CourseList } from '../../../redux/courseSlices'
+import { FlatList } from 'react-native-gesture-handler'
 
-export function Home() {
+export interface ReduxProps {
+  courseList: CourseList
+  getCourses: () => void
+}
+
+export function Home({ courseList, getCourses }: ReduxProps) {
   const navigation = useNavigation()
   const { colors } = useTheme()
+
+  useEffect(() => {
+    getCourses()
+  }, [])
 
   return (
     <Container>
@@ -51,50 +62,18 @@ export function Home() {
           borderColor: colors.primary.separtorColor,
         }}
       />
-      <Content>
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => navigation.navigate(Screens.Coures)}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => undefined}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => undefined}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => undefined}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => undefined}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => undefined}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-        <CourseRow
-          borderColor={'#FED18C'}
-          onPress={() => undefined}
-          title={'Numbers'}
-          emoji={'🔢'}
-        />
-      </Content>
+      <FlatList
+        data={courseList}
+        contentContainerStyle={{ paddingTop: 40, paddingBottom: 40 }}
+        renderItem={({ item }) => (
+          <CourseRow
+            borderColor={'#FED18C'}
+            onPress={() => navigation.navigate(Screens.Coures)}
+            title={item.name}
+            emoji={item.emoji}
+          />
+        )}
+      />
     </Container>
   )
 }

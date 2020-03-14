@@ -1,11 +1,13 @@
 import { connect } from 'react-redux'
 import { Home } from '../components/home/screens/home'
-import { AppDispatch } from '../redux/rootReducer'
+import { AppDispatch, AppState } from '../redux/rootReducer'
 import { bindActionCreators } from '@reduxjs/toolkit'
 import { getCourses } from '../redux/thunks'
 
-function mapStateToProps() {
-  return {}
+function mapStateToProps(state: AppState) {
+  return {
+    courseList: state.courses.courseList,
+  }
 }
 
 function mapDispatchToProps(dispatch: AppDispatch) {
