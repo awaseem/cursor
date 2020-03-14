@@ -8,7 +8,7 @@ import { CourseButton } from '../components/courseButton'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { colors } from '../../../styles/color'
 
-export interface CodingInputQuestionProps {
+export interface CourseOutlineProps {
   title: string
   content: string
   marker: string
@@ -18,14 +18,14 @@ export interface CodingInputQuestionProps {
   onHold: () => void
 }
 
-export function CodingInputQuestion({
+export function CourseOutline({
   title,
   content,
   marker,
   buttonText,
   code,
   onHold,
-}: CodingInputQuestionProps) {
+}: CourseOutlineProps) {
   const insets = useSafeArea()
 
   return (

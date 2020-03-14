@@ -20,7 +20,7 @@ function addBlockToBlank(message: string) {
   if (message === 'BLANK') {
     return React.createElement(View, { style: styles.Blank })
   }
-  return message
+  return message + ' '
 }
 
 const styles = StyleSheet.create({
