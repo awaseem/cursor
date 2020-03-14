@@ -6,31 +6,29 @@ import { StyleSheet, View } from 'react-native'
 import { AnswerButtonProps, AnswerButton } from '../../answerButton'
 import { CodeMessage } from '../components/codeMessage'
 
-export interface CodingQuestionProps {
+export interface CodingInputQuestionProps {
   title: string
   content: string
   answers: AnswerButtonProps[]
 }
 
-export function CodingQuestion({
+export function CodingInputQuestion({
   title,
   content,
   answers,
-}: CodingQuestionProps) {
+}: CodingInputQuestionProps) {
   const answerButtons = answers.map((answer, index) => (
     <View key={index} style={{ marginVertical: 20 }}>
       <AnswerButton {...answer} />
     </View>
   ))
   return (
-    <>
-      <Content>
-        <CourseHeader title={title} />
-        <CourseMessage message={content} />
-        <CodeMessage message={'console.log( BLANK )'} />
-        <View style={styles.ButtonContainer}>{answerButtons}</View>
-      </Content>
-    </>
+    <Content>
+      <CourseHeader title={title} />
+      <CourseMessage message={content} />
+      <CodeMessage message={'console.log( BLANK )'} />
+      <View style={styles.ButtonContainer}>{answerButtons}</View>
+    </Content>
   )
 }
 

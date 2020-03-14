@@ -22,13 +22,11 @@ export function CourseQuestion({
     </View>
   ))
   return (
-    <>
-      <Content>
-        <CourseHeader title={title} />
-        <CourseMessage message={content} />
-        <View style={styles.ButtonContainer}>{answerButtons}</View>
-      </Content>
-    </>
+    <Content>
+      <CourseHeader title={title} />
+      <CourseMessage message={content} />
+      <View style={styles.ButtonContainer}>{answerButtons}</View>
+    </Content>
   )
 }
 
