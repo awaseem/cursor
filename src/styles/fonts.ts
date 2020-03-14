@@ -3,6 +3,22 @@ import { colors } from './color'
 
 export const BASE_FONT_SIZE = 16
 
+export const greetingHeading: Style = {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+}
+
+export const languageHeading: Style = {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+}
+
+export const languageAcronym: Style = {
+  ...iOSUIKit.largeTitleEmphasizedWhiteObject,
+}
+
+export const subtitleHeading: Style = {
+  ...iOSUIKit.title3Object,
+}
+
 export const titleHeading: Style = {
   ...iOSUIKit.subheadEmphasizedObject,
   fontSize: BASE_FONT_SIZE * 1.25,
