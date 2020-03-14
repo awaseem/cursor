@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { StepperButton } from './stepperButton'
-import { colors } from '../styles/color'
+import { colors } from '../../../styles/color'
 
 export interface StepperProps {
   steps: number

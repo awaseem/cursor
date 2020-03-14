@@ -1,6 +1,6 @@
 import React from 'react'
-import { colors } from '../styles/color'
-import { CourseButton } from './course/components/courseButton'
+import { colors } from '../../../styles/color'
+import { CourseButton } from './courseButton'
 
 export interface AnswerButtonProps {
   content: string

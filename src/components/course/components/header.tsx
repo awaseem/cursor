@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { titleHeading } from '../styles/fonts'
+import { titleHeading } from '../../../styles/fonts'
 
 export interface HeaderProps {
   title: string

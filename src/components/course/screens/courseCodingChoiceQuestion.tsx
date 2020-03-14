@@ -3,7 +3,7 @@ import { Content } from '../../content'
 import { CourseHeader } from '../components/courseHeader'
 import { CourseMessage } from '../components/courseMessage'
 import { StyleSheet, View } from 'react-native'
-import { AnswerButtonProps, AnswerButton } from '../../answerButton'
+import { AnswerButtonProps, AnswerButton } from '../components/answerButton'
 import { CodeMessage } from '../components/codeMessage'
 
 export interface CodingChoiceQuestionProps {

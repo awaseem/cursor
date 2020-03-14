@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
-import { titleHeading } from '../styles/fonts'
-import { colors } from '../styles/color'
+import { titleHeading } from '../../../styles/fonts'
+import { colors } from '../../../styles/color'
 
 export interface StepperButtonProps {
   text: string

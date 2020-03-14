@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { CourseOutline } from './courseOutline'
 import { Container } from '../../container'
-import { Header } from '../../header'
-import { Stepper } from '../../stepper'
+import { Header } from '../components/header'
+import { Stepper } from '../components/stepper'
 
 const ANIMATION_DURATION = 300
 
