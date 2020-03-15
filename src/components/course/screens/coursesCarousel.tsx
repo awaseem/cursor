@@ -1,46 +1,83 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { CourseOutline } from './courseOutline'
+import { CourseOutline, CourseOutlineProps } from './courseOutline'
 import { Container } from '../../container'
 import { Header } from '../components/header'
 import { Stepper } from '../components/stepper'
+import {
+  CourseItems,
+  CourseItem,
+  CourseType,
+} from '../../../redux/courseSlices'
+import { CourseQuestion, CourseQuestionProps } from './courseSimpleQuestion'
+import { AnswerButtonProps } from '../components/answerButton'
+import {
+  CodingChoiceQuestion,
+  CodingChoiceQuestionProps,
+} from './courseCodingChoiceQuestion'
+import {
+  CodingInputQuestion,
+  CodingInputQuestionProps,
+} from './courseCodingInputQuestion'
 
 const ANIMATION_DURATION = 300
 
-export function CourseCarousel() {
-  const courses = [
-    <CourseOutline
-      key={'test1'}
-      title={'What is a string?'}
-      content={
-        'Is a <length> or <percentage> representing the abscissa of the translating vector. A percentage value refers to the width of the reference box defined by the transform-box property.'
-      }
-      code={`console.log( BLANK )
+interface ReduxProps {
+  selectedCourse: CourseItems
+}
 
-      const i = 0;`}
-      buttonText={'Next'}
-      marker={'🤓'}
-      onHold={transitionAway}
-    />,
-    <CourseOutline
-      key={'test2'}
-      title={'What is a number?'}
-      content={
-        'Is a <length> or <percentage> representing the abscissa of the translating vector. A percentage value refers to the width of the reference box defined by the transform-box property.'
+// TODO refactor this component to be cleaner
+function courseItemToComponent(successHandler: () => void) {
+  return (courseItem: CourseItem) => {
+    const { type, ...otherProps } = courseItem
+    switch (type) {
+      case CourseType.outline:
+        return (
+          <CourseOutline
+            {...(otherProps as CourseOutlineProps)}
+            onHold={successHandler}
+          />
+        )
+      case CourseType.choice: {
+        const props = otherProps as CourseQuestionProps
+        const answers: AnswerButtonProps[] = props.answers.map(answer => ({
+          ...answer,
+          onHold: answer.correct ? successHandler : undefined,
+        }))
+        return <CourseQuestion {...props} answers={answers} />
       }
-      code={`const i = 0`}
-      buttonText={'Next'}
-      marker={'🤓'}
-      onHold={transitionAway}
-    />,
-  ]
+      case CourseType.chodingChoice: {
+        const props = otherProps as CodingChoiceQuestionProps
+        const answers: AnswerButtonProps[] = props.answers.map(answer => ({
+          ...answer,
+          onHold: answer.correct ? successHandler : undefined,
+        }))
+        return <CodingChoiceQuestion {...props} answers={answers} />
+      }
+      case CourseType.codingInputChoice: {
+        return (
+          <CodingInputQuestion
+            {...(otherProps as CodingInputQuestionProps)}
+            onSuccess={successHandler}
+          />
+        )
+      }
+    }
+  }
+}
 
+export function CourseCarousel({ selectedCourse }: ReduxProps) {
   const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
   const [index, setIndex] = useState(0)
   const [visiable, setVisiable] = useState(true)
+  const [courses, setCourses] = useState<CourseItems>([])
+
+  useEffect(() => {
+    setCourses(selectedCourse.map(courseItemToComponent(transitionAway)))
+  }, [selectedCourse])
 
   function transitionAway() {
     Animated.timing(animatedTransitionAway, {
@@ -48,13 +85,19 @@ export function CourseCarousel() {
       toValue: 1,
       useNativeDriver: true,
     }).start(() => {
-      setIndex(index + 1)
+      setIndex(index => index + 1)
       setVisiable(false)
       Animated.timing(animatedTransitionIn, {
         duration: ANIMATION_DURATION,
         toValue: 1,
         useNativeDriver: true,
-      }).start()
+      }).start(result => {
+        if (result.finished) {
+          setVisiable(true)
+          animatedTransitionAway.setValue(0)
+          animatedTransitionIn.setValue(0)
+        }
+      })
     })
   }
 
@@ -97,6 +140,8 @@ export function CourseCarousel() {
       ],
     }
   }
+
+  console.log(index)
 
   return (
     <Container>

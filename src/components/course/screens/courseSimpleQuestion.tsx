@@ -17,7 +17,7 @@ export function CourseQuestion({
   answers,
 }: CourseQuestionProps) {
   const answerButtons = answers.map((answer, index) => (
-    <View key={index} style={{ marginVertical: 20 }}>
+    <View key={index} style={{ width: '95%', marginVertical: 20 }}>
       <AnswerButton {...answer} />
     </View>
   ))

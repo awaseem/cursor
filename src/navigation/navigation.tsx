@@ -1,8 +1,8 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { CourseCarousel } from '../components/course/screens/coursesCarousel'
 import { Screens } from './screens'
 import { HomeConatiner } from '../containers/homeContainer'
+import { CourseContainer } from '../containers/coursesContainer'
 
 const RootStack = createStackNavigator()
 
@@ -16,7 +16,7 @@ export function RootStackScreen() {
       />
       <RootStack.Screen
         name={Screens.Coures}
-        component={CourseCarousel}
+        component={CourseContainer}
         options={{ headerShown: false }}
       />
     </RootStack.Navigator>
