@@ -6,6 +6,7 @@ import { Header } from '../components/header'
 import { Stepper } from '../components/stepper'
 import { CourseItems } from '../../../redux/courseSlices'
 import { CourseRenderer } from './courseRenderer'
+import { CourseComplete } from './courseComplete'
 
 const ANIMATION_DURATION = 300
 
@@ -93,15 +94,16 @@ export function CourseCarousel({ selectedCourse }: ReduxProps) {
   }
 
   useEffect(() => {
-    setCourses(
-      selectedCourse.map((course, index) => (
+    setCourses([
+      ...selectedCourse.map((course, index) => (
         <CourseRenderer
           key={index}
           courseItem={course}
           successHandler={transitionAway}
         />
       )),
-    )
+      <CourseComplete />,
+    ])
   }, [selectedCourse])
 
   return (
