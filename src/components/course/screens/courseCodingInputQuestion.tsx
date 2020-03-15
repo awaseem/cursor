@@ -37,6 +37,13 @@ export function CodingInputQuestion({
   const [finalColor, setFinalColor] = useState(colors.buttonErrorColor)
   const [marker, setMarker] = useState('🤔')
 
+  useEffect(() => {
+    if (text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()) {
+      setFinalColor(colors.buttonSucessColor)
+      setMarker('🤗')
+    }
+  }, [text])
+
   return (
     <View style={[styles.Container, { paddingBottom: insets.bottom }]}>
       <Content>
@@ -57,8 +64,6 @@ export function CodingInputQuestion({
           if (
             text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()
           ) {
-            setFinalColor(colors.buttonSucessColor)
-            setMarker('🤗')
             onSuccess()
           }
         }}
