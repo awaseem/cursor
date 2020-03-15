@@ -9,6 +9,7 @@ import { iOSUIKit } from 'react-native-typography'
 import { useTheme } from '../../../hooks/themeHooks'
 
 const ACTION_TIMER = 600
+const DELAY_ACTION = 1000
 
 export interface CourseButtonProps {
   text: string
@@ -17,6 +18,7 @@ export interface CourseButtonProps {
   onHold: () => void
 
   additionalText?: string
+  reset?: boolean
 }
 
 export function CourseButton({
@@ -25,6 +27,7 @@ export function CourseButton({
   finalColor,
   onHold,
   additionalText,
+  reset,
 }: CourseButtonProps) {
   const { colors } = useTheme()
   const COLORS = ['white', colors.primary.buttonSelectionColor]
@@ -41,6 +44,18 @@ export function CourseButton({
   useEffect(() => {
     pressAction.addListener(({ value }) => (_value.current = value))
   }, [])
+
+  function resetAnimation() {
+    Animated.timing(completeAction, {
+      duration: ACTION_TIMER / 2,
+      toValue: 0,
+    }).start(() => {
+      Animated.timing(pressAction, {
+        duration: ACTION_TIMER / 2,
+        toValue: 0,
+      }).start()
+    })
+  }
 
   function handlePressIn() {
     Animated.timing(pressAction, {
@@ -170,13 +185,23 @@ export function CourseButton({
         Animated.timing(completeAction, {
           duration: ACTION_TIMER,
           toValue: 1,
-        }).start(() => {
-          onHold()
-        })
+        }).start(() => fireDelayedOnHold())
+      } else if (reset) {
+        fireDelayedOnHold()
       } else {
         onHold()
       }
     }
+  }
+
+  function fireDelayedOnHold() {
+    setTimeout(() => {
+      if (reset) {
+        resetAnimation()
+      } else {
+        onHold()
+      }
+    }, DELAY_ACTION)
   }
 
   return (

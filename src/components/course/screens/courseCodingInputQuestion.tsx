@@ -36,11 +36,13 @@ export function CodingInputQuestion({
   const [text, setText] = useState('')
   const [finalColor, setFinalColor] = useState(colors.buttonErrorColor)
   const [marker, setMarker] = useState('🤔')
+  const [reset, setReset] = useState(true)
 
   useEffect(() => {
     if (text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()) {
       setFinalColor(colors.buttonSucessColor)
       setMarker('🤗')
+      setReset(false)
     }
   }, [text])
 
@@ -60,6 +62,7 @@ export function CodingInputQuestion({
         text={SUBMIT_BUTTON_TEXT}
         additionalText={additionalText}
         marker={marker}
+        reset={reset}
         onHold={() => {
           if (
             text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()
