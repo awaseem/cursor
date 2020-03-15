@@ -21,7 +21,6 @@ export const courseList = createSlice({
 export enum CourseType {
   outline = 'outline',
   choice = 'choice',
-  chodingChoice = 'codingChoice',
   codingInputChoice = 'codingInputChoice',
 }
 

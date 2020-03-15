@@ -23,7 +23,7 @@
     ]
   },
   {
-    "type": "codingChoice",
+    "type": "choice",
     "title": "Basic math test cont'd",
     "content": "So what is the following output?",
     "code": "2 + BLANK = 4",

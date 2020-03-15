@@ -9,7 +9,7 @@ import { CodeMessage } from '../components/codeMessage'
 export interface CodingChoiceQuestionProps {
   title: string
   content: string
-  code: string
+  code?: string
   answers: AnswerButtonProps[]
 }
 
@@ -28,7 +28,7 @@ export function CodingChoiceQuestion({
     <Content>
       <CourseHeader title={title} />
       <CourseMessage message={content} />
-      <CodeMessage message={code} />
+      {code && <CodeMessage message={code} />}
       <View style={styles.ButtonContainer}>{answerButtons}</View>
     </Content>
   )
