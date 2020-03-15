@@ -36,15 +36,6 @@ export function CodingInputQuestion({
   const [text, setText] = useState('')
   const [finalColor, setFinalColor] = useState(colors.buttonErrorColor)
   const [marker, setMarker] = useState('🤔')
-  const [successful, setSuccessful] = useState(false)
-
-  useEffect(() => {
-    if (text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()) {
-      setSuccessful(true)
-      setFinalColor(colors.buttonSucessColor)
-      setMarker('🤗')
-    }
-  }, [text])
 
   return (
     <View style={[styles.Container, { paddingBottom: insets.bottom }]}>
@@ -62,7 +53,15 @@ export function CodingInputQuestion({
         text={SUBMIT_BUTTON_TEXT}
         additionalText={additionalText}
         marker={marker}
-        onHold={successful ? onSuccess : () => undefined}
+        onHold={() => {
+          if (
+            text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()
+          ) {
+            setFinalColor(colors.buttonSucessColor)
+            setMarker('🤗')
+            onSuccess()
+          }
+        }}
       />
     </View>
   )
