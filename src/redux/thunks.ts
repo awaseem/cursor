@@ -1,22 +1,31 @@
 import { AppDispatch } from './rootReducer'
 import { courseList, selectedCourse } from './courseSlices'
+import { getCoursesForJavascript, getCourseByPath } from '../data/api'
 
 export function getCourses() {
   return async (dispatch: AppDispatch) => {
-    const javaScriptCourses = await import(
-      '../data/subjects/javaScript/courseList.json'
-    )
-    dispatch(courseList.actions.setList(javaScriptCourses.default))
+    try {
+      // TODO handle refresh case
+      const javaScriptCourses = await getCoursesForJavascript()
+
+      dispatch(courseList.actions.setList(javaScriptCourses))
+    } catch (error) {
+      // TODO handle errors
+      console.log(error)
+    }
   }
 }
 
 export function setSelectedCourse(path: string) {
   return async (dispatch: AppDispatch) => {
-    // TODO this is a hack until we setup a simple rest api
-    const course = await (path === '/courses/numbers.json'
-      ? import('../data/subjects/javaScript/courses/numbers.json')
-      : import('../data/subjects/javaScript/courses/strings.json'))
-    // @ts-ignore
-    dispatch(selectedCourse.actions.setSelectedCourse(course.default))
+    try {
+      // TODO handle refresh case
+      const course = await getCourseByPath(path)
+
+      dispatch(selectedCourse.actions.setSelectedCourse(course))
+    } catch (error) {
+      // TODO handle errors
+      console.log(error)
+    }
   }
 }
