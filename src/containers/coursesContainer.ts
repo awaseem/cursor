@@ -1,18 +1,16 @@
 import { connect } from 'react-redux'
 import { AppState } from '../redux/rootReducer'
-import { CourseCarousel } from '../components/course/screens/coursesCarousel'
+import {
+  CourseCarousel,
+  CourseCarouselReduxProps,
+} from '../components/course/screens/coursesCarousel'
 
-function mapStateToProps(state: AppState) {
+function mapStateToProps(state: AppState): CourseCarouselReduxProps {
   return {
     selectedCourse: state.courses.selectedCourse.data,
+    loading: state.courses.selectedCourse.loading,
+    error: state.courses.selectedCourse.error,
   }
 }
 
-function mapDispatchToProps() {
-  return {}
-}
-
-export const CourseContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CourseCarousel)
+export const CourseContainer = connect(mapStateToProps)(CourseCarousel)

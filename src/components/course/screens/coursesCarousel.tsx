@@ -7,14 +7,21 @@ import { Stepper } from '../components/stepper'
 import { CourseRenderer } from './courseRenderer'
 import { CourseComplete } from './courseComplete'
 import { CourseItems } from '../../../data/api'
+import { Loader } from '../../loader'
 
 const ANIMATION_DURATION = 300
 
-interface ReduxProps {
+export interface CourseCarouselReduxProps {
+  loading: boolean
+  error: boolean
   selectedCourse: CourseItems
 }
 
-export function CourseCarousel({ selectedCourse }: ReduxProps) {
+export function CourseCarousel({
+  loading,
+  error,
+  selectedCourse,
+}: CourseCarouselReduxProps) {
   const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
@@ -105,6 +112,10 @@ export function CourseCarousel({ selectedCourse }: ReduxProps) {
       <CourseComplete />,
     ])
   }, [selectedCourse])
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <Container>

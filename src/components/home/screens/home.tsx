@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet, RefreshControl } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
@@ -10,18 +10,25 @@ import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
 import { FlatList } from 'react-native-gesture-handler'
 import { CourseList } from '../../../data/api'
+import { Loader } from '../../loader'
 
-export interface ReduxProps {
+export interface HomeReduxProps {
+  loading: boolean
+  error: boolean
   courseList: CourseList
+}
+
+export interface HomeReduxDispatch {
   getCourses: () => void
   setSelectedCourse: (path: string) => void
 }
 
 export function Home({
+  loading,
   courseList,
   getCourses,
   setSelectedCourse,
-}: ReduxProps) {
+}: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
   const { colors } = useTheme()
 
@@ -67,21 +74,28 @@ export function Home({
           borderColor: colors.primary.separtorColor,
         }}
       />
-      <FlatList
-        data={courseList}
-        contentContainerStyle={{ paddingTop: 40, paddingBottom: 40 }}
-        renderItem={({ item }) => (
-          <CourseRow
-            borderColor={'#FED18C'}
-            onPress={() => {
-              setSelectedCourse(item.path)
-              navigation.navigate(Screens.Coures)
-            }}
-            title={item.name}
-            emoji={item.emoji}
-          />
-        )}
-      />
+      {loading && courseList.length === 0 ? (
+        <Loader />
+      ) : (
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={getCourses} />
+          }
+          data={courseList}
+          contentContainerStyle={{ paddingTop: 40, paddingBottom: 40 }}
+          renderItem={({ item }) => (
+            <CourseRow
+              borderColor={'#FED18C'}
+              onPress={() => {
+                setSelectedCourse(item.path)
+                navigation.navigate(Screens.Coures)
+              }}
+              title={item.name}
+              emoji={item.emoji}
+            />
+          )}
+        />
+      )}
     </Container>
   )
 }
