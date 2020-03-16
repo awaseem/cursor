@@ -5,12 +5,15 @@ import { getCoursesForJavascript, getCourseByPath } from '../data/api'
 export function getCourses() {
   return async (dispatch: AppDispatch) => {
     try {
-      // TODO handle refresh case
-      const javaScriptCourses = await getCoursesForJavascript()
+      dispatch(courseList.actions.setError(false))
+      dispatch(courseList.actions.setLoading(true))
 
+      const javaScriptCourses = await getCoursesForJavascript()
       dispatch(courseList.actions.setList(javaScriptCourses))
+
+      dispatch(courseList.actions.setLoading(false))
     } catch (error) {
-      // TODO handle errors
+      dispatch(courseList.actions.setError(true))
       console.log(error)
     }
   }
@@ -19,12 +22,15 @@ export function getCourses() {
 export function setSelectedCourse(path: string) {
   return async (dispatch: AppDispatch) => {
     try {
-      // TODO handle refresh case
-      const course = await getCourseByPath(path)
+      dispatch(courseList.actions.setError(false))
+      dispatch(courseList.actions.setLoading(true))
 
+      const course = await getCourseByPath(path)
       dispatch(selectedCourse.actions.setList(course))
+
+      dispatch(courseList.actions.setLoading(false))
     } catch (error) {
-      // TODO handle errors
+      dispatch(courseList.actions.setError(true))
       console.log(error)
     }
   }
