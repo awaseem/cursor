@@ -22,7 +22,7 @@ export function setSelectedCourse(path: string) {
       // TODO handle refresh case
       const course = await getCourseByPath(path)
 
-      dispatch(selectedCourse.actions.setSelectedCourse(course))
+      dispatch(selectedCourse.actions.setList(course))
     } catch (error) {
       // TODO handle errors
       console.log(error)

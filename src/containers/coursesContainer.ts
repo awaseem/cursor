@@ -4,7 +4,7 @@ import { CourseCarousel } from '../components/course/screens/coursesCarousel'
 
 function mapStateToProps(state: AppState) {
   return {
-    selectedCourse: state.courses.selectedCourse,
+    selectedCourse: state.courses.selectedCourse.data,
   }
 }
 

@@ -6,7 +6,7 @@ import { getCourses, setSelectedCourse } from '../redux/thunks'
 
 function mapStateToProps(state: AppState) {
   return {
-    courseList: state.courses.courseList,
+    courseList: state.courses.courseList.data,
   }
 }
 
