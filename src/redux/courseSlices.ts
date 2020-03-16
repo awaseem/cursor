@@ -1,13 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-export interface CourseListItem {
-  id: string
-  name: string
-  emoji: string
-  path: string
-}
-
-export type CourseList = CourseListItem[]
+import { CourseList, CourseItems } from '../data/api'
 
 export const courseList = createSlice({
   name: 'courseList',
@@ -17,22 +9,6 @@ export const courseList = createSlice({
       (state = action.payload),
   },
 })
-
-export enum CourseType {
-  outline = 'outline',
-  choice = 'choice',
-  codingInputChoice = 'codingInputChoice',
-}
-
-export interface CourseItemBody {
-  [prop: string]: any
-}
-
-export interface CourseItem extends CourseItemBody {
-  type: CourseType
-}
-
-export type CourseItems = CourseItem[]
 
 export const selectedCourse = createSlice({
   name: 'selectedCourse',

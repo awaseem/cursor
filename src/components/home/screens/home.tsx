@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+
 import { Header } from '../components/header'
 import { Container } from '../../container'
 import { LanguageCard } from '../components/languageCard'
 import { CourseRow } from '../components/courseRow'
 import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
-import { CourseList } from '../../../redux/courseSlices'
 import { FlatList } from 'react-native-gesture-handler'
+import { CourseList } from '../../../data/api'
 
 export interface ReduxProps {
   courseList: CourseList

@@ -1,6 +1,5 @@
 import React from 'react'
 import { View } from 'react-native'
-import { CourseItem, CourseType } from '../../../redux/courseSlices'
 import { CourseOutline, CourseOutlineProps } from './courseOutline'
 import { AnswerButtonProps } from '../components/answerButton'
 import {
@@ -11,6 +10,7 @@ import {
   CodingInputQuestion,
   CodingInputQuestionProps,
 } from './courseCodingInputQuestion'
+import { CourseItem, CourseType } from '../../../data/api'
 
 export interface CourseRendererProps {
   courseItem: CourseItem

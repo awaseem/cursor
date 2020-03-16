@@ -4,9 +4,9 @@ import { useNavigation } from '@react-navigation/native'
 import { Container } from '../../container'
 import { Header } from '../components/header'
 import { Stepper } from '../components/stepper'
-import { CourseItems } from '../../../redux/courseSlices'
 import { CourseRenderer } from './courseRenderer'
 import { CourseComplete } from './courseComplete'
+import { CourseItems } from '../../../data/api'
 
 const ANIMATION_DURATION = 300
 
