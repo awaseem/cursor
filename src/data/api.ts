@@ -1,5 +1,5 @@
 const S3_PUBLIC_URL_JAVASCRIPT =
-  'https://cursor-development-project.s3-us-west-2.amazonaws.com/data/subjects/javaScript'
+  'https://cursor-development-project.s3-us-west-2.amazonaws.com/subjects/javascript'
 const COURSE_LIST_FILE_NAME = 'courseList.json'
 
 const GET_FETCH_OPTIONS: RequestInit = {
