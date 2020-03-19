@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { StyleSheet, ScrollView, View } from 'react-native'
+import React, { useRef, useEffect } from 'react'
+import { StyleSheet, View, FlatList } from 'react-native'
 import { StepperButton } from './stepperButton'
 import { useTheme } from '../../../hooks/themeHooks'
 
-const SCROLL_PADDING = 10
+const SCROLL_PADDING = 5
 
 export interface StepperProps {
   steps: number
@@ -11,33 +11,32 @@ export interface StepperProps {
 }
 
 export function Stepper({ steps, activeStep }: StepperProps) {
-  const stepperPositionMap = useRef(new Map<number, number>()).current
-  const scrollViewRef = useRef<ScrollView | null>(null)
-
+  const flatListRef = useRef<FlatList<number> | null>(null)
   const { colors } = useTheme()
-
-  const stepButton = Array.from(Array(steps).keys()).map(step => (
-    <StepperButton
-      active={activeStep === step}
-      onLayout={event =>
-        stepperPositionMap.set(
-          step,
-          event.nativeEvent.layout.x - SCROLL_PADDING,
-        )
-      }
-      key={step}
-      text={(step + 1).toString()}
-    />
-  ))
+  const stepButton = Array.from(Array(steps).keys())
 
   useEffect(() => {
-    scrollViewRef.current?.scrollTo({ x: stepperPositionMap.get(activeStep) })
+    if (activeStep !== 0) {
+      flatListRef.current?.scrollToIndex({
+        animated: true,
+        index: activeStep,
+        viewOffset: SCROLL_PADDING,
+      })
+    }
   }, [activeStep])
 
   return (
     <View>
-      <ScrollView
-        ref={scrollViewRef}
+      <FlatList
+        ref={flatListRef}
+        data={stepButton}
+        renderItem={({ item }) => (
+          <StepperButton
+            active={activeStep === item}
+            text={(item + 1).toString()}
+          />
+        )}
+        keyExtractor={item => item.toString()}
         style={[
           styles.Container,
           { borderBottomColor: colors.primary.separtorColor },
@@ -47,7 +46,7 @@ export function Stepper({ steps, activeStep }: StepperProps) {
         horizontal={true}
       >
         {stepButton}
-      </ScrollView>
+      </FlatList>
     </View>
   )
 }
