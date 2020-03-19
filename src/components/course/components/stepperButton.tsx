@@ -1,16 +1,23 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  View,
+  LayoutChangeEvent,
+} from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
 export interface StepperButtonProps {
   text: string
   active?: boolean
+  onLayout?: (event: LayoutChangeEvent) => void
 }
 
-export function StepperButton({ text, active }: StepperButtonProps) {
+export function StepperButton({ text, active, onLayout }: StepperButtonProps) {
   const { colors, font } = useTheme()
   return (
-    <TouchableOpacity style={styles.Container}>
+    <TouchableOpacity onLayout={onLayout} style={styles.Container}>
       <Text style={font.titleHeading}>{text}</Text>
       {active && (
         <View
