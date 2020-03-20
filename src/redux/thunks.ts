@@ -22,15 +22,15 @@ export function getCourses() {
 export function setSelectedCourse(path: string) {
   return async (dispatch: AppDispatch) => {
     try {
-      dispatch(courseList.actions.setError(false))
-      dispatch(courseList.actions.setLoading(true))
+      dispatch(selectedCourse.actions.setError(false))
+      dispatch(selectedCourse.actions.setLoading(true))
 
       const course = await getCourseByPath(path)
       dispatch(selectedCourse.actions.setList(course))
 
-      dispatch(courseList.actions.setLoading(false))
+      dispatch(selectedCourse.actions.setLoading(false))
     } catch (error) {
-      dispatch(courseList.actions.setError(true))
+      dispatch(selectedCourse.actions.setError(true))
       console.log(error)
     }
   }
