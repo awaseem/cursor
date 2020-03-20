@@ -6,7 +6,7 @@ import {
 } from '../components/home/screens/home'
 import { AppDispatch, AppState } from '../redux/rootReducer'
 import { bindActionCreators } from '@reduxjs/toolkit'
-import { getCourses, setSelectedCourse } from '../redux/thunks'
+import { getCourses, setSelectedCourse } from '../redux/courseThunks'
 
 function mapStateToProps(state: AppState): HomeReduxProps {
   return {
