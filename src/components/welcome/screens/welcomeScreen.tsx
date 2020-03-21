@@ -12,7 +12,7 @@ import { CourseButton } from '../../course/components/courseButton'
 const ANIMATION_DURATION = 800
 
 export interface WelcomeScreenProps {
-  onSuccess: () => void
+  onSuccess: (name: string) => void
 }
 
 export function WelcomeScreen({ onSuccess }: WelcomeScreenProps) {
@@ -129,7 +129,11 @@ export function WelcomeScreen({ onSuccess }: WelcomeScreenProps) {
           reset={reset}
           additionalText={additionalText}
           finalColor={buttonColor}
-          onHold={name ? onSuccess : () => undefined}
+          onHold={() => {
+            if (name) {
+              onSuccess(name)
+            }
+          }}
         />
       </Animated.View>
     </Container>
