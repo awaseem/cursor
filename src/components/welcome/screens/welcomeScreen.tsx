@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { StyleSheet, Text, Animated } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { Container } from '../../container'
@@ -11,11 +11,25 @@ import { CourseButton } from '../../course/components/courseButton'
 
 const ANIMATION_DURATION = 800
 
-export function WelcomeScreen() {
+export interface WelcomeScreenProps {
+  onSuccess: () => void
+}
+
+export function WelcomeScreen({ onSuccess }: WelcomeScreenProps) {
   const insets = useSafeArea()
   const { font, colors } = useTheme()
   const animatedEmoji = useRef(new Animated.Value(0)).current
   const animatedWelcomeText = useRef(new Animated.Value(0)).current
+
+  const [name, setName] = useState('')
+  const [buttonColor, setButtonColor] = useState(
+    colors.primary.buttonErrorColor,
+  )
+  const [marker, setMarker] = useState('👎')
+  const [reset, setReset] = useState(true)
+  const [additionalText, setAdditionalText] = useState<string | undefined>(
+    'Please enter your first name',
+  )
 
   function getAnimatedEmojiStyles() {
     const opacity = animatedEmoji.interpolate({
@@ -38,7 +52,7 @@ export function WelcomeScreen() {
     }
   }
 
-  function getAnimatedWelcomeStyles() {
+  function getAnimatedOpacityStyles() {
     const opacity = animatedWelcomeText.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
@@ -48,6 +62,15 @@ export function WelcomeScreen() {
       opacity,
     }
   }
+
+  useEffect(() => {
+    if (name) {
+      setButtonColor(colors.primary.buttonSucessColor)
+      setMarker('👍')
+      setReset(false)
+      setAdditionalText(undefined)
+    }
+  }, [name])
 
   useEffect(() => {
     Animated.timing(animatedEmoji, {
@@ -71,34 +94,42 @@ export function WelcomeScreen() {
           <WelcomeEmoji />
         </Animated.View>
         <Animated.View
-          style={[styles.titleContainer, getAnimatedWelcomeStyles()]}
+          style={[styles.titleContainer, getAnimatedOpacityStyles()]}
         >
           <CourseHeader title={'Welcome'} />
         </Animated.View>
         <Animated.View
-          style={[styles.titleContainer, getAnimatedWelcomeStyles()]}
+          style={[styles.titleContainer, getAnimatedOpacityStyles()]}
         >
           <Text style={[font.courseMessage, { textAlign: 'center' }]}>
             {
-              'Thanks for downloading! I hope you enjoy the experience and learning something new.'
+              'Thanks for downloading! I hope you enjoy the experience and learning something new. If you like the app feel free to give it a rating on the App Store.'
             }
           </Text>
         </Animated.View>
-        <Animated.View style={styles.nameContainer}>
+        <Animated.View
+          style={[styles.nameContainer, getAnimatedOpacityStyles()]}
+        >
           <CourseInput
             placeholder={'Enter you first name'}
-            onChange={text => undefined}
+            onChange={text => setName(text)}
           />
         </Animated.View>
       </Content>
       <Animated.View
-        style={[styles.buttonContainer, { paddingBottom: insets.bottom }]}
+        style={[
+          styles.buttonContainer,
+          { paddingBottom: insets.bottom },
+          getAnimatedOpacityStyles(),
+        ]}
       >
         <CourseButton
           text={'Hold to continue'}
-          marker={'👍'}
-          finalColor={colors.primary.buttonSucessColor}
-          onHold={() => undefined}
+          marker={marker}
+          reset={reset}
+          additionalText={additionalText}
+          finalColor={buttonColor}
+          onHold={name ? onSuccess : () => undefined}
         />
       </Animated.View>
     </Container>

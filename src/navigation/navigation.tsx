@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Screens } from './screens'
 import { HomeConatiner } from '../containers/homeContainer'
 import { CourseContainer } from '../containers/coursesContainer'
-import { WelcomeScreen } from '../components/welcome/screens/welcomeScreen'
 
 const RootStack = createStackNavigator()
 
@@ -12,11 +11,11 @@ export function RootStackScreen() {
     <RootStack.Navigator mode="modal">
       <RootStack.Screen
         name={Screens.Home}
-        component={WelcomeScreen}
+        component={HomeConatiner}
         options={{ headerShown: false }}
       />
       <RootStack.Screen
-        name={Screens.Coures}
+        name={Screens.Courses}
         component={CourseContainer}
         options={{ headerShown: false }}
       />

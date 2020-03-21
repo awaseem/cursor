@@ -88,7 +88,7 @@ export function Home({
               borderColor={'#FED18C'}
               onPress={() => {
                 setSelectedCourse(item.path)
-                navigation.navigate(Screens.Coures)
+                navigation.navigate(Screens.Courses)
               }}
               title={item.name}
               emoji={item.emoji}
