@@ -43,7 +43,11 @@ export function setCompletedCourses(courses: CourseList) {
       data: incompleteCourses,
     }
 
-    dispatch(courseList.actions.setList([incompleteSection, completedSection]))
+    const nonEmptySections = [incompleteSection, completedSection].filter(
+      section => section.data.length > 0,
+    )
+
+    dispatch(courseList.actions.setList(nonEmptySections))
   }
 }
 

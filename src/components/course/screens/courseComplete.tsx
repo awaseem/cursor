@@ -4,6 +4,7 @@ import { useTheme } from '../../../hooks/themeHooks'
 import { BASE_FONT_SIZE } from '../../../styles/fonts'
 import { CourseButton } from '../components/courseButton'
 import { useNavigation } from '@react-navigation/native'
+import { EmptyScreen } from '../../common/emptyScreen'
 
 export function CourseComplete() {
   const { font, colors } = useTheme()
@@ -11,10 +12,7 @@ export function CourseComplete() {
 
   return (
     <View style={styles.Container}>
-      <View style={styles.TextContainer}>
-        <Text style={styles.Emoji}>{'👍'}</Text>
-        <Text style={font.courseHeading}>All Done!</Text>
-      </View>
+      <EmptyScreen emoji={'👍'} description={'All Done!'} />
       <CourseButton
         finalColor={colors.primary.buttonSucessColor}
         text={'Got it!'}
@@ -31,13 +29,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 40,
-  },
-  TextContainer: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  Emoji: {
-    fontSize: BASE_FONT_SIZE * 5,
-    marginBottom: 20,
   },
 })
