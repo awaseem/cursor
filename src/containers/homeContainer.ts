@@ -14,6 +14,7 @@ function mapStateToProps(state: AppState): HomeReduxProps {
     error: state.courses.courseList.error,
     courseList: state.courses.courseList.data,
     firstTime: state.profile.firstTime,
+    name: state.profile.name,
   }
 }
 

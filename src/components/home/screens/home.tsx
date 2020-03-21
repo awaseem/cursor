@@ -17,6 +17,7 @@ export interface HomeReduxProps {
   error: boolean
   courseList: CourseList
   firstTime: boolean
+  name: string
 }
 
 export interface HomeReduxDispatch {
@@ -30,6 +31,7 @@ export function Home({
   getCourses,
   setSelectedCourse,
   firstTime,
+  name,
 }: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
   const { colors } = useTheme()
@@ -45,7 +47,7 @@ export function Home({
 
   return (
     <Container>
-      <Header title={'Hi 👋'} subtitle={'Welcome back, Ali'} />
+      <Header title={'Hi 👋'} subtitle={`Welcome back, ${name}`} />
       <View style={styles.LanguagesContainer}>
         <ScrollView
           style={styles.LanguagesScrollContainer}
