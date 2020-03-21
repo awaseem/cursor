@@ -77,12 +77,13 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
 
   useEffect(() => {
     Animated.timing(animatedEmoji, {
+      delay: ANIMATION_DURATION,
       toValue: 1,
       duration: ANIMATION_DURATION / 2,
     }).start()
 
     Animated.timing(animatedWelcomeText, {
-      delay: ANIMATION_DURATION,
+      delay: ANIMATION_DURATION * 2,
       toValue: 1,
       duration: ANIMATION_DURATION,
     }).start()
