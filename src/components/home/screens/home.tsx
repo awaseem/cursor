@@ -16,6 +16,7 @@ export interface HomeReduxProps {
   loading: boolean
   error: boolean
   courseList: CourseList
+  firstTime: boolean
 }
 
 export interface HomeReduxDispatch {
@@ -28,6 +29,7 @@ export function Home({
   courseList,
   getCourses,
   setSelectedCourse,
+  firstTime,
 }: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
   const { colors } = useTheme()
@@ -35,6 +37,10 @@ export function Home({
   useEffect(() => {
     getCourses()
   }, [])
+
+  if (firstTime) {
+    return <Container />
+  }
 
   return (
     <Container>

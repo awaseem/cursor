@@ -9,10 +9,12 @@ import { bindActionCreators } from '@reduxjs/toolkit'
 import { getCourses, setSelectedCourse } from '../redux/courseThunks'
 
 function mapStateToProps(state: AppState): HomeReduxProps {
+  console.log(state)
   return {
     loading: state.courses.courseList.loading,
     error: state.courses.courseList.error,
     courseList: state.courses.courseList.data,
+    firstTime: state.profile.firstTime,
   }
 }
 

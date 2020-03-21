@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native'
 import { useTheme } from '../../hooks/themeHooks'
 
 export interface ContainerProps {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export function Container({ children }: ContainerProps) {
