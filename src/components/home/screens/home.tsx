@@ -39,6 +39,7 @@ export function Home({
   }, [])
 
   if (firstTime) {
+    navigation.navigate(Screens.Welcome)
     return <Container />
   }
 

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { Screens } from './screens'
 import { HomeContainer } from '../containers/homeContainer'
 import { CourseContainer } from '../containers/coursesContainer'
+import { WelcomeContainer } from '../containers/welcomeContainer'
 
 const RootStack = createStackNavigator()
 
@@ -17,6 +18,11 @@ export function RootStackScreen() {
       <RootStack.Screen
         name={Screens.Courses}
         component={CourseContainer}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name={Screens.Welcome}
+        component={WelcomeContainer}
         options={{ headerShown: false }}
       />
     </RootStack.Navigator>

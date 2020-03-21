@@ -8,16 +8,19 @@ import { useTheme } from '../../../hooks/themeHooks'
 import { Content } from '../../common/content'
 import { CourseInput } from '../../course/components/courseInput'
 import { CourseButton } from '../../course/components/courseButton'
+import { useNavigation } from '@react-navigation/native'
 
 const ANIMATION_DURATION = 800
 
-export interface WelcomeScreenProps {
-  onSuccess: (name: string) => void
+export interface WelcomeReduxDispatch {
+  setFirstTimeProfile: (name: string) => void
 }
 
-export function WelcomeScreen({ onSuccess }: WelcomeScreenProps) {
+export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
   const insets = useSafeArea()
   const { font, colors } = useTheme()
+  const navigation = useNavigation()
+
   const animatedEmoji = useRef(new Animated.Value(0)).current
   const animatedWelcomeText = useRef(new Animated.Value(0)).current
 
@@ -131,7 +134,8 @@ export function WelcomeScreen({ onSuccess }: WelcomeScreenProps) {
           finalColor={buttonColor}
           onHold={() => {
             if (name) {
-              onSuccess(name)
+              setFirstTimeProfile(name)
+              navigation.goBack()
             }
           }}
         />
