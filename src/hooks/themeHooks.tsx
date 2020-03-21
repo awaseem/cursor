@@ -1,4 +1,3 @@
-import React from 'react'
 import { useColorScheme } from 'react-native-appearance'
 import { darkTheme, lightTheme } from '../styles/theme'
 

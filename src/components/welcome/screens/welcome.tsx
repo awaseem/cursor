@@ -107,7 +107,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
         >
           <Text style={[font.courseMessage, { textAlign: 'center' }]}>
             {
-              'Thanks for downloading! I hope you enjoy the experience and learning something new. If you like the app feel free to give it a rating on the App Store.'
+              'Thanks for downloading! I hope you enjoy the experience and learn something new. If you like the app feel free to give it a rating on the App Store.'
             }
           </Text>
         </Animated.View>
