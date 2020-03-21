@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { Container } from '../../container'
+import { Container } from '../../common/container'
 import { Header } from '../components/header'
 import { Stepper } from '../components/stepper'
 import { CourseRenderer } from './courseRenderer'
 import { CourseComplete } from './courseComplete'
 import { CourseItems } from '../../../data/api'
-import { Loader } from '../../loader'
+import { Loader } from '../../common/loader'
 
 const ANIMATION_DURATION = 300
 

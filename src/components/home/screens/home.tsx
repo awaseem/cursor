@@ -3,14 +3,14 @@ import { View, ScrollView, StyleSheet, RefreshControl } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
-import { Container } from '../../container'
+import { Container } from '../../common/container'
 import { LanguageCard } from '../components/languageCard'
 import { CourseRow } from '../components/courseRow'
 import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
 import { FlatList } from 'react-native-gesture-handler'
 import { CourseList } from '../../../data/api'
-import { Loader } from '../../loader'
+import { Loader } from '../../common/loader'
 
 export interface HomeReduxProps {
   loading: boolean

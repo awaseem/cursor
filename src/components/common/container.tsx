@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { StyleSheet, View } from 'react-native'
-import { useColorScheme } from 'react-native-appearance'
-import { useTheme } from '../hooks/themeHooks'
+import { useTheme } from '../../hooks/themeHooks'
 
 export interface ContainerProps {
   children: React.ReactNode

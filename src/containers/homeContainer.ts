@@ -26,4 +26,4 @@ function mapDispatchToProps(dispatch: AppDispatch): HomeReduxDispatch {
   )
 }
 
-export const HomeConatiner = connect(mapStateToProps, mapDispatchToProps)(Home)
+export const HomeContainer = connect(mapStateToProps, mapDispatchToProps)(Home)

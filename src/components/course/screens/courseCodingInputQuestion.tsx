@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Content } from '../../content'
+import { Content } from '../../common/content'
 import { CourseHeader } from '../components/courseHeader'
 import { CourseMessage } from '../components/courseMessage'
 import { StyleSheet, View } from 'react-native'

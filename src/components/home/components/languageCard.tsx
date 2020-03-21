@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { TouchableScale } from '../../touchableScale'
+import { TouchableScale } from '../../common/touchableScale'
 import { useTheme } from '../../../hooks/themeHooks'
 
 export interface LanguageCardProps {

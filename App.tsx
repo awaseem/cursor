@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { RootStackScreen } from './src/navigation/navigation'
 import { store, persistedStore } from './src/redux/rootReducer'
-import { Loader } from './src/components/loader'
+import { Loader } from './src/components/common/loader'
 
 export default function App() {
   return (

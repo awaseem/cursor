@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Screens } from './screens'
-import { HomeConatiner } from '../containers/homeContainer'
+import { HomeContainer } from '../containers/homeContainer'
 import { CourseContainer } from '../containers/coursesContainer'
 
 const RootStack = createStackNavigator()
@@ -11,7 +11,7 @@ export function RootStackScreen() {
     <RootStack.Navigator mode="modal">
       <RootStack.Screen
         name={Screens.Home}
-        component={HomeConatiner}
+        component={HomeContainer}
         options={{ headerShown: false }}
       />
       <RootStack.Screen

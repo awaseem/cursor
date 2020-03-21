@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { StyleSheet, Text, Animated } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
-import { Container } from '../../container'
+import { Container } from '../../common/container'
 import { WelcomeEmoji } from '../components/welcomeEmoji'
 import { CourseHeader } from '../../course/components/courseHeader'
 import { useTheme } from '../../../hooks/themeHooks'
-import { Content } from '../../content'
+import { Content } from '../../common/content'
 import { CourseInput } from '../../course/components/courseInput'
 import { CourseButton } from '../../course/components/courseButton'
 

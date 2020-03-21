@@ -1,6 +1,6 @@
 import React from 'react'
 import { CourseButton } from './courseButton'
-import { Content } from '../../content'
+import { Content } from '../../common/content'
 import { CourseHeader } from './courseHeader'
 import { CourseMessage } from './courseMessage'
 import { useTheme } from '../../../hooks/themeHooks'
