@@ -16,6 +16,7 @@ import {
 } from '@reduxjs/toolkit'
 import { courseList, selectedCourse } from './courseSlices'
 import { profile } from './profileSlice'
+import { stats } from './statsSlices'
 
 const ASYNC_STORAGE_KEY = 'root_storage'
 const BLACKLIST = ['courses']
@@ -26,6 +27,7 @@ export const rootReducer = combineReducers({
     selectedCourse: selectedCourse.reducer,
   }),
   profile: profile.reducer,
+  stats: stats.reducer,
 })
 
 const persistedReducer = persistReducer(
@@ -45,6 +47,7 @@ export const store = configureStore({
     },
   }),
 })
+
 export const persistedStore = persistStore(store)
 
 export type AppDispatch = typeof store.dispatch

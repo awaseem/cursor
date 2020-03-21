@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react'
-import { View, ScrollView, StyleSheet, RefreshControl } from 'react-native'
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  SectionList,
+  Text,
+} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
@@ -8,14 +15,13 @@ import { LanguageCard } from '../components/languageCard'
 import { CourseRow } from '../components/courseRow'
 import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
-import { FlatList } from 'react-native-gesture-handler'
-import { CourseList } from '../../../data/api'
 import { Loader } from '../../common/loader'
+import { Sections } from '../../../redux/courseSlices'
 
 export interface HomeReduxProps {
   loading: boolean
   error: boolean
-  courseList: CourseList
+  courseSections: Sections
   firstTime: boolean
   name: string
 }
@@ -27,14 +33,14 @@ export interface HomeReduxDispatch {
 
 export function Home({
   loading,
-  courseList,
+  courseSections,
   getCourses,
   setSelectedCourse,
   firstTime,
   name,
 }: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
-  const { colors } = useTheme()
+  const { colors, font } = useTheme()
 
   useEffect(() => {
     getCourses()
@@ -83,15 +89,22 @@ export function Home({
           borderColor: colors.primary.separtorColor,
         }}
       />
-      {loading && courseList.length === 0 ? (
+      {loading && courseSections.length === 0 ? (
         <Loader />
       ) : (
-        <FlatList
+        <SectionList
+          showsVerticalScrollIndicator={false}
+          sections={courseSections}
+          keyExtractor={(item, index) => item.id}
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={getCourses} />
           }
-          data={courseList}
           contentContainerStyle={{ paddingTop: 40, paddingBottom: 40 }}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={[font.subtitleHeading, { marginBottom: 30 }]}>
+              {title}
+            </Text>
+          )}
           renderItem={({ item }) => (
             <CourseRow
               borderColor={'#FED18C'}

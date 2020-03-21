@@ -12,7 +12,7 @@ function mapStateToProps(state: AppState): HomeReduxProps {
   return {
     loading: state.courses.courseList.loading,
     error: state.courses.courseList.error,
-    courseList: state.courses.courseList.data,
+    courseSections: state.courses.courseList.data,
     firstTime: state.profile.firstTime,
     name: state.profile.name,
   }
