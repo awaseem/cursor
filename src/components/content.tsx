@@ -11,7 +11,6 @@ export function Content({ children }: ContentProps) {
       style={styles.FlexContainer}
       behavior="padding"
       enabled
-      keyboardVerticalOffset={100}
     >
       <ScrollView
         showsVerticalScrollIndicator={false}

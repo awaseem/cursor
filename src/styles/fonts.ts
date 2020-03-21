@@ -2,6 +2,7 @@ import { iOSUIKit } from 'react-native-typography'
 import { colors } from './color'
 
 export interface FontTheme {
+  welcomeHeading: Object
   greetingHeading: Object
   languageHeading: Object
   languageAcronym: Object
@@ -16,6 +17,9 @@ export interface FontTheme {
 export const BASE_FONT_SIZE = 16
 
 export const fontsLightTheme: FontTheme = {
+  welcomeHeading: {
+    fontSize: BASE_FONT_SIZE * 4,
+  },
   greetingHeading: {
     ...iOSUIKit.largeTitleEmphasizedObject,
   },
@@ -53,6 +57,9 @@ export const fontsLightTheme: FontTheme = {
 }
 
 export const fontsDarkTheme: FontTheme = {
+  welcomeHeading: {
+    fontSize: BASE_FONT_SIZE * 4,
+  },
   greetingHeading: {
     ...iOSUIKit.largeTitleEmphasizedWhiteObject,
   },
