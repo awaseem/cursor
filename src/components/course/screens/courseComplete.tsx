@@ -1,14 +1,15 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
-import { BASE_FONT_SIZE } from '../../../styles/fonts'
 import { CourseButton } from '../components/courseButton'
-import { useNavigation } from '@react-navigation/native'
 import { EmptyScreen } from '../../common/emptyScreen'
 
-export function CourseComplete() {
-  const { font, colors } = useTheme()
-  const navigation = useNavigation()
+export interface CourseCompleteProps {
+  onComplete: () => void
+}
+
+export function CourseComplete({ onComplete }: CourseCompleteProps) {
+  const { colors } = useTheme()
 
   return (
     <View style={styles.Container}>
@@ -17,7 +18,7 @@ export function CourseComplete() {
         finalColor={colors.primary.buttonSucessColor}
         text={'Got it!'}
         marker={'🍾'}
-        onHold={() => navigation.goBack()}
+        onHold={onComplete}
       />
     </View>
   )

@@ -1,16 +1,38 @@
 import { connect } from 'react-redux'
-import { AppState } from '../redux/rootReducer'
+import { AppState, AppDispatch } from '../redux/rootReducer'
 import {
   CourseCarousel,
   CourseCarouselReduxProps,
+  CourseCarouselDispatchProps,
 } from '../components/course/screens/coursesCarousel'
+import { bindActionCreators } from '@reduxjs/toolkit'
+import {
+  setCompletedItemAndRefresh,
+  setInProgressItemAndRefresh,
+} from '../redux/courseThunks'
 
 function mapStateToProps(state: AppState): CourseCarouselReduxProps {
   return {
-    selectedCourse: state.courses.selectedCourse.data,
+    selectedCourseItems: state.courses.selectedCourse.data.items,
+    selectedCourse: state.courses.selectedCourse.data.course,
     loading: state.courses.selectedCourse.loading,
     error: state.courses.selectedCourse.error,
   }
 }
 
-export const CourseContainer = connect(mapStateToProps)(CourseCarousel)
+function mapDispatchToProps(
+  dispatch: AppDispatch,
+): CourseCarouselDispatchProps {
+  return bindActionCreators(
+    {
+      setCompleted: setCompletedItemAndRefresh,
+      setInProgress: setInProgressItemAndRefresh,
+    },
+    dispatch,
+  )
+}
+
+export const CourseContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CourseCarousel)

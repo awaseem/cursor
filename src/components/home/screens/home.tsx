@@ -17,6 +17,7 @@ import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
 import { Loader } from '../../common/loader'
 import { Sections } from '../../../redux/courseSlices'
+import { CourseListItem } from '../../../data/api'
 
 export interface HomeReduxProps {
   loading: boolean
@@ -28,7 +29,7 @@ export interface HomeReduxProps {
 
 export interface HomeReduxDispatch {
   getCourses: () => void
-  setSelectedCourse: (path: string) => void
+  setSelectedCourse: (course: CourseListItem) => void
 }
 
 export function Home({
@@ -95,7 +96,7 @@ export function Home({
         <SectionList
           showsVerticalScrollIndicator={false}
           sections={courseSections}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={item => item.id}
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={getCourses} />
           }
@@ -109,7 +110,7 @@ export function Home({
             <CourseRow
               borderColor={'#FED18C'}
               onPress={() => {
-                setSelectedCourse(item.path)
+                setSelectedCourse(item)
                 navigation.navigate(Screens.Courses)
               }}
               title={item.name}

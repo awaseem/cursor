@@ -9,7 +9,9 @@ import {
   getCoursesForJavascript,
   getCourseByPath,
   CourseList,
+  CourseListItem,
 } from '../data/api'
+import { stats } from './statsSlices'
 
 export function getCourses() {
   return async (dispatch: AppDispatch) => {
@@ -66,14 +68,16 @@ export function setCourseSections(courses: CourseList) {
   }
 }
 
-export function setSelectedCourse(path: string) {
+export function setSelectedCourse(course: CourseListItem) {
   return async (dispatch: AppDispatch) => {
     try {
+      dispatch(selectedCourse.actions.setCourse(course))
+
       dispatch(selectedCourse.actions.setError(false))
       dispatch(selectedCourse.actions.setLoading(true))
 
-      const course = await getCourseByPath(path)
-      dispatch(selectedCourse.actions.setList(course))
+      const courseItems = await getCourseByPath(course.path)
+      dispatch(selectedCourse.actions.setItems(courseItems))
 
       dispatch(selectedCourse.actions.setLoading(false))
     } catch (error) {
@@ -87,5 +91,19 @@ export function refreshSectionList() {
   return async (dispatch: AppDispatch, getState: () => AppState) => {
     const { data: courseList } = getState().courses.courseList
     dispatch(setCourseSections(courseList))
+  }
+}
+
+export function setInProgressItemAndRefresh(id: string, index: number) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(stats.actions.inProgressCourse({ id, index }))
+    dispatch(refreshSectionList())
+  }
+}
+
+export function setCompletedItemAndRefresh(id: string) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(stats.actions.completedCourses(id))
+    dispatch(refreshSectionList())
   }
 }

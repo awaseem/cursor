@@ -6,7 +6,7 @@ import { Header } from '../components/header'
 import { Stepper } from '../components/stepper'
 import { CourseRenderer } from './courseRenderer'
 import { CourseComplete } from './courseComplete'
-import { CourseItems } from '../../../data/api'
+import { CourseItems, CourseListItem } from '../../../data/api'
 import { Loader } from '../../common/loader'
 
 const ANIMATION_DURATION = 300
@@ -14,14 +14,23 @@ const ANIMATION_DURATION = 300
 export interface CourseCarouselReduxProps {
   loading: boolean
   error: boolean
-  selectedCourse: CourseItems
+  selectedCourse?: CourseListItem
+  selectedCourseItems: CourseItems
+}
+
+export interface CourseCarouselDispatchProps {
+  setCompleted: (id: string) => void
+  setInProgress: (id: string, index: number) => void
 }
 
 export function CourseCarousel({
   loading,
   error,
+  selectedCourseItems,
   selectedCourse,
-}: CourseCarouselReduxProps) {
+  setCompleted,
+  setInProgress,
+}: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
   const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
@@ -100,18 +109,37 @@ export function CourseCarousel({
     }
   }
 
+  function onComplete() {
+    if (selectedCourse) {
+      setCompleted(selectedCourse.id)
+    }
+    navigation.goBack()
+  }
+
+  function onInProgress() {
+    if (index === courses.length - 1) {
+      onComplete()
+      return
+    }
+
+    if (selectedCourse) {
+      setInProgress(selectedCourse.id, index)
+    }
+    navigation.goBack()
+  }
+
   useEffect(() => {
     setCourses([
-      ...selectedCourse.map((course, index) => (
+      ...selectedCourseItems.map((course, index) => (
         <CourseRenderer
           key={index}
           courseItem={course}
           successHandler={transitionAway}
         />
       )),
-      <CourseComplete />,
+      <CourseComplete onComplete={onComplete} />,
     ])
-  }, [selectedCourse])
+  }, [selectedCourseItems])
 
   if (loading) {
     return <Loader />
@@ -119,7 +147,7 @@ export function CourseCarousel({
 
   return (
     <Container>
-      <Header onPress={() => navigation.goBack()} title="Strings" />
+      <Header onPress={onInProgress} title={selectedCourse?.name ?? ''} />
       <Stepper activeStep={index} steps={courses.length} />
       <Animated.View
         style={[
