@@ -14,7 +14,7 @@ import {
   configureStore,
   getDefaultMiddleware,
 } from '@reduxjs/toolkit'
-import { courseList, selectedCourse } from './courseSlices'
+import { courseList, selectedCourse, courseSectionList } from './courseSlices'
 import { profile } from './profileSlice'
 import { stats } from './statsSlices'
 
@@ -23,6 +23,7 @@ const BLACKLIST = ['courses']
 
 export const rootReducer = combineReducers({
   courses: combineReducers({
+    courseSectionList: courseSectionList.reducer,
     courseList: courseList.reducer,
     selectedCourse: selectedCourse.reducer,
   }),

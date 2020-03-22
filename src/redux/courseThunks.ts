@@ -1,5 +1,10 @@
 import { AppDispatch, AppState } from './rootReducer'
-import { courseList, selectedCourse, SectionCourseList } from './courseSlices'
+import {
+  courseList,
+  selectedCourse,
+  SectionCourseList,
+  courseSectionList,
+} from './courseSlices'
 import {
   getCoursesForJavascript,
   getCourseByPath,
@@ -13,7 +18,8 @@ export function getCourses() {
       dispatch(courseList.actions.setLoading(true))
 
       const javaScriptCourses = await getCoursesForJavascript()
-      dispatch(setCompletedCourses(javaScriptCourses))
+      dispatch(courseList.actions.setList(javaScriptCourses))
+      dispatch(setCourseSections(javaScriptCourses))
 
       dispatch(courseList.actions.setLoading(false))
     } catch (error) {
@@ -23,31 +29,40 @@ export function getCourses() {
   }
 }
 
-export function setCompletedCourses(courses: CourseList) {
+export function setCourseSections(courses: CourseList) {
   return async (dispatch: AppDispatch, getState: () => AppState) => {
-    const completedCoursesIds = getState().stats.completedCourseIds
+    const { completedCourseIds, inProgressCourseIds } = getState().stats
 
     const completedCourses: CourseList = courses.filter(
-      course => completedCoursesIds[course.id],
+      course => completedCourseIds[course.id],
+    )
+    const inProgressCourses: CourseList = courses.filter(
+      course => inProgressCourseIds[course.id],
     )
     const incompleteCourses: CourseList = courses.filter(
-      course => !completedCoursesIds[course.id],
+      course => !completedCourseIds[course.id],
     )
 
     const completedSection: SectionCourseList = {
       title: 'Completed',
       data: completedCourses,
     }
+    const inProgressSection: SectionCourseList = {
+      title: 'In Progress',
+      data: inProgressCourses,
+    }
     const incompleteSection: SectionCourseList = {
       title: 'Incomplete',
       data: incompleteCourses,
     }
 
-    const nonEmptySections = [incompleteSection, completedSection].filter(
-      section => section.data.length > 0,
-    )
+    const nonEmptySections: SectionCourseList[] = [
+      inProgressSection,
+      incompleteSection,
+      completedSection,
+    ].filter(section => section.data.length > 0)
 
-    dispatch(courseList.actions.setList(nonEmptySections))
+    dispatch(courseSectionList.actions.setList(nonEmptySections))
   }
 }
 
@@ -65,5 +80,12 @@ export function setSelectedCourse(path: string) {
       dispatch(selectedCourse.actions.setError(true))
       console.log(error)
     }
+  }
+}
+
+export function refreshSectionList() {
+  return async (dispatch: AppDispatch, getState: () => AppState) => {
+    const { data: courseList } = getState().courses.courseList
+    dispatch(setCourseSections(courseList))
   }
 }

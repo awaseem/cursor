@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CourseList, CourseItems, CourseItem } from '../data/api'
 
 export interface SectionCourseList {
-  title: 'Completed' | 'Incomplete'
+  title: 'Completed' | 'Incomplete' | 'In Progress'
   data: CourseList
 }
 
@@ -14,7 +14,7 @@ export interface GenericApiDataState<T> {
   error: boolean
 }
 
-export const courseList = createSlice({
+export const courseSectionList = createSlice({
   name: 'courseList',
   initialState: {
     loading: true,
@@ -22,13 +22,27 @@ export const courseList = createSlice({
     error: false,
   } as GenericApiDataState<Sections>,
   reducers: {
+    setList: (state, action: PayloadAction<Sections>) => {
+      state.data = action.payload
+    },
+  },
+})
+
+export const courseList = createSlice({
+  name: 'courseList',
+  initialState: {
+    loading: true,
+    data: [],
+    error: false,
+  } as GenericApiDataState<CourseList>,
+  reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload
     },
     setError: (state, action: PayloadAction<boolean>) => {
       state.error = action.payload
     },
-    setList: (state, action: PayloadAction<Sections>) => {
+    setList: (state, action: PayloadAction<CourseList>) => {
       state.data = action.payload
     },
   },
