@@ -32,18 +32,18 @@ export function getCourses() {
 }
 
 export function setCourseSections(courses: CourseList) {
-  return async (dispatch: AppDispatch, getState: () => AppState) => {
+  return (dispatch: AppDispatch, getState: () => AppState) => {
     const { completedCourseIds, inProgressCourseIds } = getState().stats
 
     const completedCourses: CourseList = courses.filter(
       course => completedCourseIds[course.id],
     )
     const inProgressCourses: CourseList = courses.filter(
-      course => inProgressCourseIds[course.id],
+      course => inProgressCourseIds[course.id] !== undefined,
     )
-    const incompleteCourses: CourseList = courses.filter(
-      course => !completedCourseIds[course.id],
-    )
+    const incompleteCourses: CourseList = courses
+      .filter(course => !completedCourseIds[course.id])
+      .filter(course => inProgressCourseIds[course.id] === undefined)
 
     const completedSection: SectionCourseList = {
       title: 'Completed',
@@ -103,6 +103,7 @@ export function setInProgressItemAndRefresh(id: string, index: number) {
 
 export function setCompletedItemAndRefresh(id: string) {
   return async (dispatch: AppDispatch) => {
+    dispatch(stats.actions.removeIdFromInProgressCourse(id))
     dispatch(stats.actions.completedCourses(id))
     dispatch(refreshSectionList())
   }

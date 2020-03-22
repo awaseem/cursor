@@ -27,5 +27,12 @@ export const stats = createSlice({
         [action.payload.id]: action.payload.index,
       }
     },
+    removeIdFromInProgressCourse: (state, action: PayloadAction<string>) => {
+      const {
+        [action.payload]: value,
+        ...withOutIdCourses
+      } = state.inProgressCourseIds
+      state.inProgressCourseIds = withOutIdCourses
+    },
   },
 })

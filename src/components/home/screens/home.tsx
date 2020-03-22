@@ -96,6 +96,7 @@ export function Home({
         <SectionList
           showsVerticalScrollIndicator={false}
           sections={courseSections}
+          stickySectionHeadersEnabled={false}
           keyExtractor={item => item.id}
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={getCourses} />

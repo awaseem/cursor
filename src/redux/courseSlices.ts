@@ -20,7 +20,7 @@ export interface GenericApiDataState<T> {
 }
 
 export const courseSectionList = createSlice({
-  name: 'courseList',
+  name: 'courseSectionList',
   initialState: {
     loading: true,
     data: [],
