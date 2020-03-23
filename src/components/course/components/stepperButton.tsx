@@ -12,12 +12,22 @@ export interface StepperButtonProps {
   text: string
   active?: boolean
   onLayout?: (event: LayoutChangeEvent) => void
+  onPress?: () => void
 }
 
-export function StepperButton({ text, active, onLayout }: StepperButtonProps) {
+export function StepperButton({
+  text,
+  active,
+  onLayout,
+  onPress,
+}: StepperButtonProps) {
   const { colors, font } = useTheme()
   return (
-    <TouchableOpacity onLayout={onLayout} style={styles.Container}>
+    <TouchableOpacity
+      onPress={onPress}
+      onLayout={onLayout}
+      style={styles.Container}
+    >
       <Text style={font.titleHeading}>{text}</Text>
       {active && (
         <View

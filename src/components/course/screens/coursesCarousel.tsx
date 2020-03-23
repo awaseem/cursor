@@ -17,6 +17,7 @@ export interface CourseCarouselReduxProps {
   selectedCourse?: CourseListItem
   selectedCourseItems: CourseItems
   activeIndex: number
+  completed: boolean
 }
 
 export interface CourseCarouselDispatchProps {
@@ -26,12 +27,12 @@ export interface CourseCarouselDispatchProps {
 
 export function CourseCarousel({
   loading,
-  error,
   activeIndex,
   selectedCourseItems,
   selectedCourse,
   setCompleted,
   setInProgress,
+  completed,
 }: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
   const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
@@ -111,14 +112,28 @@ export function CourseCarousel({
     }
   }
 
+  function handleStepperPress(index: number) {
+    setIndex(index)
+  }
+
   function onComplete() {
+    if (completed) {
+      navigation.goBack()
+      return
+    }
+
     if (selectedCourse) {
       setCompleted(selectedCourse.id)
     }
     navigation.goBack()
   }
 
-  function onInProgress() {
+  function onExit() {
+    if (completed) {
+      navigation.goBack()
+      return
+    }
+
     if (index === courses.length - 1) {
       onComplete()
       return
@@ -153,8 +168,13 @@ export function CourseCarousel({
 
   return (
     <Container>
-      <Header onPress={onInProgress} title={selectedCourse?.name ?? ''} />
-      <Stepper activeStep={index} steps={courses.length} />
+      <Header onPress={onExit} title={selectedCourse?.name ?? ''} />
+      <Stepper
+        completed={completed}
+        activeStep={index}
+        steps={courses.length}
+        onStepperPress={handleStepperPress}
+      />
       <Animated.View
         style={[
           styles.FlexContainer,

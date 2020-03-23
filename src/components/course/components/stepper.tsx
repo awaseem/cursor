@@ -4,16 +4,28 @@ import { StepperButton } from './stepperButton'
 import { useTheme } from '../../../hooks/themeHooks'
 
 export interface StepperProps {
+  completed: boolean
   steps: number
   activeStep: number
+
+  onStepperPress?: (index: number) => void
 }
 
-export function Stepper({ steps, activeStep }: StepperProps) {
+export function Stepper({
+  steps,
+  activeStep,
+  completed = false,
+  onStepperPress,
+}: StepperProps) {
   const flatListRef = useRef<FlatList<number> | null>(null)
   const { colors } = useTheme()
   const stepButton = Array.from(Array(steps).keys())
 
   useEffect(() => {
+    if (completed) {
+      return
+    }
+
     if (activeStep !== 0) {
       flatListRef.current?.scrollToIndex({
         animated: true,
@@ -29,6 +41,7 @@ export function Stepper({ steps, activeStep }: StepperProps) {
         data={stepButton}
         renderItem={({ item }) => (
           <StepperButton
+            onPress={() => completed && onStepperPress && onStepperPress(item)}
             active={activeStep === item}
             text={(item + 1).toString()}
           />
