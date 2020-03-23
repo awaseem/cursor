@@ -24,6 +24,8 @@ export interface CourseCarouselDispatchProps {
   setCompletedAndRefresh: (id: string) => void
   setInProgressAndRefresh: (id: string, index: number) => void
   setInProgress: (args: { id: string; index: number }) => void
+  nextCourseItem: () => void
+  manuallySetCourseItem: (index: number) => void
 }
 
 export function CourseCarousel({
@@ -33,13 +35,13 @@ export function CourseCarousel({
   selectedCourse,
   setCompletedAndRefresh,
   setInProgressAndRefresh,
-  setInProgress,
   completed,
+  manuallySetCourseItem,
+  nextCourseItem,
 }: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
   const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
-  const [index, setIndex] = useState(0)
   const [visible, setVisible] = useState(true)
   const [courses, setCourses] = useState<CourseItems>([])
 
@@ -55,7 +57,7 @@ export function CourseCarousel({
       toValue: 1,
       useNativeDriver: true,
     }).start(() => {
-      setIndex(index => index + 1)
+      nextCourseItem()
       setVisible(false)
       transitionIn()
     })
@@ -114,7 +116,7 @@ export function CourseCarousel({
   }
 
   function handleStepperPress(index: number) {
-    setIndex(index)
+    manuallySetCourseItem(index)
   }
 
   function onComplete() {
@@ -135,13 +137,13 @@ export function CourseCarousel({
       return
     }
 
-    if (index === courses.length - 1) {
+    if (activeIndex === courses.length - 1) {
       onComplete()
       return
     }
 
     if (selectedCourse) {
-      setInProgressAndRefresh(selectedCourse.id, index)
+      setInProgressAndRefresh(selectedCourse.id, activeIndex)
     }
     navigation.goBack()
   }
@@ -159,10 +161,6 @@ export function CourseCarousel({
     ])
   }, [selectedCourseItems])
 
-  useEffect(() => {
-    setIndex(activeIndex)
-  }, [activeIndex])
-
   if (loading) {
     return <Loader />
   }
@@ -172,7 +170,7 @@ export function CourseCarousel({
       <Header onPress={onExit} title={selectedCourse?.name ?? ''} />
       <Stepper
         completed={completed}
-        activeStep={index}
+        activeStep={activeIndex}
         steps={courses.length}
         onStepperPress={handleStepperPress}
       />
@@ -182,7 +180,7 @@ export function CourseCarousel({
           visible ? transitionAwayAnimation() : transitionInAnimation(),
         ]}
       >
-        {courses[index]}
+        {courses[activeIndex]}
       </Animated.View>
     </Container>
   )

@@ -96,6 +96,27 @@ export function setCourseSections(courses: CourseList) {
   }
 }
 
+export function nextCourseItem() {
+  return (dispatch: AppDispatch, getState: () => AppState) => {
+    const {
+      itemIndex,
+      completed,
+      course,
+    } = getState().courses.selectedCourse.data
+
+    const newIndex = itemIndex + 1
+    if (!completed) {
+      dispatch(
+        stats.actions.inProgressCourse({
+          id: course?.id ?? '',
+          index: newIndex,
+        }),
+      )
+    }
+    dispatch(selectedCourse.actions.setItemIndex(newIndex))
+  }
+}
+
 export function refreshSectionList() {
   return (dispatch: AppDispatch, getState: () => AppState) => {
     const { data: courseList } = getState().courses.courseList

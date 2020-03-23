@@ -9,8 +9,10 @@ import { bindActionCreators } from '@reduxjs/toolkit'
 import {
   setCompletedItemAndRefresh,
   setInProgressItemAndRefresh,
+  nextCourseItem,
 } from '../redux/courseThunks'
 import { stats } from '../redux/statsSlices'
+import { selectedCourse } from '../redux/courseSlices'
 
 function mapStateToProps(state: AppState): CourseCarouselReduxProps {
   return {
@@ -28,9 +30,11 @@ function mapDispatchToProps(
 ): CourseCarouselDispatchProps {
   return bindActionCreators(
     {
+      manuallySetCourseItem: selectedCourse.actions.setItemIndex,
       setInProgress: stats.actions.inProgressCourse,
       setCompletedAndRefresh: setCompletedItemAndRefresh,
       setInProgressAndRefresh: setInProgressItemAndRefresh,
+      nextCourseItem,
     },
     dispatch,
   )
