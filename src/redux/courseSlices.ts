@@ -5,6 +5,7 @@ export interface SelectedCourse {
   items: CourseItems
   course?: CourseListItem
   itemIndex: number
+  completed: boolean
 }
 
 export interface SectionCourseList {
@@ -62,6 +63,7 @@ export const selectedCourse = createSlice({
       items: [],
       course: undefined,
       itemIndex: 0,
+      completed: false,
     },
     error: false,
   } as GenericApiDataState<SelectedCourse>,
@@ -80,6 +82,9 @@ export const selectedCourse = createSlice({
     },
     setItemIndex: (state, action: PayloadAction<number>) => {
       state.data.itemIndex = action.payload
+    },
+    setCompleted: (state, action: PayloadAction<boolean>) => {
+      state.data.completed = action.payload
     },
   },
 })

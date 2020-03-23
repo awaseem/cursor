@@ -31,7 +31,10 @@ export function getCourses() {
   }
 }
 
-export function setSelectedCourse(course: CourseListItem) {
+export function setSelectedCourse(
+  course: CourseListItem,
+  completed: boolean = false,
+) {
   return async (dispatch: AppDispatch, getState: () => AppState) => {
     try {
       const { inProgressCourseIds } = getState().stats
@@ -45,6 +48,8 @@ export function setSelectedCourse(course: CourseListItem) {
 
       const activeIndex = inProgressCourseIds[course.id] ?? 0
       dispatch(selectedCourse.actions.setItemIndex(activeIndex))
+
+      dispatch(selectedCourse.actions.setCompleted(completed))
 
       dispatch(selectedCourse.actions.setLoading(false))
     } catch (error) {
