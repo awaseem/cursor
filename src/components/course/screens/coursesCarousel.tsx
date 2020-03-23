@@ -55,14 +55,7 @@ export function CourseCarousel({
       toValue: 1,
       useNativeDriver: true,
     }).start(() => {
-      setIndex(index => {
-        const newIndex = index + 1
-        if (!completed && selectedCourse) {
-          setInProgress({ id: selectedCourse.id, index: newIndex })
-        }
-        return newIndex
-      })
-
+      setIndex(index => index + 1)
       setVisible(false)
       transitionIn()
     })

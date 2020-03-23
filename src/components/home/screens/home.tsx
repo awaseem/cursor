@@ -29,7 +29,7 @@ export interface HomeReduxProps {
 
 export interface HomeReduxDispatch {
   getCourses: () => void
-  setSelectedCourse: (course: CourseListItem, completed?: boolean) => void
+  setSelectedCourse: (course: CourseListItem) => void
 }
 
 export function Home({
@@ -111,7 +111,7 @@ export function Home({
             <CourseRow
               borderColor={'#FED18C'}
               onPress={() => {
-                setSelectedCourse(item, title === 'Completed')
+                setSelectedCourse(item)
                 navigation.navigate(Screens.Courses)
               }}
               title={item.name}

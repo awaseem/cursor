@@ -31,25 +31,25 @@ export function getCourses() {
   }
 }
 
-export function setSelectedCourse(
-  course: CourseListItem,
-  completed: boolean = false,
-) {
+export function setSelectedCourse(course: CourseListItem) {
   return async (dispatch: AppDispatch, getState: () => AppState) => {
     try {
-      const { inProgressCourseIds } = getState().stats
-      dispatch(selectedCourse.actions.setCourse(course))
+      const { inProgressCourseIds, completedCourseIds } = getState().stats
 
       dispatch(selectedCourse.actions.setError(false))
       dispatch(selectedCourse.actions.setLoading(true))
 
       const courseItems = await getCourseByPath(course.path)
-      dispatch(selectedCourse.actions.setItems(courseItems))
-
       const activeIndex = inProgressCourseIds[course.id] ?? 0
-      dispatch(selectedCourse.actions.setItemIndex(activeIndex))
 
-      dispatch(selectedCourse.actions.setCompleted(completed))
+      dispatch(selectedCourse.actions.setItems(courseItems))
+      dispatch(selectedCourse.actions.setItemIndex(activeIndex))
+      dispatch(
+        selectedCourse.actions.setCompleted(
+          completedCourseIds[course.id] ?? false,
+        ),
+      )
+      dispatch(selectedCourse.actions.setCourse(course))
 
       dispatch(selectedCourse.actions.setLoading(false))
     } catch (error) {
