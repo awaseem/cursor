@@ -57,7 +57,7 @@ export function CourseCarousel({
     }).start(() => {
       setIndex(index => {
         const newIndex = index + 1
-        if (selectedCourse) {
+        if (!completed && selectedCourse) {
           setInProgress({ id: selectedCourse.id, index: newIndex })
         }
         return newIndex

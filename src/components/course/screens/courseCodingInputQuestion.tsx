@@ -43,6 +43,10 @@ export function CodingInputQuestion({
       setFinalColor(colors.buttonSucessColor)
       setMarker('🤗')
       setReset(false)
+    } else {
+      setFinalColor(colors.buttonErrorColor)
+      setMarker('🤔')
+      setReset(true)
     }
   }, [text])
 
