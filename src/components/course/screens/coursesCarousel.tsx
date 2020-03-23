@@ -21,8 +21,9 @@ export interface CourseCarouselReduxProps {
 }
 
 export interface CourseCarouselDispatchProps {
-  setCompleted: (id: string) => void
-  setInProgress: (id: string, index: number) => void
+  setCompletedAndRefresh: (id: string) => void
+  setInProgressAndRefresh: (id: string, index: number) => void
+  setInProgress: (args: { id: string; index: number }) => void
 }
 
 export function CourseCarousel({
@@ -30,7 +31,8 @@ export function CourseCarousel({
   activeIndex,
   selectedCourseItems,
   selectedCourse,
-  setCompleted,
+  setCompletedAndRefresh,
+  setInProgressAndRefresh,
   setInProgress,
   completed,
 }: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
@@ -53,9 +55,15 @@ export function CourseCarousel({
       toValue: 1,
       useNativeDriver: true,
     }).start(() => {
-      setIndex(index => index + 1)
-      setVisible(false)
+      setIndex(index => {
+        const newIndex = index + 1
+        if (selectedCourse) {
+          setInProgress({ id: selectedCourse.id, index: newIndex })
+        }
+        return newIndex
+      })
 
+      setVisible(false)
       transitionIn()
     })
   }
@@ -123,7 +131,7 @@ export function CourseCarousel({
     }
 
     if (selectedCourse) {
-      setCompleted(selectedCourse.id)
+      setCompletedAndRefresh(selectedCourse.id)
     }
     navigation.goBack()
   }
@@ -140,7 +148,7 @@ export function CourseCarousel({
     }
 
     if (selectedCourse) {
-      setInProgress(selectedCourse.id, index)
+      setInProgressAndRefresh(selectedCourse.id, index)
     }
     navigation.goBack()
   }
@@ -149,7 +157,7 @@ export function CourseCarousel({
     setCourses([
       ...selectedCourseItems.map((course, index) => (
         <CourseRenderer
-          key={index}
+          key={course.type + index}
           courseItem={course}
           successHandler={transitionAway}
         />

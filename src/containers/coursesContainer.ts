@@ -10,6 +10,7 @@ import {
   setCompletedItemAndRefresh,
   setInProgressItemAndRefresh,
 } from '../redux/courseThunks'
+import { stats } from '../redux/statsSlices'
 
 function mapStateToProps(state: AppState): CourseCarouselReduxProps {
   return {
@@ -27,8 +28,9 @@ function mapDispatchToProps(
 ): CourseCarouselDispatchProps {
   return bindActionCreators(
     {
-      setCompleted: setCompletedItemAndRefresh,
-      setInProgress: setInProgressItemAndRefresh,
+      setInProgress: stats.actions.inProgressCourse,
+      setCompletedAndRefresh: setCompletedItemAndRefresh,
+      setInProgressAndRefresh: setInProgressItemAndRefresh,
     },
     dispatch,
   )
