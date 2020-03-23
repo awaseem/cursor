@@ -3,8 +3,6 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import { StepperButton } from './stepperButton'
 import { useTheme } from '../../../hooks/themeHooks'
 
-const SCROLL_PADDING = 5
-
 export interface StepperProps {
   steps: number
   activeStep: number
@@ -20,7 +18,6 @@ export function Stepper({ steps, activeStep }: StepperProps) {
       flatListRef.current?.scrollToIndex({
         animated: true,
         index: activeStep,
-        viewOffset: SCROLL_PADDING,
       })
     }
   }, [activeStep])
@@ -41,6 +38,14 @@ export function Stepper({ steps, activeStep }: StepperProps) {
           styles.Container,
           { borderBottomColor: colors.primary.separtorColor },
         ]}
+        onScrollToIndexFailed={async info => {
+          setTimeout(() => {
+            flatListRef.current?.scrollToIndex({
+              index: info.index,
+              animated: true,
+            })
+          }, 0)
+        }}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.InnerContainer}
         horizontal={true}

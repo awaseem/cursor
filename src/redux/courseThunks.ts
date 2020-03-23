@@ -31,6 +31,29 @@ export function getCourses() {
   }
 }
 
+export function setSelectedCourse(course: CourseListItem) {
+  return async (dispatch: AppDispatch, getState: () => AppState) => {
+    try {
+      const { inProgressCourseIds } = getState().stats
+      dispatch(selectedCourse.actions.setCourse(course))
+
+      dispatch(selectedCourse.actions.setError(false))
+      dispatch(selectedCourse.actions.setLoading(true))
+
+      const courseItems = await getCourseByPath(course.path)
+      dispatch(selectedCourse.actions.setItems(courseItems))
+
+      const activeIndex = inProgressCourseIds[course.id] ?? 0
+      dispatch(selectedCourse.actions.setItemIndex(activeIndex))
+
+      dispatch(selectedCourse.actions.setLoading(false))
+    } catch (error) {
+      dispatch(selectedCourse.actions.setError(true))
+      console.log(error)
+    }
+  }
+}
+
 export function setCourseSections(courses: CourseList) {
   return (dispatch: AppDispatch, getState: () => AppState) => {
     const { completedCourseIds, inProgressCourseIds } = getState().stats
@@ -68,41 +91,22 @@ export function setCourseSections(courses: CourseList) {
   }
 }
 
-export function setSelectedCourse(course: CourseListItem) {
-  return async (dispatch: AppDispatch) => {
-    try {
-      dispatch(selectedCourse.actions.setCourse(course))
-
-      dispatch(selectedCourse.actions.setError(false))
-      dispatch(selectedCourse.actions.setLoading(true))
-
-      const courseItems = await getCourseByPath(course.path)
-      dispatch(selectedCourse.actions.setItems(courseItems))
-
-      dispatch(selectedCourse.actions.setLoading(false))
-    } catch (error) {
-      dispatch(selectedCourse.actions.setError(true))
-      console.log(error)
-    }
-  }
-}
-
 export function refreshSectionList() {
-  return async (dispatch: AppDispatch, getState: () => AppState) => {
+  return (dispatch: AppDispatch, getState: () => AppState) => {
     const { data: courseList } = getState().courses.courseList
     dispatch(setCourseSections(courseList))
   }
 }
 
 export function setInProgressItemAndRefresh(id: string, index: number) {
-  return async (dispatch: AppDispatch) => {
+  return (dispatch: AppDispatch) => {
     dispatch(stats.actions.inProgressCourse({ id, index }))
     dispatch(refreshSectionList())
   }
 }
 
 export function setCompletedItemAndRefresh(id: string) {
-  return async (dispatch: AppDispatch) => {
+  return (dispatch: AppDispatch) => {
     dispatch(stats.actions.removeIdFromInProgressCourse(id))
     dispatch(stats.actions.completedCourses(id))
     dispatch(refreshSectionList())

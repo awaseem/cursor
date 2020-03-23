@@ -15,6 +15,7 @@ function mapStateToProps(state: AppState): CourseCarouselReduxProps {
   return {
     selectedCourseItems: state.courses.selectedCourse.data.items,
     selectedCourse: state.courses.selectedCourse.data.course,
+    activeIndex: state.courses.selectedCourse.data.itemIndex,
     loading: state.courses.selectedCourse.loading,
     error: state.courses.selectedCourse.error,
   }

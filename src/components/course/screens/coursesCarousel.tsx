@@ -16,6 +16,7 @@ export interface CourseCarouselReduxProps {
   error: boolean
   selectedCourse?: CourseListItem
   selectedCourseItems: CourseItems
+  activeIndex: number
 }
 
 export interface CourseCarouselDispatchProps {
@@ -26,6 +27,7 @@ export interface CourseCarouselDispatchProps {
 export function CourseCarousel({
   loading,
   error,
+  activeIndex,
   selectedCourseItems,
   selectedCourse,
   setCompleted,
@@ -35,11 +37,11 @@ export function CourseCarousel({
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
   const [index, setIndex] = useState(0)
-  const [visiable, setVisiable] = useState(true)
+  const [visible, setVisible] = useState(true)
   const [courses, setCourses] = useState<CourseItems>([])
 
   function resetAnimationTimings() {
-    setVisiable(true)
+    setVisible(true)
     animatedTransitionAway.setValue(0)
     animatedTransitionIn.setValue(0)
   }
@@ -51,7 +53,7 @@ export function CourseCarousel({
       useNativeDriver: true,
     }).start(() => {
       setIndex(index => index + 1)
-      setVisiable(false)
+      setVisible(false)
 
       transitionIn()
     })
@@ -141,6 +143,10 @@ export function CourseCarousel({
     ])
   }, [selectedCourseItems])
 
+  useEffect(() => {
+    setIndex(activeIndex)
+  }, [activeIndex])
+
   if (loading) {
     return <Loader />
   }
@@ -152,7 +158,7 @@ export function CourseCarousel({
       <Animated.View
         style={[
           styles.FlexContainer,
-          visiable ? transitionAwayAnimation() : transitionInAnimation(),
+          visible ? transitionAwayAnimation() : transitionInAnimation(),
         ]}
       >
         {courses[index]}

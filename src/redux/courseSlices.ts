@@ -4,6 +4,7 @@ import { CourseList, CourseItems, CourseListItem } from '../data/api'
 export interface SelectedCourse {
   items: CourseItems
   course?: CourseListItem
+  itemIndex: number
 }
 
 export interface SectionCourseList {
@@ -60,6 +61,7 @@ export const selectedCourse = createSlice({
     data: {
       items: [],
       course: undefined,
+      itemIndex: 0,
     },
     error: false,
   } as GenericApiDataState<SelectedCourse>,
@@ -75,6 +77,9 @@ export const selectedCourse = createSlice({
     },
     setCourse: (state, action: PayloadAction<CourseListItem>) => {
       state.data.course = action.payload
+    },
+    setItemIndex: (state, action: PayloadAction<number>) => {
+      state.data.itemIndex = action.payload
     },
   },
 })
