@@ -43,7 +43,6 @@ export function CourseCarousel({
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
   const [visible, setVisible] = useState(true)
-  const [courses, setCourses] = useState<CourseItems>([])
 
   function resetAnimationTimings() {
     setVisible(true)
@@ -148,22 +147,20 @@ export function CourseCarousel({
     navigation.goBack()
   }
 
-  useEffect(() => {
-    setCourses([
-      ...selectedCourseItems.map((course, index) => (
-        <CourseRenderer
-          key={course.type + index}
-          courseItem={course}
-          successHandler={transitionAway}
-        />
-      )),
-      <CourseComplete onComplete={onComplete} />,
-    ])
-  }, [selectedCourseItems])
-
   if (loading) {
     return <Loader />
   }
+
+  const courses = [
+    ...selectedCourseItems.map((course, index) => (
+      <CourseRenderer
+        key={course.type + index}
+        courseItem={course}
+        successHandler={transitionAway}
+      />
+    )),
+    <CourseComplete onComplete={onComplete} />,
+  ]
 
   return (
     <Container>
