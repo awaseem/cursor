@@ -69,15 +69,9 @@ export function Home({
           />
           <LanguageCard
             onPress={() => alert('Coming soon!')}
-            title={'Hypertext Markup Language'}
-            emoji={'🖼️'}
-            color={'#FF715B'}
-          />
-          <LanguageCard
-            onPress={() => alert('Coming soon!')}
-            title={'Cascading Style Sheets'}
-            emoji={'🎨'}
-            color={'#414770'}
+            title={'Python'}
+            emoji={'🐍'}
+            color={'#4B8BBE'}
           />
         </ScrollView>
       </View>

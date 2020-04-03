@@ -33,7 +33,7 @@ export function LanguageCard({
 const styles = StyleSheet.create({
   CardContainer: {
     width: 350,
-    height: 180,
+    height: 150,
     marginHorizontal: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
