@@ -12,6 +12,8 @@ export interface FontTheme {
   courseMessage: Object
   courseRowText: Object
   codeMessage: Object
+  helperHeading: Object
+  helperDescription: Object
 }
 
 export const BASE_FONT_SIZE = 16
@@ -54,6 +56,12 @@ export const fontsLightTheme: FontTheme = {
     fontSize: BASE_FONT_SIZE * 1.1,
     color: colors.codingColor,
   },
+  helperHeading: {
+    ...iOSUIKit.footnoteObject,
+  },
+  helperDescription: {
+    ...iOSUIKit.caption2Object,
+  },
 }
 
 export const fontsDarkTheme: FontTheme = {
@@ -93,5 +101,11 @@ export const fontsDarkTheme: FontTheme = {
     fontFamily: 'Courier',
     fontSize: BASE_FONT_SIZE * 1.1,
     color: colors.codingColor,
+  },
+  helperHeading: {
+    ...iOSUIKit.bodyEmphasizedWhiteObject,
+  },
+  helperDescription: {
+    ...iOSUIKit.subheadWhiteObject,
   },
 }
