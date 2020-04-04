@@ -31,6 +31,7 @@ export interface CourseCarouselDispatchProps {
 
 export function CourseCarousel({
   loading,
+  error,
   activeIndex,
   selectedCourseItems,
   selectedCourse,
@@ -147,6 +148,24 @@ export function CourseCarousel({
       setInProgressAndRefresh(selectedCourse.id, activeIndex)
     }
     navigation.goBack()
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <InfoScreenWithButton
+          emoji={'😢'}
+          heading={'Error'}
+          description={'Failed to get selected course'}
+          buttonProps={{
+            finalColor: colors.primary.buttonSucessColor,
+            text: 'Hold to dismiss',
+            marker: '🙇‍♂️',
+            onHold: () => navigation.goBack(),
+          }}
+        />
+      </Container>
+    )
   }
 
   if (loading) {
