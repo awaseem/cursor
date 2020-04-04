@@ -163,7 +163,7 @@ export function CourseCarousel({
     )),
     <InfoScreenWithButton
       emoji={'👍'}
-      description={'All Done!'}
+      heading={'All Done!'}
       buttonProps={{
         finalColor: colors.primary.buttonSucessColor,
         text: 'Got it!',

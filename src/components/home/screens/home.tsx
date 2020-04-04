@@ -11,6 +11,7 @@ import { Loader } from '../../common/loader'
 import { Sections } from '../../../redux/courseSlices'
 import { CourseListItem } from '../../../data/api'
 import { HomeCourseList } from '../components/homeCourseList'
+import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 
 export interface HomeReduxProps {
   loading: boolean
@@ -27,8 +28,10 @@ export interface HomeReduxDispatch {
 
 export function Home({
   loading,
+  error,
   courseSections,
   getCourses,
+  setSelectedCourse,
   firstTime,
   name,
 }: HomeReduxProps & HomeReduxDispatch) {
@@ -38,6 +41,38 @@ export function Home({
   useEffect(() => {
     getCourses()
   }, [])
+
+  function renderHomeCourses() {
+    if (error) {
+      return (
+        <InfoScreenWithButton
+          emoji={'😢'}
+          heading={'Error'}
+          description={'Failed to fetch courses from server.'}
+          buttonProps={{
+            text: 'Hold to refresh',
+            marker: '🔄',
+            finalColor: colors.primary.buttonSucessColor,
+            onHold: getCourses,
+            reset: true,
+          }}
+        />
+      )
+    }
+
+    if (loading && courseSections.length === 0) {
+      return <Loader />
+    }
+
+    return (
+      <HomeCourseList
+        getCourses={getCourses}
+        setSelectedCourse={setSelectedCourse}
+        courseSections={courseSections}
+        loading={loading}
+      />
+    )
+  }
 
   if (firstTime) {
     navigation.navigate(Screens.Welcome)
@@ -76,11 +111,7 @@ export function Home({
           borderColor: colors.primary.separtorColor,
         }}
       />
-      {loading && courseSections.length === 0 ? (
-        <Loader />
-      ) : (
-        <HomeCourseList courseSections={courseSections} loading={loading} />
-      )}
+      {renderHomeCourses()}
     </Container>
   )
 }
