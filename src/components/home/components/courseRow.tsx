@@ -21,7 +21,7 @@ export function CourseRow({
   return (
     <TouchableScale
       onPress={onPress}
-      style={[styles.RowContainer, { borderColor: borderColor }]}
+      style={[styles.RowContainer, { borderColor }]}
     >
       <Text style={font.courseRowText}>{title}</Text>
       <Text style={font.courseRowText}>{emoji}</Text>
