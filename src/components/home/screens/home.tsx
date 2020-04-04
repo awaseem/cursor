@@ -1,23 +1,16 @@
 import React, { useEffect } from 'react'
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  RefreshControl,
-  SectionList,
-  Text,
-} from 'react-native'
+import { View, ScrollView, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
 import { Container } from '../../common/container'
 import { LanguageCard } from '../components/languageCard'
-import { CourseRow } from '../components/courseRow'
 import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
 import { Loader } from '../../common/loader'
 import { Sections } from '../../../redux/courseSlices'
 import { CourseListItem } from '../../../data/api'
+import { HomeCourseList } from '../components/homeCourseList'
 
 export interface HomeReduxProps {
   loading: boolean
@@ -36,12 +29,11 @@ export function Home({
   loading,
   courseSections,
   getCourses,
-  setSelectedCourse,
   firstTime,
   name,
 }: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
-  const { colors, font } = useTheme()
+  const { colors } = useTheme()
 
   useEffect(() => {
     getCourses()
@@ -87,32 +79,7 @@ export function Home({
       {loading && courseSections.length === 0 ? (
         <Loader />
       ) : (
-        <SectionList
-          showsVerticalScrollIndicator={false}
-          sections={courseSections}
-          stickySectionHeadersEnabled={false}
-          keyExtractor={item => item.id}
-          refreshControl={
-            <RefreshControl refreshing={loading} onRefresh={getCourses} />
-          }
-          contentContainerStyle={{ paddingTop: 40, paddingBottom: 40 }}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={[font.subtitleHeading, { marginBottom: 30 }]}>
-              {title}
-            </Text>
-          )}
-          renderItem={({ item, section: { title } }) => (
-            <CourseRow
-              borderColor={'#FED18C'}
-              onPress={() => {
-                setSelectedCourse(item)
-                navigation.navigate(Screens.Courses)
-              }}
-              title={item.name}
-              emoji={item.emoji}
-            />
-          )}
-        />
+        <HomeCourseList courseSections={courseSections} loading={loading} />
       )}
     </Container>
   )
