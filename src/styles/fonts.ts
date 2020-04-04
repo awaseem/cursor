@@ -26,10 +26,10 @@ export const fontsLightTheme: FontTheme = {
     ...iOSUIKit.largeTitleEmphasizedObject,
   },
   languageHeading: {
-    ...iOSUIKit.largeTitleEmphasizedWhiteObject,
+    ...iOSUIKit.largeTitleEmphasizedObject,
   },
   languageAcronym: {
-    ...iOSUIKit.largeTitleEmphasizedWhiteObject,
+    ...iOSUIKit.largeTitleEmphasizedObject,
   },
   subtitleHeading: {
     ...iOSUIKit.title3Object,

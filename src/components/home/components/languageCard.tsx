@@ -7,6 +7,7 @@ export interface LanguageCardProps {
   color: string
   title: string
   emoji: string
+  selected: boolean
   onPress: () => void
 }
 
@@ -14,13 +15,18 @@ export function LanguageCard({
   color,
   title,
   emoji,
+  selected,
   onPress,
 }: LanguageCardProps) {
   const { font } = useTheme()
+
+  const cardColorStyle = selected
+    ? { backgroundColor: color }
+    : { borderWidth: 2.5, borderColor: color }
   return (
     <TouchableScale
       onPress={onPress}
-      style={[styles.CardContainer, { backgroundColor: color }]}
+      style={[styles.CardContainer, cardColorStyle]}
     >
       <Text style={font.languageHeading}>{title}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>

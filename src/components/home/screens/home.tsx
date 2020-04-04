@@ -89,12 +89,14 @@ export function Home({
           horizontal={true}
         >
           <LanguageCard
+            selected={true}
             onPress={() => undefined}
             title={'JavaScript'}
             emoji={'🤓'}
             color={'#FED18C'}
           />
           <LanguageCard
+            selected={false}
             onPress={() => alert('Coming soon!')}
             title={'Python'}
             emoji={'🐍'}
