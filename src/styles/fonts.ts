@@ -57,10 +57,10 @@ export const fontsLightTheme: FontTheme = {
     color: colors.codingColor,
   },
   helperHeading: {
-    ...iOSUIKit.footnoteObject,
+    ...iOSUIKit.bodyEmphasizedWhiteObject,
   },
   helperDescription: {
-    ...iOSUIKit.caption2Object,
+    ...iOSUIKit.subheadWhiteObject,
   },
 }
 
