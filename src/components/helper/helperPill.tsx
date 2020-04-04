@@ -4,9 +4,8 @@ import { useSafeArea } from 'react-native-safe-area-context'
 import { useTheme } from '../../hooks/themeHooks'
 
 const SHOW_ANIMATION_DURATION = 250
-const DISPLAY_ANIMATION = 3000
 
-export interface HelperPillProps {
+export interface HelperPillReduxProps {
   heading: string
   message: string
   animation: boolean
@@ -16,7 +15,7 @@ export function HelperPill({
   heading,
   message,
   animation = false,
-}: HelperPillProps) {
+}: HelperPillReduxProps) {
   const { top } = useSafeArea()
   const { font } = useTheme()
 
@@ -24,22 +23,25 @@ export function HelperPill({
 
   useEffect(() => {
     if (animation) {
-      startAndResetAnimation()
+      startAnimation()
+    } else {
+      stopAnimation()
     }
   }, [animation])
 
-  function startAndResetAnimation() {
+  function startAnimation() {
     Animated.timing(showAnimation, {
       duration: SHOW_ANIMATION_DURATION,
-      delay: SHOW_ANIMATION_DURATION * 2,
+      delay: SHOW_ANIMATION_DURATION,
       toValue: 1,
-    }).start(() => {
-      Animated.timing(showAnimation, {
-        duration: SHOW_ANIMATION_DURATION,
-        delay: DISPLAY_ANIMATION,
-        toValue: 0,
-      }).start()
-    })
+    }).start()
+  }
+
+  function stopAnimation() {
+    Animated.timing(showAnimation, {
+      duration: SHOW_ANIMATION_DURATION,
+      toValue: 0,
+    }).start()
   }
 
   function getShowAnimationStyles() {
@@ -81,7 +83,7 @@ export function HelperPill({
 const styles = StyleSheet.create({
   Container: {
     position: 'absolute',
-    width: 200,
+    maxWidth: 250,
     right: 10,
     zIndex: 10,
     padding: 10,

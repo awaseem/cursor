@@ -17,9 +17,10 @@ import {
 import { courseList, selectedCourse, courseSectionList } from './courseSlices'
 import { profile } from './profileSlice'
 import { stats } from './statsSlices'
+import { helperPill } from './helperPillSlice'
 
 const ASYNC_STORAGE_KEY = 'root_storage'
-const BLACKLIST = ['courses']
+const BLACKLIST = ['courses', 'helperPill']
 
 export const rootReducer = combineReducers({
   courses: combineReducers({
@@ -27,6 +28,7 @@ export const rootReducer = combineReducers({
     courseList: courseList.reducer,
     selectedCourse: selectedCourse.reducer,
   }),
+  helperPill: helperPill.reducer,
   profile: profile.reducer,
   stats: stats.reducer,
 })
@@ -43,6 +45,7 @@ const persistedReducer = persistReducer(
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware({
+    // Ignore these for serialize checks for redux persist to work properly
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },

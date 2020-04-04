@@ -9,7 +9,7 @@ import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { CourseItems, CourseListItem } from '../../../data/api'
 import { Loader } from '../../common/loader'
 import { useTheme } from '../../../hooks/themeHooks'
-import { HelperPill } from '../../helper/helperPill'
+import { HelperPillContainer } from '../../../containers/helperPillContainer'
 
 const ANIMATION_DURATION = 300
 
@@ -195,6 +195,7 @@ export function CourseCarousel({
 
   return (
     <Container>
+      <HelperPillContainer />
       <Header onPress={onExit} title={selectedCourse?.name ?? ''} />
       <Stepper
         completed={completed}

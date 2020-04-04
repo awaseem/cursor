@@ -12,6 +12,7 @@ import {
   CourseListItem,
 } from '../data/api'
 import { stats } from './statsSlices'
+import { showAndResetHelperPill } from './helperPillThunks'
 
 export function getCourses() {
   return async (dispatch: AppDispatch) => {
@@ -44,12 +45,20 @@ export function setSelectedCourse(course: CourseListItem) {
 
       dispatch(selectedCourse.actions.setItems(courseItems))
       dispatch(selectedCourse.actions.setItemIndex(activeIndex))
-      dispatch(
-        selectedCourse.actions.setCompleted(
-          completedCourseIds[course.id] ?? false,
-        ),
-      )
       dispatch(selectedCourse.actions.setCourse(course))
+
+      const courseCompleted = completedCourseIds[course.id]
+      if (courseCompleted) {
+        dispatch(selectedCourse.actions.setCompleted(true))
+        dispatch(
+          showAndResetHelperPill(
+            'Congrats!',
+            'Good job! You can now navigate to any page you want.',
+          ),
+        )
+      } else {
+        dispatch(selectedCourse.actions.setCompleted(false))
+      }
 
       dispatch(selectedCourse.actions.setLoading(false))
     } catch (error) {

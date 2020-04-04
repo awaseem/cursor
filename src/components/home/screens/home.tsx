@@ -13,6 +13,7 @@ import { CourseListItem } from '../../../data/api'
 import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { HelperPill } from '../../helper/helperPill'
+import { HelperPillContainer } from '../../../containers/helperPillContainer'
 
 export interface HomeReduxProps {
   loading: boolean
@@ -81,6 +82,7 @@ export function Home({
 
   return (
     <Container>
+      <HelperPillContainer />
       <Header title={'Hi 👋'} subtitle={`Welcome back, ${name}`} />
       <View style={styles.LanguagesContainer}>
         <ScrollView
