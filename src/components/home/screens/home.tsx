@@ -81,7 +81,6 @@ export function Home({
 
   return (
     <Container>
-      <HelperPill />
       <Header title={'Hi 👋'} subtitle={`Welcome back, ${name}`} />
       <View style={styles.LanguagesContainer}>
         <ScrollView

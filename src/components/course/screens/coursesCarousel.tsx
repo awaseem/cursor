@@ -195,7 +195,6 @@ export function CourseCarousel({
 
   return (
     <Container>
-      <HelperPill />
       <Header onPress={onExit} title={selectedCourse?.name ?? ''} />
       <Stepper
         completed={completed}
