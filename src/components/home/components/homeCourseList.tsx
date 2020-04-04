@@ -21,7 +21,18 @@ export function HomeCourseList({
   setSelectedCourse,
 }: HomeCourseListProps) {
   const navigation = useNavigation()
-  const { font } = useTheme()
+  const { font, colors } = useTheme()
+
+  function getBorderColor(title: string): string {
+    // TODO make into enums
+    if (title === 'In Progress') {
+      return colors.primary.buttonSucessColor
+    }
+    if (title === 'Incomplete') {
+      return colors.primary.buttonErrorColor
+    }
+    return '#FED18C'
+  }
 
   return (
     <SectionList
@@ -38,14 +49,15 @@ export function HomeCourseList({
           {title}
         </Text>
       )}
-      renderItem={({ item }) => (
+      renderItem={({ item, section: { title } }) => (
         <CourseRow
-          borderColor={'#FED18C'}
+          borderColor={getBorderColor(title)}
           onPress={() => {
             setSelectedCourse(item)
             navigation.navigate(Screens.Courses)
           }}
           title={item.name}
+          description={item.description}
           emoji={item.emoji}
         />
       )}

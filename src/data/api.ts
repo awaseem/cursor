@@ -13,6 +13,7 @@ const GET_FETCH_OPTIONS: RequestInit = {
 export interface CourseListItem {
   id: string
   name: string
+  description: string
   emoji: string
   path: string
 }

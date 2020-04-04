@@ -10,6 +10,7 @@ export interface FontTheme {
   titleHeading: Object
   courseHeading: Object
   courseMessage: Object
+  courseRowHeading: Object
   courseRowText: Object
   codeMessage: Object
   helperHeading: Object
@@ -46,6 +47,10 @@ export const fontsLightTheme: FontTheme = {
     ...iOSUIKit.bodyObject,
     fontSize: BASE_FONT_SIZE,
     lineHeight: 30,
+  },
+  courseRowHeading: {
+    ...iOSUIKit.title3EmphasizedObject,
+    fontSize: BASE_FONT_SIZE,
   },
   courseRowText: {
     ...iOSUIKit.title3Object,
@@ -92,6 +97,10 @@ export const fontsDarkTheme: FontTheme = {
     ...iOSUIKit.bodyWhiteObject,
     fontSize: BASE_FONT_SIZE,
     lineHeight: 30,
+  },
+  courseRowHeading: {
+    ...iOSUIKit.title3EmphasizedWhiteObject,
+    fontSize: BASE_FONT_SIZE,
   },
   courseRowText: {
     ...iOSUIKit.title3WhiteObject,
