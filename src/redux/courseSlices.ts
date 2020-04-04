@@ -47,6 +47,9 @@ export const courseList = createSlice({
       state.loading = action.payload
     },
     setError: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        state.data = []
+      }
       state.error = action.payload
     },
     setList: (state, action: PayloadAction<CourseList>) => {

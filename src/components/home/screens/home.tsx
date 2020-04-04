@@ -54,7 +54,6 @@ export function Home({
             marker: '🔄',
             finalColor: colors.primary.buttonSucessColor,
             onHold: getCourses,
-            reset: true,
           }}
         />
       )
