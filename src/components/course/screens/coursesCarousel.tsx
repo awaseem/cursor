@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Container } from '../../common/container'
 import { Header } from '../components/header'
 import { Stepper } from '../components/stepper'
 import { CourseRenderer } from './courseRenderer'
-import { CourseComplete } from './courseComplete'
+import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { CourseItems, CourseListItem } from '../../../data/api'
 import { Loader } from '../../common/loader'
+import { useTheme } from '../../../hooks/themeHooks'
 
 const ANIMATION_DURATION = 300
 
@@ -39,6 +40,7 @@ export function CourseCarousel({
   manuallySetCourseItem,
   nextCourseItem,
 }: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
+  const { colors } = useTheme()
   const navigation = useNavigation()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
@@ -159,7 +161,16 @@ export function CourseCarousel({
         successHandler={transitionAway}
       />
     )),
-    <CourseComplete onComplete={onComplete} />,
+    <InfoScreenWithButton
+      emoji={'👍'}
+      description={'All Done!'}
+      buttonProps={{
+        finalColor: colors.primary.buttonSucessColor,
+        text: 'Got it!',
+        marker: '🍾',
+        onHold: onComplete,
+      }}
+    />,
   ]
 
   return (

@@ -1,9 +1,6 @@
 import React, { useRef } from 'react'
 import { Animated } from 'react-native'
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 const SCALE_DURATION_ANIMATION = 100
 
