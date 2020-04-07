@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Blank Template (TypeScript)",
+    "name": "Cursor",
     "slug": "cursor",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
@@ -19,7 +19,9 @@
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.awaseem.cursor",
+      "buildNumber": "1.0.0"
     }
   }
 }
