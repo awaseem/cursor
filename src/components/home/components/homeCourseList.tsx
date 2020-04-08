@@ -36,12 +36,12 @@ export function HomeCourseList({
   function getBorderColor(title: string): string {
     // TODO make into enums
     if (title === 'In Progress') {
-      return colors.primary.buttonSucessColor
+      return '#FED18C'
     }
     if (title === 'Incomplete') {
       return colors.primary.buttonErrorColor
     }
-    return '#FED18C'
+    return colors.primary.buttonSucessColor
   }
 
   return (
