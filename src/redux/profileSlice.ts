@@ -5,6 +5,7 @@ export interface ProfileState {
   lastLoggedIn: string
   firstTime: boolean
   outOfOrder: boolean
+  disableCompletePopup: boolean
 }
 
 export const profile = createSlice({
@@ -13,6 +14,7 @@ export const profile = createSlice({
     name: '',
     firstTime: true,
     outOfOrder: false,
+    disableCompletePopup: false,
   } as ProfileState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
@@ -23,6 +25,9 @@ export const profile = createSlice({
     },
     setOutOfOrder: (state, action: PayloadAction<boolean>) => {
       state.outOfOrder = action.payload
+    },
+    setDisableCompletePopup: (state, action: PayloadAction<boolean>) => {
+      state.disableCompletePopup = action.payload
     },
   },
 })

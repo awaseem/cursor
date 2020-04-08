@@ -9,15 +9,19 @@ import { HairlineSeparator } from '../../common/hairlineSeparator'
 
 export interface SettingsReduxProps {
   outOfOrder: boolean
+  disableCompletePopups: boolean
 }
 
 export interface SettingsReduxDispatch {
   setOutOfOrder: (value: boolean) => void
+  setDisableCompletePopups: (value: boolean) => void
 }
 
 export function Settings({
   outOfOrder,
   setOutOfOrder,
+  disableCompletePopups,
+  setDisableCompletePopups,
 }: SettingsReduxProps & SettingsReduxDispatch) {
   const navigation = useNavigation()
 
@@ -37,6 +41,12 @@ export function Settings({
           }
           enabled={outOfOrder}
           onValueChange={setOutOfOrder}
+        />
+        <Toggle
+          text={'Disable pop ups?'}
+          description={'Disable pop ups when courses are complete.'}
+          enabled={disableCompletePopups}
+          onValueChange={setDisableCompletePopups}
         />
       </Content>
     </Container>

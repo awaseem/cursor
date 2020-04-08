@@ -41,6 +41,7 @@ export function Toggle({
 
 const styles = StyleSheet.create({
   SwitchContainer: {
+    marginBottom: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

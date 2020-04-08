@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { View, ScrollView, StyleSheet, Animated } from 'react-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
@@ -12,8 +13,6 @@ import { Sections } from '../../../redux/courseSlices'
 import { CourseListItem } from '../../../data/api'
 import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
-import { HelperPillContainer } from '../../../containers/helperPillContainer'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { CourseHeader } from '../components/courseHeader'
 import { HairlineSeparator } from '../../common/hairlineSeparator'
 
@@ -113,7 +112,6 @@ export function Home({
 
   return (
     <Container>
-      <HelperPillContainer />
       <CourseHeader
         height={HEADER_MIN_HEIGHT}
         opacity={titleOpacity}

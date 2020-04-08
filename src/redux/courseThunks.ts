@@ -36,7 +36,10 @@ export function getCourses() {
 export function setSelectedCourse(course: CourseListItem) {
   return async (dispatch: AppDispatch, getState: () => AppState) => {
     try {
-      const { inProgressCourseIds, completedCourseIds } = getState().stats
+      const {
+        stats: { inProgressCourseIds, completedCourseIds },
+        profile: { disableCompletePopup },
+      } = getState()
 
       dispatch(selectedCourse.actions.setError(false))
       dispatch(selectedCourse.actions.setLoading(true))
@@ -51,12 +54,15 @@ export function setSelectedCourse(course: CourseListItem) {
       const courseCompleted = completedCourseIds[course.id]
       if (courseCompleted) {
         dispatch(selectedCourse.actions.setCompleted(true))
-        dispatch(
-          showAndResetHelperPill(
-            'Congrats!',
-            'Good job! You can now navigate to any page you want.',
-          ),
-        )
+
+        if (!disableCompletePopup) {
+          dispatch(
+            showAndResetHelperPill(
+              'Congrats!',
+              'Good job! You can now navigate to any page you want.',
+            ),
+          )
+        }
       } else {
         dispatch(selectedCourse.actions.setCompleted(false))
       }
