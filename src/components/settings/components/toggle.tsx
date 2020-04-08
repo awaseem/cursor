@@ -20,8 +20,8 @@ export function Toggle({
   return (
     <View style={styles.SwitchContainer}>
       <View style={{ flex: 0.8 }}>
-        <Text style={font.helperHeading}>{text}</Text>
-        <Text style={[styles.Description, font.helperDescription]}>
+        <Text style={font.toggleHeading}>{text}</Text>
+        <Text style={[styles.Description, font.toggleDescription]}>
           {description}
         </Text>
       </View>

@@ -13,6 +13,8 @@ export interface FontTheme {
   courseRowHeading: Object
   courseRowText: Object
   codeMessage: Object
+  toggleHeading: Object
+  toggleDescription: Object
   helperHeading: Object
   helperDescription: Object
 }
@@ -60,6 +62,12 @@ export const fontsLightTheme: FontTheme = {
     fontFamily: 'Courier',
     fontSize: BASE_FONT_SIZE * 1.1,
     color: colors.codingColor,
+  },
+  toggleHeading: {
+    ...iOSUIKit.bodyEmphasizedObject,
+  },
+  toggleDescription: {
+    ...iOSUIKit.subheadObject,
   },
   helperHeading: {
     ...iOSUIKit.bodyEmphasizedWhiteObject,
@@ -110,6 +118,12 @@ export const fontsDarkTheme: FontTheme = {
     fontFamily: 'Courier',
     fontSize: BASE_FONT_SIZE * 1.1,
     color: colors.codingColor,
+  },
+  toggleHeading: {
+    ...iOSUIKit.bodyEmphasizedWhiteObject,
+  },
+  toggleDescription: {
+    ...iOSUIKit.subheadWhiteObject,
   },
   helperHeading: {
     ...iOSUIKit.bodyEmphasizedWhiteObject,

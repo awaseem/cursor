@@ -112,7 +112,7 @@ export function Home({
 
   const titleTranslate = newScrollYAnimated.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-    outputRange: [20, 20, 0],
+    outputRange: [-20, -20, 0],
     extrapolate: 'clamp',
   })
 
