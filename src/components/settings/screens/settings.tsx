@@ -35,7 +35,7 @@ export function Settings({
       <HairlineSeparator />
       <Content>
         <Toggle
-          text={'Out of order?'}
+          text={'Out of order'}
           description={
             'Complete courses out of order. Warning this will reset in progress courses!'
           }
@@ -43,7 +43,7 @@ export function Settings({
           onValueChange={setOutOfOrder}
         />
         <Toggle
-          text={'Disable pop ups?'}
+          text={'Disable pop ups'}
           description={'Disable pop ups when courses are complete.'}
           enabled={disableCompletePopups}
           onValueChange={setDisableCompletePopups}

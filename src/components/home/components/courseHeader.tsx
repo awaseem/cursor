@@ -8,7 +8,6 @@ export interface CourseHeaderProps {
   opacity: Animated.AnimatedInterpolation
   title: string
   translateY: Animated.AnimatedInterpolation
-  emoji: string
 }
 
 export function CourseHeader({
@@ -16,7 +15,6 @@ export function CourseHeader({
   opacity,
   title,
   translateY,
-  emoji,
 }: CourseHeaderProps) {
   const { font, colors } = useTheme()
   const { top } = useSafeArea()
@@ -41,9 +39,6 @@ export function CourseHeader({
     >
       <Text style={[font.languageHeading, { paddingHorizontal: 20 }]}>
         {title}
-      </Text>
-      <Text style={[font.languageHeading, { paddingHorizontal: 20 }]}>
-        {emoji}
       </Text>
     </Animated.View>
   )

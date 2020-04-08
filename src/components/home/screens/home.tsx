@@ -123,7 +123,6 @@ export function Home({
         opacity={titleOpacity}
         translateY={titleTranslate}
         title={'JavaScript'}
-        emoji={'🤓'}
       />
       <Animated.View
         style={[
