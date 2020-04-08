@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { View, ScrollView, StyleSheet, Animated, Text } from 'react-native'
+import { View, ScrollView, StyleSheet, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
@@ -15,6 +15,7 @@ import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { HelperPillContainer } from '../../../containers/helperPillContainer'
 import { useSafeArea } from 'react-native-safe-area-context'
 import { CourseHeader } from '../components/courseHeader'
+import { HairlineSeparator } from '../../common/hairlineSeparator'
 
 const HEADER_MAX_HEIGHT = 400
 const HEADER_MIN_HEIGHT = 100
@@ -43,7 +44,7 @@ export function Home({
   name,
 }: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
-  const { colors, font } = useTheme()
+  const { colors } = useTheme()
   const { top } = useSafeArea()
 
   const scrollYAnimated = useRef(new Animated.Value(-HEADER_MAX_HEIGHT)).current
@@ -129,7 +130,14 @@ export function Home({
           },
         ]}
       >
-        <Header title={'Hi 👋'} subtitle={`Welcome back, ${name}`} />
+        <Header
+          title={'Hi 👋'}
+          subtitle={`Welcome back, ${name}`}
+          icon={{
+            emoji: '⚙️',
+            onPress: () => navigation.navigate(Screens.Settings),
+          }}
+        />
         <View style={styles.LanguagesContainer}>
           <ScrollView
             style={styles.LanguagesScrollContainer}
@@ -153,15 +161,7 @@ export function Home({
           </ScrollView>
         </View>
         <Header title={'Courses'} />
-        <View
-          style={[
-            styles.HairlineWidth,
-            {
-              borderColor: colors.primary.separtorColor,
-              backgroundColor: colors.background,
-            },
-          ]}
-        />
+        <HairlineSeparator />
       </Animated.View>
       {renderHomeCourses()}
     </Container>
@@ -179,11 +179,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   LanguagesScrollContainer: {
-    marginHorizontal: -20,
-  },
-  HairlineWidth: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    marginTop: 20,
     marginHorizontal: -20,
   },
 })

@@ -4,6 +4,7 @@ import { Screens } from './screens'
 import { HomeContainer } from '../containers/homeContainer'
 import { CourseContainer } from '../containers/coursesContainer'
 import { WelcomeContainer } from '../containers/welcomeContainer'
+import { Settings } from '../components/settings/screens/settings'
 
 const RootStack = createStackNavigator()
 
@@ -23,6 +24,11 @@ export function RootStackScreen() {
       <RootStack.Screen
         name={Screens.Welcome}
         component={WelcomeContainer}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name={Screens.Settings}
+        component={Settings}
         options={{ headerShown: false }}
       />
     </RootStack.Navigator>

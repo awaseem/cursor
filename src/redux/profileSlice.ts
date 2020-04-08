@@ -4,6 +4,7 @@ export interface ProfileState {
   name: string
   lastLoggedIn: string
   firstTime: boolean
+  outOfOrder: boolean
 }
 
 export const profile = createSlice({
@@ -12,6 +13,7 @@ export const profile = createSlice({
     name: '',
     lastLoggedIn: '',
     firstTime: true,
+    outOfOrder: false,
   } as ProfileState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
@@ -21,6 +23,9 @@ export const profile = createSlice({
       state.lastLoggedIn = action.payload
     },
     setFirstTime: (state, action: PayloadAction<boolean>) => {
+      state.firstTime = action.payload
+    },
+    setOutOfOrder: (state, action: PayloadAction<boolean>) => {
       state.firstTime = action.payload
     },
   },
