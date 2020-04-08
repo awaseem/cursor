@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, StyleSheet, View } from 'react-native'
-import { TouchableScale } from '../../common/touchableScale'
 import { useTheme } from '../../../hooks/themeHooks'
 import { BASE_FONT_SIZE } from '../../../styles/fonts'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export interface CouresRowProps {
   title: string
@@ -22,7 +22,7 @@ export function CourseRow({
 }: CouresRowProps) {
   const { font } = useTheme()
   return (
-    <TouchableScale
+    <TouchableOpacity
       onPress={onPress}
       style={[styles.RowContainer, { borderColor }]}
     >
@@ -33,7 +33,7 @@ export function CourseRow({
       <View style={styles.EmojiContainer}>
         <Text style={styles.EmojiText}>{emoji}</Text>
       </View>
-    </TouchableScale>
+    </TouchableOpacity>
   )
 }
 

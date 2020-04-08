@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
-import { TouchableScale } from '../../common/touchableScale'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export interface HeaderProps {
   title: string
@@ -25,9 +25,9 @@ export function Header({ title, subtitle, icon }: HeaderProps) {
         )}
       </View>
       {icon && (
-        <TouchableScale onPress={icon.onPress}>
+        <TouchableOpacity onPress={icon.onPress}>
           <Text style={font.closeButton}>{icon.emoji}</Text>
-        </TouchableScale>
+        </TouchableOpacity>
       )}
     </View>
   )

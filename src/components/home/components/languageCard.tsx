@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { TouchableScale } from '../../common/touchableScale'
 import { useTheme } from '../../../hooks/themeHooks'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export interface LanguageCardProps {
   color: string
@@ -24,7 +24,7 @@ export function LanguageCard({
     ? { backgroundColor: color }
     : { borderWidth: 2.5, borderColor: color }
   return (
-    <TouchableScale
+    <TouchableOpacity
       onPress={onPress}
       style={[styles.CardContainer, cardColorStyle]}
     >
@@ -32,7 +32,7 @@ export function LanguageCard({
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
         <Text style={font.languageAcronym}>{emoji}</Text>
       </View>
-    </TouchableScale>
+    </TouchableOpacity>
   )
 }
 
