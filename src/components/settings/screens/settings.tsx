@@ -11,10 +11,13 @@ export interface SettingsReduxProps {
   outOfOrder: boolean
 }
 
-export interface SettingsReduxDispatch {}
+export interface SettingsReduxDispatch {
+  setOutOfOrder: (value: boolean) => void
+}
 
 export function Settings({
   outOfOrder,
+  setOutOfOrder,
 }: SettingsReduxProps & SettingsReduxDispatch) {
   const navigation = useNavigation()
 
@@ -33,7 +36,7 @@ export function Settings({
             'Complete courses out of order. Warning this will reset in progress courses!'
           }
           enabled={outOfOrder}
-          onValueChange={() => undefined}
+          onValueChange={setOutOfOrder}
         />
       </Content>
     </Container>

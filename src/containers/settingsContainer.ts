@@ -1,9 +1,12 @@
 import { connect } from 'react-redux'
-import { AppState } from '../redux/rootReducer'
+import { bindActionCreators } from '@reduxjs/toolkit'
+import { AppState, AppDispatch } from '../redux/rootReducer'
 import {
   SettingsReduxProps,
   Settings,
+  SettingsReduxDispatch,
 } from '../components/settings/screens/settings'
+import { setOutOfOrder } from '../redux/profileThunks'
 
 function mapStateToProps(state: AppState): SettingsReduxProps {
   return {
@@ -11,4 +14,16 @@ function mapStateToProps(state: AppState): SettingsReduxProps {
   }
 }
 
-export const SettingsContainer = connect(mapStateToProps)(Settings)
+function mapDispatchToProps(dispatch: AppDispatch): SettingsReduxDispatch {
+  return bindActionCreators(
+    {
+      setOutOfOrder,
+    },
+    dispatch,
+  )
+}
+
+export const SettingsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Settings)

@@ -34,5 +34,8 @@ export const stats = createSlice({
       } = state.inProgressCourseIds
       state.inProgressCourseIds = withOutIdCourses
     },
+    resetInProgress: state => {
+      state.inProgressCourseIds = {}
+    },
   },
 })
