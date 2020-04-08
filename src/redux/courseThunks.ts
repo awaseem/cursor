@@ -4,6 +4,7 @@ import {
   selectedCourse,
   SectionCourseList,
   courseSectionList,
+  SectionTitle,
 } from './courseSlices'
 import {
   getCoursesForJavascript,
@@ -83,15 +84,15 @@ export function setCourseSections(courses: CourseList) {
       .filter(course => inProgressCourseIds[course.id] === undefined)
 
     const completedSection: SectionCourseList = {
-      title: 'Completed',
+      title: SectionTitle.completed,
       data: completedCourses,
     }
     const inProgressSection: SectionCourseList = {
-      title: 'In Progress',
+      title: SectionTitle.inProgress,
       data: inProgressCourses,
     }
     const incompleteSection: SectionCourseList = {
-      title: 'Incomplete',
+      title: SectionTitle.incomplete,
       data: incompleteCourses,
     }
 

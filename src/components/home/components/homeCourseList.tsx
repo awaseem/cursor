@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { CourseRow } from './courseRow'
 import { Screens } from '../../../navigation/screens'
-import { Sections } from '../../../redux/courseSlices'
+import { Sections, SectionTitle } from '../../../redux/courseSlices'
 import { useTheme } from '../../../hooks/themeHooks'
 import { useNavigation } from '@react-navigation/native'
 import { CourseListItem } from '../../../data/api'
@@ -35,10 +35,10 @@ export function HomeCourseList({
 
   function getBorderColor(title: string): string {
     // TODO make into enums
-    if (title === 'In Progress') {
+    if (title === SectionTitle.inProgress) {
       return '#FED18C'
     }
-    if (title === 'Incomplete') {
+    if (title === SectionTitle.incomplete) {
       return colors.primary.buttonErrorColor
     }
     return colors.primary.buttonSucessColor
@@ -46,7 +46,7 @@ export function HomeCourseList({
 
   return (
     <Animated.SectionList
-      style={{ zIndex: -1000 }}
+      style={styles.SectionListIndex}
       showsVerticalScrollIndicator={false}
       sections={courseSections}
       stickySectionHeadersEnabled={false}
@@ -58,7 +58,7 @@ export function HomeCourseList({
       renderSectionHeader={({
         section: { title },
       }: SectionListRenderItemInfo<CourseListItem>) => (
-        <Text style={[font.subtitleHeading, { marginBottom: 30 }]}>
+        <Text style={[font.subtitleHeading, styles.SubtitleHeading]}>
           {title}
         </Text>
       )}
@@ -92,6 +92,12 @@ export function HomeCourseList({
 }
 
 const styles = StyleSheet.create({
+  SectionListIndex: {
+    zIndex: -1000,
+  },
+  SubtitleHeading: {
+    marginBottom: 30,
+  },
   ContentContainer: {
     paddingTop: 40,
     paddingBottom: 40,

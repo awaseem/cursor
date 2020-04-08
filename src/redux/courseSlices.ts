@@ -8,8 +8,14 @@ export interface SelectedCourse {
   completed: boolean
 }
 
+export enum SectionTitle {
+  completed = 'Completed',
+  incomplete = 'Incomplete',
+  inProgress = 'In Progress',
+}
+
 export interface SectionCourseList {
-  title: 'Completed' | 'Incomplete' | 'In Progress'
+  title: SectionTitle
   data: CourseList
 }
 
