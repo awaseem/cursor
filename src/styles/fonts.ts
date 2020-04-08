@@ -8,6 +8,7 @@ export interface FontTheme {
   languageAcronym: Object
   subtitleHeading: Object
   titleHeading: Object
+  closeButton: Object
   courseHeading: Object
   courseMessage: Object
   courseRowHeading: Object
@@ -40,6 +41,11 @@ export const fontsLightTheme: FontTheme = {
   titleHeading: {
     ...iOSUIKit.title3EmphasizedObject,
     fontSize: BASE_FONT_SIZE * 1.25,
+  },
+  closeButton: {
+    ...iOSUIKit.title3Object,
+    fontSize: BASE_FONT_SIZE * 1.25,
+    color: colors.buttonErrorColor,
   },
   courseHeading: {
     ...iOSUIKit.title3EmphasizedObject,
@@ -95,7 +101,10 @@ export const fontsDarkTheme: FontTheme = {
   },
   titleHeading: {
     ...iOSUIKit.title3EmphasizedWhiteObject,
-    fontSize: BASE_FONT_SIZE * 1.25,
+  },
+  closeButton: {
+    ...iOSUIKit.title3Object,
+    color: colors.buttonErrorColor,
   },
   courseHeading: {
     ...iOSUIKit.title3EmphasizedWhiteObject,

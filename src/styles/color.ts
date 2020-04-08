@@ -14,7 +14,7 @@ export interface ColorTheme {
 }
 
 export const colors: Colors = {
-  indicatorColor: '#FF715B',
+  indicatorColor: '#1EA896',
 
   separtorColor: '#4C5454',
 

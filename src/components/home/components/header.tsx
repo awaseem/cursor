@@ -26,7 +26,7 @@ export function Header({ title, subtitle, icon }: HeaderProps) {
       </View>
       {icon && (
         <TouchableScale onPress={icon.onPress}>
-          <Text style={font.greetingHeading}>{icon.emoji}</Text>
+          <Text style={font.closeButton}>{icon.emoji}</Text>
         </TouchableScale>
       )}
     </View>

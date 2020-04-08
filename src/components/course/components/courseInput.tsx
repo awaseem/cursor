@@ -13,7 +13,7 @@ export function CourseInput({ placeholder, onChange }: CourseInputProps) {
     <TextInput
       onChangeText={onChange}
       style={[styles.Input, font.codeMessage]}
-      placeholder={placeholder ?? 'Enter your response here 💁‍♂️'}
+      placeholder={placeholder ?? 'Enter your response here'}
     />
   )
 }

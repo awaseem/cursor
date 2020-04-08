@@ -139,7 +139,7 @@ export function Home({
           title={'Hi 👋'}
           subtitle={`Welcome back, ${name}`}
           icon={{
-            emoji: '⚙️',
+            emoji: 'Settings',
             onPress: () => navigation.navigate(Screens.Settings),
           }}
         />

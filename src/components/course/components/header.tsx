@@ -12,12 +12,12 @@ export function Header({ title, onPress }: HeaderProps) {
   return (
     <View style={styles.Container}>
       <View>
-        <TouchableOpacity onPress={onPress}>
-          <Text style={font.titleHeading}>{'❎'}</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.TitleContainer}>
         <Text style={font.titleHeading}>{title}</Text>
+      </View>
+      <View>
+        <TouchableOpacity onPress={onPress}>
+          <Text style={font.closeButton}>{'Close'}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -25,11 +25,9 @@ export function Header({ title, onPress }: HeaderProps) {
 
 const styles = StyleSheet.create({
   Container: {
-    paddingVertical: 20,
+    paddingVertical: 30,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  TitleContainer: {
-    padding: 10,
   },
 })
