@@ -161,7 +161,7 @@ export function Home({
           </ScrollView>
         </View>
         <Header title={'Courses'} />
-        <HairlineSeparator />
+        <HairlineSeparator extraSpacing />
       </Animated.View>
       {renderHomeCourses()}
     </Container>

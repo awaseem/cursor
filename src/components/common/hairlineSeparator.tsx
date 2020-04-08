@@ -2,7 +2,11 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useTheme } from '../../hooks/themeHooks'
 
-export function HairlineSeparator() {
+export interface HairlineSeparatorProps {
+  extraSpacing?: boolean
+}
+
+export function HairlineSeparator({ extraSpacing }: HairlineSeparatorProps) {
   const { colors } = useTheme()
   return (
     <View
@@ -11,6 +15,7 @@ export function HairlineSeparator() {
         {
           borderColor: colors.primary.separtorColor,
           backgroundColor: colors.background,
+          marginTop: extraSpacing ? 20 : 0,
         },
       ]}
     />
@@ -20,7 +25,6 @@ export function HairlineSeparator() {
 const styles = StyleSheet.create({
   HairlineWidth: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    marginTop: 20,
     marginHorizontal: -20,
   },
 })
