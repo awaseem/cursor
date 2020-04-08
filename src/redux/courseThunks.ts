@@ -83,17 +83,24 @@ export function setCourseSections(courses: CourseList) {
       .filter(course => !completedCourseIds[course.id])
       .filter(course => inProgressCourseIds[course.id] === undefined)
 
+    const {
+      profile: { outOfOrder },
+    } = getState()
     const completedSection: SectionCourseList = {
       title: SectionTitle.completed,
       data: completedCourses,
     }
     const inProgressSection: SectionCourseList = {
       title: SectionTitle.inProgress,
-      data: inProgressCourses,
+      data: getInProgressCourses(inProgressCourses, outOfOrder),
     }
     const incompleteSection: SectionCourseList = {
       title: SectionTitle.incomplete,
-      data: incompleteCourses,
+      data: getIncompleteCourses(
+        incompleteCourses,
+        inProgressCourses,
+        outOfOrder,
+      ),
     }
 
     const nonEmptySections: SectionCourseList[] = [
@@ -147,4 +154,41 @@ export function setCompletedItemAndRefresh(id: string) {
     dispatch(stats.actions.completedCourses(id))
     dispatch(refreshSectionList())
   }
+}
+
+function getInProgressCourses(
+  inProgressCourses: CourseList,
+  outOfOrder: boolean,
+): CourseList {
+  if (outOfOrder) {
+    return inProgressCourses
+  }
+
+  const [firstCourse] = inProgressCourses
+  if (firstCourse) {
+    return [firstCourse]
+  }
+
+  return []
+}
+
+function getIncompleteCourses(
+  incompleteCourses: CourseList,
+  inProgressCourses: CourseList,
+  outOfOrder: boolean,
+): CourseList {
+  if (outOfOrder) {
+    return incompleteCourses
+  }
+
+  if (inProgressCourses.length > 0) {
+    return []
+  }
+
+  const [firstCourse] = incompleteCourses
+  if (firstCourse) {
+    return [firstCourse]
+  }
+
+  return []
 }

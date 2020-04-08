@@ -15,32 +15,25 @@ export function setOutOfOrder(value: boolean) {
   return async (dispatch: AppDispatch) => {
     const { setOutOfOrder } = profile.actions
     const { resetInProgress } = stats.actions
-    dispatch(setOutOfOrder(value))
 
     const successHandler = () => {
-      dispatch(setOutOfOrder(true))
+      dispatch(setOutOfOrder(value))
 
       dispatch(resetInProgress())
       dispatch(getCourses())
     }
-    const cancelHandler = () => {
-      dispatch(setOutOfOrder(false))
-    }
 
-    if (value) {
-      Alert.alert(
-        'Are you sure?',
-        'This will erase all your in progress courses!',
-        [
-          {
-            text: 'No',
-            onPress: cancelHandler,
-            style: 'cancel',
-          },
-          { text: 'Yes', onPress: successHandler },
-        ],
-        { cancelable: false },
-      )
-    }
+    Alert.alert(
+      'Are you sure?',
+      'This will erase all your in progress courses!',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        { text: 'Yes', onPress: successHandler },
+      ],
+      { cancelable: false },
+    )
   }
 }
