@@ -7,6 +7,7 @@ export interface CourseHeaderProps {
   height: number
   opacity: Animated.AnimatedInterpolation
   title: string
+  translateY: Animated.AnimatedInterpolation
   emoji: string
 }
 
@@ -14,6 +15,7 @@ export function CourseHeader({
   height,
   opacity,
   title,
+  translateY,
   emoji,
 }: CourseHeaderProps) {
   const { font, colors } = useTheme()
@@ -29,6 +31,11 @@ export function CourseHeader({
           backgroundColor: colors.background,
           borderColor: colors.primary.separtorColor,
           opacity,
+          transform: [
+            {
+              translateY,
+            },
+          ],
         },
       ]}
     >

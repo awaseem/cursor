@@ -110,11 +110,18 @@ export function Home({
     extrapolate: 'clamp',
   })
 
+  const titleTranslate = newScrollYAnimated.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+    outputRange: [20, 20, 0],
+    extrapolate: 'clamp',
+  })
+
   return (
     <Container>
       <CourseHeader
         height={HEADER_MIN_HEIGHT}
         opacity={titleOpacity}
+        translateY={titleTranslate}
         title={'JavaScript'}
         emoji={'🤓'}
       />
