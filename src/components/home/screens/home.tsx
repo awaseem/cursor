@@ -14,6 +14,7 @@ import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { HelperPillContainer } from '../../../containers/helperPillContainer'
 import { useSafeArea } from 'react-native-safe-area-context'
+import { CourseHeader } from '../components/courseHeader'
 
 const HEADER_MAX_HEIGHT = 400
 const HEADER_MIN_HEIGHT = 100
@@ -112,36 +113,17 @@ export function Home({
   return (
     <Container>
       <HelperPillContainer />
-      <Animated.View
-        style={[
-          {
-            position: 'absolute',
-            top,
-            left: 0,
-            right: 0,
-            height: HEADER_MIN_HEIGHT,
-            backgroundColor: colors.background,
-            borderBottomWidth: StyleSheet.hairlineWidth,
-            borderColor: colors.primary.separtorColor,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          },
-          { opacity: titleOpacity },
-        ]}
-      >
-        <Text style={[font.languageHeading, { paddingHorizontal: 20 }]}>
-          {'JavaScript'}
-        </Text>
-        <Text style={[font.languageHeading, { paddingHorizontal: 20 }]}>
-          {'🤓'}
-        </Text>
-      </Animated.View>
+      <CourseHeader
+        height={HEADER_MIN_HEIGHT}
+        opacity={titleOpacity}
+        title={'JavaScript'}
+        emoji={'🤓'}
+      />
       <Animated.View
         style={[
           styles.HeadingContainer,
-          { top },
           {
+            top,
             opacity: headingOpacity,
             transform: [{ translateY: headingTranslate }],
           },
@@ -172,12 +154,13 @@ export function Home({
         </View>
         <Header title={'Courses'} />
         <View
-          style={{
-            borderBottomWidth: StyleSheet.hairlineWidth,
-            marginTop: 20,
-            marginHorizontal: -20,
-            borderColor: colors.primary.separtorColor,
-          }}
+          style={[
+            styles.HairlineWidth,
+            {
+              borderColor: colors.primary.separtorColor,
+              backgroundColor: colors.background,
+            },
+          ]}
         />
       </Animated.View>
       {renderHomeCourses()}
@@ -196,6 +179,11 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   LanguagesScrollContainer: {
+    marginHorizontal: -20,
+  },
+  HairlineWidth: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginTop: 20,
     marginHorizontal: -20,
   },
 })
