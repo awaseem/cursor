@@ -2,13 +2,11 @@
   "default": {
     "title": {
       "font": "./fonts/Roboto-Bold.ttf",
-      "color": "#545454"
+      "color": "#FFFFFF"
     },
     "background": "./background.jpg",
-    "padding": 50,
     "show_complete_frame": false,
     "stack_title": false,
-    "frame": "WHITE",
     "use_platform": "IOS"
   },
   "data": [
