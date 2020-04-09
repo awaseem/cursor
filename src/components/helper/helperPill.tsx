@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { StyleSheet, View, Text, Animated } from 'react-native'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { useTheme } from '../../hooks/themeHooks'
+import { useSafeAreaWithPadding } from '../../hooks/useSafeArea'
 
 const SHOW_ANIMATION_DURATION = 250
 
@@ -16,7 +16,7 @@ export function HelperPill({
   message,
   animation = false,
 }: HelperPillReduxProps) {
-  const { top } = useSafeArea()
+  const { top } = useSafeAreaWithPadding()
   const { font } = useTheme()
 
   const showAnimation = useRef(new Animated.Value(0)).current

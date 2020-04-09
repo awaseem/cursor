@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { StyleSheet, Text, Animated } from 'react-native'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { Container } from '../../common/container'
 import { WelcomeEmoji } from '../components/welcomeEmoji'
 import { CourseHeader } from '../../course/components/courseHeader'
@@ -9,6 +8,7 @@ import { Content } from '../../common/content'
 import { CourseInput } from '../../course/components/courseInput'
 import { CourseButton } from '../../course/components/courseButton'
 import { useNavigation } from '@react-navigation/native'
+import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 const ANIMATION_DURATION = 800
 
@@ -17,7 +17,7 @@ export interface WelcomeReduxDispatch {
 }
 
 export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
-  const insets = useSafeArea()
+  const { bottom } = useSafeAreaWithPadding()
   const { font, colors } = useTheme()
   const navigation = useNavigation()
 
@@ -123,7 +123,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
       <Animated.View
         style={[
           styles.buttonContainer,
-          { paddingBottom: insets.bottom },
+          { paddingBottom: bottom },
           getAnimatedOpacityStyles(),
         ]}
       >

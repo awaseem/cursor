@@ -1,12 +1,12 @@
 import React from 'react'
+import { StyleSheet, View } from 'react-native'
 import { Content } from '../../common/content'
 import { CourseHeader } from '../components/courseHeader'
 import { CourseMessage } from '../components/courseMessage'
-import { StyleSheet, View } from 'react-native'
 import { CodeMessage } from '../components/codeMessage'
 import { CourseButton } from '../components/courseButton'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { colors } from '../../../styles/color'
+import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 export interface CourseOutlineProps {
   title: string
@@ -26,10 +26,10 @@ export function CourseOutline({
   code,
   onHold,
 }: CourseOutlineProps) {
-  const insets = useSafeArea()
+  const { bottom } = useSafeAreaWithPadding()
 
   return (
-    <View style={[styles.Container, { paddingBottom: insets.bottom }]}>
+    <View style={[styles.Container, { paddingBottom: bottom }]}>
       <Content>
         <CourseHeader title={title} />
         <CourseMessage message={content} />

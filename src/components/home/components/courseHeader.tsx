@@ -1,7 +1,7 @@
 import React from 'react'
 import { Animated, StyleSheet, Text } from 'react-native'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { useTheme } from '../../../hooks/themeHooks'
+import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 export interface CourseHeaderProps {
   height: number
@@ -17,7 +17,7 @@ export function CourseHeader({
   translateY,
 }: CourseHeaderProps) {
   const { font, colors } = useTheme()
-  const { top } = useSafeArea()
+  const { top } = useSafeAreaWithPadding()
 
   return (
     <Animated.View

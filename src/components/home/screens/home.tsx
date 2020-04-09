@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { View, ScrollView, StyleSheet, Animated } from 'react-native'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 
 import { Header } from '../components/header'
@@ -15,6 +14,7 @@ import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { CourseHeader } from '../components/courseHeader'
 import { HairlineSeparator } from '../../common/hairlineSeparator'
+import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 const HEADER_MAX_HEIGHT = 400
 const HEADER_MIN_HEIGHT = 100
@@ -44,7 +44,7 @@ export function Home({
 }: HomeReduxProps & HomeReduxDispatch) {
   const navigation = useNavigation()
   const { colors } = useTheme()
-  const { top } = useSafeArea()
+  const { top } = useSafeAreaWithPadding()
 
   const scrollYAnimated = useRef(new Animated.Value(-HEADER_MAX_HEIGHT)).current
 

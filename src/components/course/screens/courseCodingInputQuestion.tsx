@@ -6,8 +6,8 @@ import { StyleSheet, View } from 'react-native'
 import { CodeMessage } from '../components/codeMessage'
 import { CourseButton } from '../components/courseButton'
 import { colors } from '../../../styles/color'
-import { useSafeArea } from 'react-native-safe-area-context'
 import { CourseInput } from '../components/courseInput'
+import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 const SUBMIT_BUTTON_TEXT = 'Submit'
 
@@ -32,7 +32,7 @@ export function CodingInputQuestion({
   placeholder,
   additionalText,
 }: CodingInputQuestionProps) {
-  const insets = useSafeArea()
+  const { bottom } = useSafeAreaWithPadding()
   const [text, setText] = useState('')
   const [finalColor, setFinalColor] = useState(colors.buttonErrorColor)
   const [marker, setMarker] = useState('🤔')
@@ -51,7 +51,7 @@ export function CodingInputQuestion({
   }, [text])
 
   return (
-    <View style={[styles.Container, { paddingBottom: insets.bottom }]}>
+    <View style={[styles.Container, { paddingBottom: bottom }]}>
       <Content>
         <CourseHeader title={title} />
         <CourseMessage message={content} />
