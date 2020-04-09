@@ -5,6 +5,7 @@
       "color": "#FFFFFF"
     },
     "background": "./background.jpg",
+    "padding": 50,
     "show_complete_frame": false,
     "stack_title": false,
     "use_platform": "IOS"
