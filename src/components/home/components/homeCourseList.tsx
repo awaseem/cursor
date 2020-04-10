@@ -34,7 +34,6 @@ export function HomeCourseList({
   const { font, colors } = useTheme()
 
   function getBorderColor(title: string): string {
-    // TODO make into enums
     if (title === SectionTitle.inProgress) {
       return '#FED18C'
     }

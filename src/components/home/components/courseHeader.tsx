@@ -37,7 +37,12 @@ export function CourseHeader({
         },
       ]}
     >
-      <Text style={[font.languageHeading, { paddingHorizontal: 20 }]}>
+      <Text
+        style={[
+          font.languageHeading,
+          { paddingHorizontal: 20, paddingBottom: 40 },
+        ]}
+      >
         {title}
       </Text>
     </Animated.View>
@@ -52,6 +57,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
 })

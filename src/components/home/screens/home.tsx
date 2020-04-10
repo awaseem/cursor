@@ -18,13 +18,14 @@ import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 const HEADER_MAX_HEIGHT = 400
 const HEADER_MIN_HEIGHT = 100
-const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT - 40
 
 export interface HomeReduxProps {
   loading: boolean
   error: boolean
   courseSections: Sections
   firstTime: boolean
+  showEnjoyNotification: boolean
   name: string
 }
 
@@ -39,6 +40,7 @@ export function Home({
   courseSections,
   getCourses,
   setSelectedCourse,
+  showEnjoyNotification,
   firstTime,
   name,
 }: HomeReduxProps & HomeReduxDispatch) {
@@ -50,8 +52,15 @@ export function Home({
 
   useEffect(() => {
     getCourses()
-    navigation.navigate(Screens.Enjoy)
   }, [])
+
+  useEffect(() => {
+    if (showEnjoyNotification) {
+      setTimeout(() => {
+        navigation.navigate(Screens.Enjoy)
+      }, 1500)
+    }
+  }, [showEnjoyNotification])
 
   function renderHomeCourses() {
     if (error) {
@@ -120,7 +129,7 @@ export function Home({
   return (
     <Container>
       <CourseHeader
-        height={HEADER_MIN_HEIGHT}
+        height={140}
         opacity={titleOpacity}
         translateY={titleTranslate}
         title={'JavaScript'}

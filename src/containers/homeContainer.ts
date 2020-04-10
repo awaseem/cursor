@@ -15,6 +15,7 @@ function mapStateToProps(state: AppState): HomeReduxProps {
     courseSections: state.courses.courseSectionList.data,
     firstTime: state.profile.firstTime,
     name: state.profile.name,
+    showEnjoyNotification: state.notifications.showEnjoyNotification,
   }
 }
 

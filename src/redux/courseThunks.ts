@@ -14,6 +14,7 @@ import {
 } from '../data/api'
 import { stats } from './statsSlices'
 import { showAndResetHelperPill } from './helperPillThunks'
+import { notifications } from './notificationSlice'
 
 export function getCourses() {
   return async (dispatch: AppDispatch) => {
@@ -155,10 +156,20 @@ export function setInProgressItemAndRefresh(id: string, index: number) {
 }
 
 export function setCompletedItemAndRefresh(id: string) {
-  return (dispatch: AppDispatch) => {
-    dispatch(stats.actions.removeIdFromInProgressCourse(id))
-    dispatch(stats.actions.completedCourses(id))
+  return (dispatch: AppDispatch, getState: () => AppState) => {
+    const { removeIdFromInProgressCourse, completedCourses } = stats.actions
+    dispatch(removeIdFromInProgressCourse(id))
+    dispatch(completedCourses(id))
     dispatch(refreshSectionList())
+
+    // show enjoy notification only if the user has finished two courses
+    const {
+      stats: { completedCourseIds },
+    } = getState()
+    const { setShowEnjoyNotification } = notifications.actions
+    if (Object.keys(completedCourseIds).length === 2) {
+      setShowEnjoyNotification(true)
+    }
   }
 }
 
