@@ -6,20 +6,22 @@ import {
   Settings,
   SettingsReduxDispatch,
 } from '../components/settings/screens/settings'
-import { setOutOfOrder } from '../redux/profileThunks'
+import { toggleOutOfOrder, toggleNotifications } from '../redux/profileThunks'
 import { profile } from '../redux/profileSlice'
 
 function mapStateToProps(state: AppState): SettingsReduxProps {
   return {
     outOfOrder: state.profile.outOfOrder,
     disableCompletePopups: state.profile.disableCompletePopup,
+    notifications: Boolean(state.profile.notificationId),
   }
 }
 
 function mapDispatchToProps(dispatch: AppDispatch): SettingsReduxDispatch {
   return bindActionCreators(
     {
-      setOutOfOrder,
+      toggleOutOfOrder,
+      toggleNotifications,
       setDisableCompletePopups: profile.actions.setDisableCompletePopup,
     },
     dispatch,

@@ -10,16 +10,20 @@ import { HairlineSeparator } from '../../common/hairlineSeparator'
 export interface SettingsReduxProps {
   outOfOrder: boolean
   disableCompletePopups: boolean
+  notifications: boolean
 }
 
 export interface SettingsReduxDispatch {
-  setOutOfOrder: (value: boolean) => void
+  toggleOutOfOrder: (value: boolean) => void
+  toggleNotifications: (value: boolean) => void
   setDisableCompletePopups: (value: boolean) => void
 }
 
 export function Settings({
   outOfOrder,
-  setOutOfOrder,
+  toggleOutOfOrder,
+  notifications,
+  toggleNotifications,
   disableCompletePopups,
   setDisableCompletePopups,
 }: SettingsReduxProps & SettingsReduxDispatch) {
@@ -40,13 +44,19 @@ export function Settings({
             'Complete courses out of order. Warning this will reset in progress courses!'
           }
           enabled={outOfOrder}
-          onValueChange={setOutOfOrder}
+          onValueChange={toggleOutOfOrder}
         />
         <Toggle
           text={'Disable pop ups'}
           description={'Disable pop ups when courses are complete.'}
           enabled={disableCompletePopups}
           onValueChange={setDisableCompletePopups}
+        />
+        <Toggle
+          text={'Notifications'}
+          description={'Setup weekly notifications for practice.'}
+          enabled={notifications}
+          onValueChange={toggleNotifications}
         />
       </Content>
     </Container>

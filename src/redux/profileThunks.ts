@@ -1,8 +1,16 @@
+import { Alert } from 'react-native'
+import { Notifications } from 'expo'
+import Constants from 'expo-constants'
+import { askAsync, PermissionStatus, NOTIFICATIONS } from 'expo-permissions'
 import { AppDispatch } from './rootReducer'
 import { profile } from './profileSlice'
-import { Alert } from 'react-native'
 import { stats } from './statsSlices'
 import { getCourses } from './courseThunks'
+
+const NOTIFICATION_TWO_MINUTES = 120000
+const NOTIFICATION_TITLE = 'Practice makes perfect'
+const NOTIFICATION_BODY =
+  'Come back and practice courses so you can perfect the art of code!'
 
 export function setFirstTimeProfile(name: string) {
   return async (dispatch: AppDispatch) => {
@@ -11,7 +19,7 @@ export function setFirstTimeProfile(name: string) {
   }
 }
 
-export function setOutOfOrder(value: boolean) {
+export function toggleOutOfOrder(value: boolean) {
   return async (dispatch: AppDispatch) => {
     const { setOutOfOrder } = profile.actions
     const { resetInProgress } = stats.actions
@@ -35,5 +43,34 @@ export function setOutOfOrder(value: boolean) {
       ],
       { cancelable: false },
     )
+  }
+}
+
+export function toggleNotifications(value: boolean) {
+  return async (dispatch: AppDispatch) => {
+    const { setNotificationId, removeNotificationId } = profile.actions
+
+    if (!value) {
+      Notifications.cancelAllScheduledNotificationsAsync()
+      dispatch(removeNotificationId())
+      return
+    }
+
+    const result = await askAsync(NOTIFICATIONS)
+    console.log(result)
+    if (Constants.isDevice && result.status === PermissionStatus.GRANTED) {
+      const notificationId = await Notifications.scheduleLocalNotificationAsync(
+        {
+          title: NOTIFICATION_TITLE,
+          body: NOTIFICATION_BODY,
+        },
+        {
+          time: new Date().getTime() + NOTIFICATION_TWO_MINUTES,
+          repeat: 'week',
+        },
+      )
+      console.log(notificationId)
+      dispatch(setNotificationId(notificationId))
+    }
   }
 }

@@ -6,6 +6,7 @@ export interface ProfileState {
   firstTime: boolean
   outOfOrder: boolean
   disableCompletePopup: boolean
+  notificationId?: string | number
 }
 
 export const profile = createSlice({
@@ -15,6 +16,7 @@ export const profile = createSlice({
     firstTime: true,
     outOfOrder: false,
     disableCompletePopup: false,
+    notificationId: undefined,
   } as ProfileState,
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
@@ -28,6 +30,12 @@ export const profile = createSlice({
     },
     setDisableCompletePopup: (state, action: PayloadAction<boolean>) => {
       state.disableCompletePopup = action.payload
+    },
+    setNotificationId: (state, action: PayloadAction<string | number>) => {
+      state.notificationId = action.payload
+    },
+    removeNotificationId: state => {
+      state.notificationId = undefined
     },
   },
 })
