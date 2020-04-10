@@ -57,7 +57,7 @@ export function toggleNotifications(value: boolean) {
     }
 
     const result = await askAsync(NOTIFICATIONS)
-    console.log(result)
+
     if (Constants.isDevice && result.status === PermissionStatus.GRANTED) {
       const notificationId = await Notifications.scheduleLocalNotificationAsync(
         {
@@ -69,7 +69,6 @@ export function toggleNotifications(value: boolean) {
           repeat: 'week',
         },
       )
-      console.log(notificationId)
       dispatch(setNotificationId(notificationId))
     }
   }
