@@ -42,6 +42,7 @@ export interface HomeReduxDispatch {
   getCourses: () => void
   setSelectedCourse: (course: CourseListItem) => void
   setShowEnjoyNotification: (value: boolean) => void
+  setSelectedSubject: (item: SubjectListItem) => void
 }
 
 export function Home({
@@ -52,6 +53,7 @@ export function Home({
   setSelectedCourse,
   selectedSubject,
   showEnjoyNotification,
+  setSelectedSubject,
   setShowEnjoyNotification,
   firstTime,
   name,
@@ -201,7 +203,7 @@ export function Home({
               <LanguageCard
                 key={subject.id}
                 selected={subject.id === selectedSubject.id}
-                onPress={() => undefined}
+                onPress={() => setSelectedSubject(subject)}
                 title={subject.name}
                 description={subject.description}
                 emoji={subject.emoji}

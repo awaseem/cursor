@@ -9,6 +9,7 @@ import { bindActionCreators } from '@reduxjs/toolkit'
 import { getCourses, setSelectedCourse } from '../redux/courseThunks'
 import { notifications } from '../redux/notificationSlice'
 import { getAllSubjects } from '../redux/subjectThunks'
+import { selectedSubject } from '../redux/subjectsSlice'
 
 function mapStateToProps(state: AppState): HomeReduxProps {
   return {
@@ -36,6 +37,7 @@ function mapDispatchToProps(dispatch: AppDispatch): HomeReduxDispatch {
       setSelectedCourse,
       getAllSubjects,
       setShowEnjoyNotification: notifications.actions.setShowEnjoyNotification,
+      setSelectedSubject: selectedSubject.actions.setSelectedSubject,
     },
     dispatch,
   )
