@@ -132,6 +132,17 @@ export function Home({
       return <Loader disableBackground extraTopSpacing={HEADER_MAX_HEIGHT} />
     }
 
+    if (!courses.loading && courses.courseSections.length === 0) {
+      return (
+        <InfoScreenWithButton
+          extraTopSpacing={HEADER_MAX_HEIGHT + 60}
+          emoji={'⏲️'}
+          heading={'Coming soon...'}
+          description={'Working hard to make the best content possible'}
+        />
+      )
+    }
+
     return (
       <HomeCourseList
         maxHeight={HEADER_MAX_HEIGHT}
@@ -177,7 +188,8 @@ export function Home({
         height={140}
         opacity={titleOpacity}
         translateY={titleTranslate}
-        title={'JavaScript'}
+        title={selectedSubject.name}
+        description={selectedSubject.description}
       />
       <Animated.View
         style={[

@@ -7,6 +7,7 @@ export interface CourseHeaderProps {
   height: number
   opacity: Animated.AnimatedInterpolation
   title: string
+  description: string
   translateY: Animated.AnimatedInterpolation
 }
 
@@ -14,6 +15,7 @@ export function CourseHeader({
   height,
   opacity,
   title,
+  description,
   translateY,
 }: CourseHeaderProps) {
   const { font, colors } = useTheme()
@@ -40,10 +42,18 @@ export function CourseHeader({
       <Text
         style={[
           font.languageHeading,
-          { paddingHorizontal: 20, paddingBottom: 40 },
+          { paddingHorizontal: 20, paddingTop: 20 },
         ]}
       >
         {title}
+      </Text>
+      <Text
+        style={[
+          font.languageDescription,
+          { paddingHorizontal: 20, paddingBottom: 20 },
+        ]}
+      >
+        {description}
       </Text>
     </Animated.View>
   )
@@ -55,8 +65,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
   },
 })
