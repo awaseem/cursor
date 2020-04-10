@@ -22,6 +22,7 @@ function mapStateToProps(state: AppState): HomeReduxProps {
       error: state.subjects.subjectList.error,
       subjects: state.subjects.subjectList.data,
     },
+    selectedSubject: state.subjects.selectedSubject,
     firstTime: state.profile.firstTime,
     name: state.profile.name,
     showEnjoyNotification: state.notifications.showEnjoyNotification,

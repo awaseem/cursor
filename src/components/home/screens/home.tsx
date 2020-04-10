@@ -9,7 +9,7 @@ import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
 import { Loader } from '../../common/loader'
 import { Sections } from '../../../redux/courseSlices'
-import { CourseListItem, SubjectList } from '../../../data/api'
+import { CourseListItem, SubjectList, SubjectListItem } from '../../../data/api'
 import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { CourseHeader } from '../components/courseHeader'
@@ -34,6 +34,7 @@ export interface HomeReduxProps {
     error: boolean
     subjects: SubjectList
   }
+  selectedSubject: SubjectListItem
 }
 
 export interface HomeReduxDispatch {
@@ -49,6 +50,7 @@ export function Home({
   getCourses,
   getAllSubjects,
   setSelectedCourse,
+  selectedSubject,
   showEnjoyNotification,
   setShowEnjoyNotification,
   firstTime,
@@ -59,6 +61,32 @@ export function Home({
   const { top } = useSafeAreaWithPadding()
 
   const scrollYAnimated = useRef(new Animated.Value(-HEADER_MAX_HEIGHT)).current
+
+  const newScrollYAnimated = Animated.add(scrollYAnimated, HEADER_MAX_HEIGHT)
+
+  const headingTranslate = newScrollYAnimated.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE],
+    outputRange: [0, -HEADER_SCROLL_DISTANCE],
+    extrapolate: 'clamp',
+  })
+
+  const headingOpacity = newScrollYAnimated.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+    outputRange: [1, 1, 0],
+    extrapolate: 'clamp',
+  })
+
+  const titleOpacity = newScrollYAnimated.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+    outputRange: [0, 0, 1],
+    extrapolate: 'clamp',
+  })
+
+  const titleTranslate = newScrollYAnimated.interpolate({
+    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+    outputRange: [-20, -20, 0],
+    extrapolate: 'clamp',
+  })
 
   useEffect(() => {
     getAllSubjects()
@@ -91,7 +119,11 @@ export function Home({
     }
 
     if (courses.loading && courses.courseSections.length === 0) {
-      return <Loader />
+      return (
+        <View style={{ marginTop: HEADER_MAX_HEIGHT }}>
+          <Loader />
+        </View>
+      )
     }
 
     return (
@@ -104,6 +136,11 @@ export function Home({
         loading={courses.loading}
       />
     )
+  }
+
+  if (firstTime) {
+    navigation.navigate(Screens.Welcome)
+    return <Container />
   }
 
   if (subjects.loading) {
@@ -127,37 +164,6 @@ export function Home({
       </Container>
     )
   }
-
-  if (firstTime) {
-    navigation.navigate(Screens.Welcome)
-    return <Container />
-  }
-
-  const newScrollYAnimated = Animated.add(scrollYAnimated, HEADER_MAX_HEIGHT)
-
-  const headingTranslate = newScrollYAnimated.interpolate({
-    inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [0, -HEADER_SCROLL_DISTANCE],
-    extrapolate: 'clamp',
-  })
-
-  const headingOpacity = newScrollYAnimated.interpolate({
-    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-    outputRange: [1, 1, 0],
-    extrapolate: 'clamp',
-  })
-
-  const titleOpacity = newScrollYAnimated.interpolate({
-    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-    outputRange: [0, 0, 1],
-    extrapolate: 'clamp',
-  })
-
-  const titleTranslate = newScrollYAnimated.interpolate({
-    inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-    outputRange: [-20, -20, 0],
-    extrapolate: 'clamp',
-  })
 
   return (
     <Container>
@@ -191,20 +197,16 @@ export function Home({
             showsHorizontalScrollIndicator={false}
             horizontal={true}
           >
-            <LanguageCard
-              selected={true}
-              onPress={() => undefined}
-              title={'JavaScript'}
-              emoji={'🤓'}
-              color={'#FED18C'}
-            />
-            <LanguageCard
-              selected={false}
-              onPress={() => alert('Coming soon!')}
-              title={'Python'}
-              emoji={'🐍'}
-              color={'#4B8BBE'}
-            />
+            {subjects.subjects.map(subject => (
+              <LanguageCard
+                key={subject.id}
+                selected={subject.id === selectedSubject.id}
+                onPress={() => undefined}
+                title={subject.name}
+                emoji={subject.emoji}
+                color={subject.color}
+              />
+            ))}
           </ScrollView>
         </View>
         <Header title={'Courses'} />

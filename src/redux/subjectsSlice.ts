@@ -37,7 +37,12 @@ export const selectedSubject = createSlice({
   } as SubjectListItem,
   reducers: {
     setSelectedSubject: (state, action: PayloadAction<SubjectListItem>) => {
-      state = action.payload
+      state.id = action.payload.id
+      state.name = action.payload.name
+      state.description = action.payload.description
+      state.emoji = action.payload.emoji
+      state.path = action.payload.path
+      state.color = action.payload.color
     },
   },
 })
