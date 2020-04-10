@@ -11,6 +11,7 @@ export function CourseInput({ placeholder, onChange }: CourseInputProps) {
   const { font } = useTheme()
   return (
     <TextInput
+      keyboardType={'ascii-capable'}
       onChangeText={onChange}
       style={[styles.Input, font.codeMessage]}
       placeholder={placeholder ?? 'Enter your response here'}
