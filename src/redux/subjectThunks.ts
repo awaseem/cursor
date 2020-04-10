@@ -6,17 +6,17 @@ export function getAllSubjects() {
   return async (dispatch: AppDispatch) => {
     const { setError, setLoading, setList } = subjectList.actions
 
-    try {
-      dispatch(setError(false))
-      dispatch(setLoading(true))
+    dispatch(setError(false))
+    dispatch(setLoading(true))
 
+    try {
       const subjects = await getSubjects()
       dispatch(setList(subjects))
-
-      dispatch(setLoading(false))
     } catch (error) {
       dispatch(setError(true))
       console.log(error)
+    } finally {
+      dispatch(setLoading(false))
     }
   }
 }

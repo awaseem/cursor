@@ -44,8 +44,10 @@ export interface HomeReduxDispatch {
 }
 
 export function Home({
-  courses: { loading, error, courseSections },
+  courses,
+  subjects,
   getCourses,
+  getAllSubjects,
   setSelectedCourse,
   showEnjoyNotification,
   setShowEnjoyNotification,
@@ -59,7 +61,7 @@ export function Home({
   const scrollYAnimated = useRef(new Animated.Value(-HEADER_MAX_HEIGHT)).current
 
   useEffect(() => {
-    getCourses()
+    getAllSubjects()
   }, [])
 
   useEffect(() => {
@@ -72,7 +74,7 @@ export function Home({
   }, [showEnjoyNotification])
 
   function renderHomeCourses() {
-    if (error) {
+    if (courses.error) {
       return (
         <InfoScreenWithButton
           emoji={'😢'}
@@ -88,7 +90,7 @@ export function Home({
       )
     }
 
-    if (loading && courseSections.length === 0) {
+    if (courses.loading && courses.courseSections.length === 0) {
       return <Loader />
     }
 
@@ -98,9 +100,31 @@ export function Home({
         scrollAnimationValue={scrollYAnimated}
         getCourses={getCourses}
         setSelectedCourse={setSelectedCourse}
-        courseSections={courseSections}
-        loading={loading}
+        courseSections={courses.courseSections}
+        loading={courses.loading}
       />
+    )
+  }
+
+  if (subjects.loading) {
+    return <Loader />
+  }
+
+  if (subjects.error) {
+    return (
+      <Container>
+        <InfoScreenWithButton
+          emoji={'😢'}
+          heading={'Error'}
+          description={'Failed to fetch subjects from server.'}
+          buttonProps={{
+            text: 'Hold to refresh',
+            marker: '🔄',
+            finalColor: colors.primary.buttonSucessColor,
+            onHold: getAllSubjects,
+          }}
+        />
+      </Container>
     )
   }
 
