@@ -1,11 +1,13 @@
-const S3_PUBLIC_URL_JAVASCRIPT =
-  'https://cursor-development-project.s3-us-west-2.amazonaws.com/subjects/javascript'
-const COURSE_LIST_FILE_NAME = 'courseList.json'
+const S3_PUBLIC_URL_SUBJECT =
+  'https://cursor-development-project.s3-us-west-2.amazonaws.com'
+const S3_PUBLIC_URL_SUBJECT_LIST =
+  'https://cursor-development-project.s3-us-west-2.amazonaws.com/subjects/subjectList.json'
 
 const GET_FETCH_OPTIONS: RequestInit = {
   method: 'GET',
   headers: {
     Accpet: 'application/json',
+    'Cache-Control': 'no-cache', // TODO add conditional only for dev
     'Content-Type': 'application/json',
   },
 }
@@ -18,11 +20,17 @@ export interface CourseListItem {
   path: string
 }
 
+export interface SubjectListItem extends CourseListItem {
+  color: string
+}
+
 export enum CourseType {
   outline = 'outline',
   choice = 'choice',
   codingInputChoice = 'codingInputChoice',
 }
+
+export type SubjectList = SubjectListItem[]
 
 export type CourseList = CourseListItem[]
 
@@ -36,9 +44,15 @@ export interface CourseItem extends CourseItemBody {
 
 export type CourseItems = CourseItem[]
 
-export async function getCoursesForJavascript() {
+export async function getSubjects() {
+  const response = await fetch(S3_PUBLIC_URL_SUBJECT_LIST, GET_FETCH_OPTIONS)
+
+  return response.json() as Promise<SubjectList>
+}
+
+export async function getCoursesByPath(path: string) {
   const response = await fetch(
-    `${S3_PUBLIC_URL_JAVASCRIPT}/${COURSE_LIST_FILE_NAME}`,
+    `${S3_PUBLIC_URL_SUBJECT}${path}`,
     GET_FETCH_OPTIONS,
   )
 
@@ -46,8 +60,9 @@ export async function getCoursesForJavascript() {
 }
 
 export async function getCourseByPath(path: string) {
+  console.log(`${S3_PUBLIC_URL_SUBJECT}${path}`)
   const response = await fetch(
-    `${S3_PUBLIC_URL_JAVASCRIPT}${path}`,
+    `${S3_PUBLIC_URL_SUBJECT}${path}`,
     GET_FETCH_OPTIONS,
   )
 

@@ -7,7 +7,7 @@ import {
   SectionTitle,
 } from './courseSlices'
 import {
-  getCoursesForJavascript,
+  getCoursesByPath,
   getCourseByPath,
   CourseList,
   CourseListItem,
@@ -22,7 +22,9 @@ export function getCourses() {
       dispatch(courseList.actions.setError(false))
       dispatch(courseList.actions.setLoading(true))
 
-      const javaScriptCourses = await getCoursesForJavascript()
+      const javaScriptCourses = await getCoursesByPath(
+        '/subjects/javascript/courseList.json',
+      )
       dispatch(courseList.actions.setList(javaScriptCourses))
       dispatch(setCourseSections(javaScriptCourses))
 
