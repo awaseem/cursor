@@ -29,7 +29,9 @@ export function InfoScreenWithButton({
         <View style={styles.HeadingContainer}>
           <Text style={font.courseHeading}>{heading}</Text>
         </View>
-        <Text style={font.courseMessage}>{description}</Text>
+        <Text style={[font.courseMessage, styles.Description]}>
+          {description}
+        </Text>
       </View>
       {buttonProps && <CourseButton {...buttonProps} />}
     </View>
@@ -49,6 +51,9 @@ const styles = StyleSheet.create({
   TextContainer: {
     alignItems: 'center',
     marginBottom: 30,
+  },
+  Description: {
+    textAlign: 'center',
   },
   Emoji: {
     fontSize: BASE_FONT_SIZE * 5,

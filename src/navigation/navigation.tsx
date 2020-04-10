@@ -5,6 +5,7 @@ import { HomeContainer } from '../containers/homeContainer'
 import { CourseContainer } from '../containers/coursesContainer'
 import { WelcomeContainer } from '../containers/welcomeContainer'
 import { SettingsContainer } from '../containers/settingsContainer'
+import { EnjoyNotificationContainer } from '../containers/enjoyNotificationContainer'
 
 const RootStack = createStackNavigator()
 
@@ -30,6 +31,11 @@ export function RootStackScreen() {
       <RootStack.Screen
         name={Screens.Settings}
         component={SettingsContainer}
+        options={screenOptions}
+      />
+      <RootStack.Screen
+        name={Screens.Enjoy}
+        component={EnjoyNotificationContainer}
         options={screenOptions}
       />
     </RootStack.Navigator>

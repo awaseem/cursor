@@ -3,4 +3,5 @@ export enum Screens {
   Courses = 'Course',
   Welcome = 'Welcome',
   Settings = 'Settings',
+  Enjoy = 'Enjoy',
 }

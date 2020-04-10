@@ -50,6 +50,7 @@ export function Home({
 
   useEffect(() => {
     getCourses()
+    navigation.navigate(Screens.Enjoy)
   }, [])
 
   function renderHomeCourses() {
