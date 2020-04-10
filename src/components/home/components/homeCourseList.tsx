@@ -20,6 +20,7 @@ export interface HomeCourseListProps {
   scrollAnimationValue: Animated.Value
   getCourses: () => void
   setSelectedCourse: (course: CourseListItem) => void
+  subjectColor: string
 }
 
 export function HomeCourseList({
@@ -29,13 +30,14 @@ export function HomeCourseList({
   loading,
   getCourses,
   setSelectedCourse,
+  subjectColor,
 }: HomeCourseListProps) {
   const navigation = useNavigation()
   const { font, colors } = useTheme()
 
   function getBorderColor(title: string): string {
     if (title === SectionTitle.inProgress) {
-      return '#FED18C'
+      return subjectColor
     }
     if (title === SectionTitle.incomplete) {
       return colors.primary.buttonErrorColor

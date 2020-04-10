@@ -145,6 +145,7 @@ export function Home({
 
     return (
       <HomeCourseList
+        subjectColor={selectedSubject.color}
         maxHeight={HEADER_MAX_HEIGHT}
         scrollAnimationValue={scrollYAnimated}
         getCourses={() => getCourses(selectedSubject.path)}
