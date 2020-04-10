@@ -16,17 +16,15 @@ import { stats } from './statsSlices'
 import { showAndResetHelperPill } from './helperPillThunks'
 import { notifications } from './notificationSlice'
 
-export function getCourses() {
+export function getCourses(path: string) {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(courseList.actions.setError(false))
       dispatch(courseList.actions.setLoading(true))
 
-      const javaScriptCourses = await getCoursesByPath(
-        '/subjects/javascript/courseList.json',
-      )
-      dispatch(courseList.actions.setList(javaScriptCourses))
-      dispatch(setCourseSections(javaScriptCourses))
+      const courses = await getCoursesByPath(path)
+      dispatch(courseList.actions.setList(courses))
+      dispatch(setCourseSections(courses))
 
       dispatch(courseList.actions.setLoading(false))
     } catch (error) {

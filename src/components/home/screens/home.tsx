@@ -39,7 +39,7 @@ export interface HomeReduxProps {
 
 export interface HomeReduxDispatch {
   getAllSubjects: () => void
-  getCourses: () => void
+  getCourses: (path: string) => void
   setSelectedCourse: (course: CourseListItem) => void
   setShowEnjoyNotification: (value: boolean) => void
   setSelectedSubject: (item: SubjectListItem) => void
@@ -95,6 +95,13 @@ export function Home({
   }, [])
 
   useEffect(() => {
+    const { path } = selectedSubject
+    if (path) {
+      getCourses(path)
+    }
+  }, [selectedSubject])
+
+  useEffect(() => {
     if (showEnjoyNotification) {
       setTimeout(() => {
         navigation.navigate(Screens.Enjoy)
@@ -114,7 +121,7 @@ export function Home({
             text: 'Hold to refresh',
             marker: '🔄',
             finalColor: colors.primary.buttonSucessColor,
-            onHold: getCourses,
+            onHold: () => getCourses(selectedSubject.path),
           }}
         />
       )
@@ -132,7 +139,7 @@ export function Home({
       <HomeCourseList
         maxHeight={HEADER_MAX_HEIGHT}
         scrollAnimationValue={scrollYAnimated}
-        getCourses={getCourses}
+        getCourses={() => getCourses(selectedSubject.path)}
         setSelectedCourse={setSelectedCourse}
         courseSections={courses.courseSections}
         loading={courses.loading}

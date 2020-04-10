@@ -2,7 +2,7 @@ import { Alert } from 'react-native'
 import { Notifications } from 'expo'
 import Constants from 'expo-constants'
 import { askAsync, PermissionStatus, NOTIFICATIONS } from 'expo-permissions'
-import { AppDispatch } from './rootReducer'
+import { AppDispatch, AppState } from './rootReducer'
 import { profile } from './profileSlice'
 import { stats } from './statsSlices'
 import { getCourses } from './courseThunks'
@@ -20,7 +20,10 @@ export function setFirstTimeProfile(name: string) {
 }
 
 export function toggleOutOfOrder(value: boolean) {
-  return async (dispatch: AppDispatch) => {
+  return async (dispatch: AppDispatch, getState: () => AppState) => {
+    const {
+      subjects: { selectedSubject },
+    } = getState()
     const { setOutOfOrder } = profile.actions
     const { resetInProgress } = stats.actions
 
@@ -28,7 +31,7 @@ export function toggleOutOfOrder(value: boolean) {
       dispatch(setOutOfOrder(value))
 
       dispatch(resetInProgress())
-      dispatch(getCourses())
+      dispatch(getCourses(selectedSubject.path))
     }
 
     Alert.alert(
