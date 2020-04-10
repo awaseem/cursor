@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 export interface LanguageCardProps {
   color: string
   title: string
+  description: string
   emoji: string
   selected: boolean
   onPress: () => void
@@ -14,6 +15,7 @@ export interface LanguageCardProps {
 export function LanguageCard({
   color,
   title,
+  description,
   emoji,
   selected,
   onPress,
@@ -29,6 +31,9 @@ export function LanguageCard({
       style={[styles.CardContainer, cardColorStyle]}
     >
       <Text style={font.languageHeading}>{title}</Text>
+      <Text style={[font.languageDescription, styles.DescriptionContainer]}>
+        {description}
+      </Text>
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
         <Text style={font.languageAcronym}>{emoji}</Text>
       </View>
@@ -45,5 +50,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 15,
     justifyContent: 'space-around',
+  },
+  DescriptionContainer: {
+    paddingTop: 15,
   },
 })

@@ -5,6 +5,7 @@ export interface FontTheme {
   welcomeHeading: Object
   greetingHeading: Object
   languageHeading: Object
+  languageDescription: Object
   languageAcronym: Object
   subtitleHeading: Object
   titleHeading: Object
@@ -31,6 +32,9 @@ export const fontsLightTheme: FontTheme = {
   },
   languageHeading: {
     ...iOSUIKit.largeTitleEmphasizedObject,
+  },
+  languageDescription: {
+    ...iOSUIKit.bodyObject,
   },
   languageAcronym: {
     ...iOSUIKit.largeTitleEmphasizedObject,
@@ -92,6 +96,9 @@ export const fontsDarkTheme: FontTheme = {
   },
   languageHeading: {
     ...iOSUIKit.largeTitleEmphasizedWhiteObject,
+  },
+  languageDescription: {
+    ...iOSUIKit.bodyWhiteObject,
   },
   languageAcronym: {
     ...iOSUIKit.largeTitleEmphasizedWhiteObject,

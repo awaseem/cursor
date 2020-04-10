@@ -203,6 +203,7 @@ export function Home({
                 selected={subject.id === selectedSubject.id}
                 onPress={() => undefined}
                 title={subject.name}
+                description={subject.description}
                 emoji={subject.emoji}
                 color={subject.color}
               />
