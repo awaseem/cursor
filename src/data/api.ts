@@ -60,7 +60,6 @@ export async function getCoursesByPath(path: string) {
 }
 
 export async function getCourseByPath(path: string) {
-  console.log(`${S3_PUBLIC_URL_SUBJECT}${path}`)
   const response = await fetch(
     `${S3_PUBLIC_URL_SUBJECT}${path}`,
     GET_FETCH_OPTIONS,
