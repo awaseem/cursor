@@ -114,6 +114,7 @@ export function Home({
     if (courses.error) {
       return (
         <InfoScreenWithButton
+          extraTopSpacing={HEADER_MAX_HEIGHT}
           emoji={'😢'}
           heading={'Error'}
           description={'Failed to fetch courses from server.'}
@@ -128,11 +129,7 @@ export function Home({
     }
 
     if (courses.loading && courses.courseSections.length === 0) {
-      return (
-        <View style={{ marginTop: HEADER_MAX_HEIGHT }}>
-          <Loader />
-        </View>
-      )
+      return <Loader disableBackground extraTopSpacing={HEADER_MAX_HEIGHT} />
     }
 
     return (

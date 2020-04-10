@@ -7,7 +7,7 @@ const GET_FETCH_OPTIONS: RequestInit = {
   method: 'GET',
   headers: {
     Accpet: 'application/json',
-    'Cache-Control': 'no-cache', // TODO add conditional only for dev
+    'Cache-Control': 'no-cache',
     'Content-Type': 'application/json',
   },
 }

@@ -18,18 +18,19 @@ import { notifications } from './notificationSlice'
 
 export function getCourses(path: string) {
   return async (dispatch: AppDispatch) => {
+    const { setError, setLoading, setList } = courseList.actions
+    dispatch(setError(false))
+    dispatch(setLoading(true))
+
     try {
-      dispatch(courseList.actions.setError(false))
-      dispatch(courseList.actions.setLoading(true))
-
       const courses = await getCoursesByPath(path)
-      dispatch(courseList.actions.setList(courses))
+      dispatch(setList(courses))
       dispatch(setCourseSections(courses))
-
-      dispatch(courseList.actions.setLoading(false))
     } catch (error) {
-      dispatch(courseList.actions.setError(true))
+      dispatch(setError(true))
       console.log(error)
+    } finally {
+      dispatch(setLoading(false))
     }
   }
 }

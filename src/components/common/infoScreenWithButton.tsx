@@ -12,6 +12,7 @@ export interface InfoScreenWithButtonProps {
   heading: string
   description?: string
   buttonProps?: CourseButtonProps
+  extraTopSpacing?: number
 }
 
 export function InfoScreenWithButton({
@@ -19,11 +20,12 @@ export function InfoScreenWithButton({
   heading,
   description,
   buttonProps,
+  extraTopSpacing,
 }: InfoScreenWithButtonProps) {
   const { font } = useTheme()
 
   return (
-    <View style={styles.Container}>
+    <View style={[styles.Container, { marginTop: extraTopSpacing ?? 0 }]}>
       <View style={styles.TextContainer}>
         <Text style={styles.Emoji}>{emoji}</Text>
         <View style={styles.HeadingContainer}>
