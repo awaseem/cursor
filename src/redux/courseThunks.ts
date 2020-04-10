@@ -168,7 +168,7 @@ export function setCompletedItemAndRefresh(id: string) {
     } = getState()
     const { setShowEnjoyNotification } = notifications.actions
     if (Object.keys(completedCourseIds).length === 2) {
-      setShowEnjoyNotification(true)
+      dispatch(setShowEnjoyNotification(true))
     }
   }
 }

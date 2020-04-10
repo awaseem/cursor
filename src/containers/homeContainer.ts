@@ -7,6 +7,7 @@ import {
 import { AppDispatch, AppState } from '../redux/rootReducer'
 import { bindActionCreators } from '@reduxjs/toolkit'
 import { getCourses, setSelectedCourse } from '../redux/courseThunks'
+import { notifications } from '../redux/notificationSlice'
 
 function mapStateToProps(state: AppState): HomeReduxProps {
   return {
@@ -24,6 +25,7 @@ function mapDispatchToProps(dispatch: AppDispatch): HomeReduxDispatch {
     {
       getCourses,
       setSelectedCourse,
+      setShowEnjoyNotification: notifications.actions.setShowEnjoyNotification,
     },
     dispatch,
   )

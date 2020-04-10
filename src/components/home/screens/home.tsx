@@ -32,6 +32,7 @@ export interface HomeReduxProps {
 export interface HomeReduxDispatch {
   getCourses: () => void
   setSelectedCourse: (course: CourseListItem) => void
+  setShowEnjoyNotification: (value: boolean) => void
 }
 
 export function Home({
@@ -41,6 +42,7 @@ export function Home({
   getCourses,
   setSelectedCourse,
   showEnjoyNotification,
+  setShowEnjoyNotification,
   firstTime,
   name,
 }: HomeReduxProps & HomeReduxDispatch) {
@@ -58,6 +60,7 @@ export function Home({
     if (showEnjoyNotification) {
       setTimeout(() => {
         navigation.navigate(Screens.Enjoy)
+        setShowEnjoyNotification(false)
       }, 1500)
     }
   }, [showEnjoyNotification])

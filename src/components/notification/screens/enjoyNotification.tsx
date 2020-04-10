@@ -7,7 +7,7 @@ import { Header } from '../../course/components/header'
 import { Content } from '../../common/content'
 import { Toggle } from '../../settings/components/toggle'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { CourseButton } from '../../course/components/courseButton'
 import { useTheme } from '../../../hooks/themeHooks'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
@@ -48,7 +48,7 @@ export function EnjoyNotification({
           onValueChange={toggleNotifications}
         />
       </Content>
-      <View style={{ paddingBottom: bottom }}>
+      <View style={[{ paddingBottom: bottom }, styles.ButtonContainer]}>
         <CourseButton
           text={'Hold to rate'}
           marker={'🤩'}
@@ -62,3 +62,9 @@ export function EnjoyNotification({
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  ButtonContainer: {
+    alignItems: 'center',
+  },
+})
