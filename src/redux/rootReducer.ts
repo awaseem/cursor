@@ -19,15 +19,20 @@ import { profile } from './profileSlice'
 import { stats } from './statsSlices'
 import { helperPill } from './helperPillSlice'
 import { notifications } from './notificationSlice'
+import { selectedSubject, subjectList } from './subjectsSlice'
 
 const ASYNC_STORAGE_KEY = 'root_storage'
-const BLACKLIST = ['courses', 'helperPill', 'notifications']
+const BLACKLIST = ['courses', 'helperPill', 'notifications', 'subjects']
 
 export const rootReducer = combineReducers({
   courses: combineReducers({
     courseSectionList: courseSectionList.reducer,
     courseList: courseList.reducer,
     selectedCourse: selectedCourse.reducer,
+  }),
+  subjects: combineReducers({
+    selectedSubject: selectedSubject.reducer,
+    subjectList: subjectList.reducer,
   }),
   notifications: notifications.reducer,
   helperPill: helperPill.reducer,

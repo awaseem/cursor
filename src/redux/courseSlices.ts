@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CourseList, CourseItems, CourseListItem } from '../data/api'
+import { GenericApiDataState } from './sharedTypes'
 
 export interface SelectedCourse {
   items: CourseItems
@@ -20,12 +21,6 @@ export interface SectionCourseList {
 }
 
 export type Sections = SectionCourseList[]
-
-export interface GenericApiDataState<T> {
-  loading: boolean
-  data: T
-  error: boolean
-}
 
 export const courseSectionList = createSlice({
   name: 'courseSectionList',

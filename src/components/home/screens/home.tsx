@@ -9,7 +9,7 @@ import { Screens } from '../../../navigation/screens'
 import { useTheme } from '../../../hooks/themeHooks'
 import { Loader } from '../../common/loader'
 import { Sections } from '../../../redux/courseSlices'
-import { CourseListItem } from '../../../data/api'
+import { CourseListItem, SubjectList } from '../../../data/api'
 import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { CourseHeader } from '../components/courseHeader'
@@ -21,24 +21,30 @@ const HEADER_MIN_HEIGHT = 100
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT - 40
 
 export interface HomeReduxProps {
-  loading: boolean
-  error: boolean
-  courseSections: Sections
   firstTime: boolean
   showEnjoyNotification: boolean
   name: string
+  courses: {
+    loading: boolean
+    error: boolean
+    courseSections: Sections
+  }
+  subjects: {
+    loading: boolean
+    error: boolean
+    subjects: SubjectList
+  }
 }
 
 export interface HomeReduxDispatch {
+  getAllSubjects: () => void
   getCourses: () => void
   setSelectedCourse: (course: CourseListItem) => void
   setShowEnjoyNotification: (value: boolean) => void
 }
 
 export function Home({
-  loading,
-  error,
-  courseSections,
+  courses: { loading, error, courseSections },
   getCourses,
   setSelectedCourse,
   showEnjoyNotification,
