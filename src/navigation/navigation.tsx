@@ -9,27 +9,28 @@ import { SettingsContainer } from '../containers/settingsContainer'
 const RootStack = createStackNavigator()
 
 export function RootStackScreen() {
+  const screenOptions = { headerShown: false, gestureEnabled: false }
   return (
     <RootStack.Navigator mode="modal">
       <RootStack.Screen
         name={Screens.Home}
         component={HomeContainer}
-        options={{ headerShown: false }}
+        options={screenOptions}
       />
       <RootStack.Screen
         name={Screens.Courses}
         component={CourseContainer}
-        options={{ headerShown: false }}
+        options={screenOptions}
       />
       <RootStack.Screen
         name={Screens.Welcome}
         component={WelcomeContainer}
-        options={{ headerShown: false }}
+        options={screenOptions}
       />
       <RootStack.Screen
         name={Screens.Settings}
         component={SettingsContainer}
-        options={{ headerShown: false }}
+        options={screenOptions}
       />
     </RootStack.Navigator>
   )

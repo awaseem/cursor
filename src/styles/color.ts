@@ -6,6 +6,7 @@ export interface Colors {
   buttonSelectionColor: string
   buttonErrorColor: string
   codingColor: string
+  backgroundPillColor: string
 }
 
 export interface ColorTheme {
@@ -14,7 +15,7 @@ export interface ColorTheme {
 }
 
 export const colors: Colors = {
-  indicatorColor: '#1EA896',
+  indicatorColor: '#EF476F',
 
   separtorColor: '#4C5454',
 
@@ -27,6 +28,8 @@ export const colors: Colors = {
   buttonErrorColor: '#FF715B',
 
   codingColor: '#FF715B',
+
+  backgroundPillColor: '#EF476F',
 }
 
 export const colorLightTheme: ColorTheme = {

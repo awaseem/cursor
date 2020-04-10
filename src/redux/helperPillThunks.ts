@@ -1,7 +1,7 @@
 import { AppDispatch } from './rootReducer'
 import { helperPill } from './helperPillSlice'
 
-const HIDE_TIMEOUT_ANIMATION = 3000
+const HIDE_TIMEOUT_ANIMATION = 2000
 
 export function showAndResetHelperPill(
   heading: string,

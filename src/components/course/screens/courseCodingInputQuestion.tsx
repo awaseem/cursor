@@ -52,7 +52,7 @@ export function CodingInputQuestion({
 
   return (
     <View style={[styles.Container, { paddingBottom: bottom }]}>
-      <Content>
+      <Content enableOffset>
         <CourseHeader title={title} />
         <CourseMessage message={content} />
         <CodeMessage message={code} />

@@ -17,7 +17,7 @@ export function HelperPill({
   animation = false,
 }: HelperPillReduxProps) {
   const { top } = useSafeAreaWithPadding()
-  const { font } = useTheme()
+  const { font, colors } = useTheme()
 
   const showAnimation = useRef(new Animated.Value(0)).current
 
@@ -34,6 +34,7 @@ export function HelperPill({
       duration: SHOW_ANIMATION_DURATION,
       delay: SHOW_ANIMATION_DURATION,
       toValue: 1,
+      useNativeDriver: true,
     }).start()
   }
 
@@ -41,6 +42,7 @@ export function HelperPill({
     Animated.timing(showAnimation, {
       duration: SHOW_ANIMATION_DURATION,
       toValue: 0,
+      useNativeDriver: true,
     }).start()
   }
 
@@ -68,9 +70,10 @@ export function HelperPill({
     <Animated.View
       style={[
         styles.Container,
-        { top, backgroundColor: '#623CEA' },
+        { top, backgroundColor: colors.primary.backgroundPillColor },
         getShowAnimationStyles(),
       ]}
+      pointerEvents={'none'}
     >
       <View style={styles.HeadingContainer}>
         <Text style={font.helperHeading}>{heading}</Text>
