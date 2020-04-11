@@ -13,10 +13,9 @@ import { CourseListItem, SubjectList, SubjectListItem } from '../../../data/api'
 import { HomeCourseList } from '../components/homeCourseList'
 import { InfoScreenWithButton } from '../../common/infoScreenWithButton'
 import { CourseHeader } from '../components/courseHeader'
-import { HairlineSeparator } from '../../common/hairlineSeparator'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
-const HEADER_MAX_HEIGHT = 400
+const HEADER_MAX_HEIGHT = 300
 const HEADER_MIN_HEIGHT = 100
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT - 40
 
@@ -141,7 +140,7 @@ export function Home({
     if (!courses.loading && courses.courseSections.length === 0) {
       return (
         <InfoScreenWithButton
-          extraTopSpacing={HEADER_MAX_HEIGHT + 60}
+          extraTopSpacing={HEADER_MAX_HEIGHT}
           emoji={'⏲️'}
           heading={'Coming soon...'}
           description={'Working hard to make the best content possible'}
@@ -204,6 +203,7 @@ export function Home({
           styles.HeadingContainer,
           {
             top,
+            height: HEADER_MAX_HEIGHT,
             opacity: headingOpacity,
             transform: [{ translateY: headingTranslate }],
           },
@@ -236,8 +236,6 @@ export function Home({
             ))}
           </ScrollView>
         </View>
-        <Header title={'Courses'} />
-        <HairlineSeparator extraSpacing />
       </Animated.View>
       {renderHomeCourses()}
     </Container>
@@ -249,7 +247,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     right: 20,
-    height: 300,
   },
   LanguagesContainer: {
     marginTop: 40,
