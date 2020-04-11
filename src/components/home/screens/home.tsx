@@ -111,7 +111,7 @@ export function Home({
       setTimeout(() => {
         navigation.navigate(Screens.Enjoy)
         setShowEnjoyNotification(false)
-      }, 1500)
+      }, 1000)
     }
   }, [showEnjoyNotification])
 
