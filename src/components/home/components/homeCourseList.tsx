@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import {
   RefreshControl,
   Text,
   StyleSheet,
   Animated,
   SectionListRenderItemInfo,
+  SectionList,
 } from 'react-native'
 import { CourseRow } from './courseRow'
 import { Screens } from '../../../navigation/screens'
@@ -16,6 +17,7 @@ import { CourseListItem } from '../../../data/api'
 export interface HomeCourseListProps {
   courseSections: Sections
   loading: boolean
+  scrollToTop: boolean
   maxHeight: number
   scrollAnimationValue: Animated.Value
   getCourses: () => void
@@ -28,12 +30,26 @@ export function HomeCourseList({
   maxHeight,
   courseSections,
   loading,
+  scrollToTop,
   getCourses,
   setSelectedCourse,
   subjectColor,
 }: HomeCourseListProps) {
   const navigation = useNavigation()
   const { font, colors } = useTheme()
+
+  const sectionListRef = useRef<SectionList<number> | null>(null)
+
+  useEffect(() => {
+    if (scrollToTop) {
+      // @ts-ignore: not sure what the right type of this is
+      sectionListRef.current?.getNode().scrollToLocation({
+        itemIndex: 0,
+        sectionIndex: 0,
+        viewOffset: maxHeight + 40,
+      })
+    }
+  }, [scrollToTop])
 
   function getBorderColor(title: string): string {
     if (title === SectionTitle.inProgress) {
@@ -47,6 +63,7 @@ export function HomeCourseList({
 
   return (
     <Animated.SectionList
+      ref={sectionListRef}
       style={styles.SectionListIndex}
       showsVerticalScrollIndicator={false}
       sections={courseSections}

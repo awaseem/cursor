@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { View, ScrollView, StyleSheet, Animated } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -64,6 +64,8 @@ export function Home({
 
   const scrollYAnimated = useRef(new Animated.Value(-HEADER_MAX_HEIGHT)).current
 
+  const [scrollHomeListToTop, setScrollHomeListToTop] = useState(false)
+
   const newScrollYAnimated = Animated.add(scrollYAnimated, HEADER_MAX_HEIGHT)
 
   const headingTranslate = newScrollYAnimated.interpolate({
@@ -97,7 +99,11 @@ export function Home({
   useEffect(() => {
     const { path } = selectedSubject
     if (path) {
-      getCourses(path)
+      setScrollHomeListToTop(true)
+      setTimeout(() => {
+        setScrollHomeListToTop(false)
+        getCourses(path)
+      }, 500)
     }
   }, [selectedSubject])
 
@@ -145,6 +151,7 @@ export function Home({
 
     return (
       <HomeCourseList
+        scrollToTop={scrollHomeListToTop}
         subjectColor={selectedSubject.color}
         maxHeight={HEADER_MAX_HEIGHT}
         scrollAnimationValue={scrollYAnimated}
