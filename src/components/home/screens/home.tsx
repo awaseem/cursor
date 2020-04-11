@@ -101,9 +101,9 @@ export function Home({
     if (path) {
       setScrollHomeListToTop(true)
       setTimeout(() => {
-        setScrollHomeListToTop(false)
         getCourses(path)
-      }, 500)
+        setScrollHomeListToTop(false)
+      }, 100)
     }
   }, [selectedSubject])
 
