@@ -11,6 +11,7 @@ import { View, StyleSheet } from 'react-native'
 import { CourseButton } from '../../course/components/courseButton'
 import { useTheme } from '../../../hooks/themeHooks'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
+import { useVibrations } from '../../../hooks/useVibrations'
 
 export interface EnjoyNotificationReduxProps {
   notifications: boolean
@@ -25,6 +26,7 @@ export function EnjoyNotification({
   toggleNotifications,
 }: EnjoyNotificationReduxProps & EnjoyNotificationReduxDispatch) {
   const navigation = useNavigation()
+  const { correct } = useVibrations()
   const { bottom } = useSafeAreaWithPadding()
   const { colors } = useTheme()
 
@@ -53,6 +55,7 @@ export function EnjoyNotification({
           text={'Hold to rate'}
           marker={'🤩'}
           finalColor={colors.primary.buttonSucessColor}
+          vibrationMethod={correct}
           onHold={() => {
             requestReview()
             navigation.goBack()

@@ -10,6 +10,7 @@ import { CourseItems, CourseListItem } from '../../../data/api'
 import { Loader } from '../../common/loader'
 import { useTheme } from '../../../hooks/themeHooks'
 import { HelperPillContainer } from '../../../containers/helperPillContainer'
+import { useVibrations } from '../../../hooks/useVibrations'
 
 const ANIMATION_DURATION = 300
 
@@ -44,6 +45,7 @@ export function CourseCarousel({
 }: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
   const { colors } = useTheme()
   const navigation = useNavigation()
+  const { correct } = useVibrations()
   const animatedTransitionAway = useRef(new Animated.Value(0)).current
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
   const [visible, setVisible] = useState(true)
@@ -163,6 +165,7 @@ export function CourseCarousel({
             text: 'Hold to dismiss',
             marker: '🙇‍♂️',
             onHold: () => navigation.goBack(),
+            vibrationMethod: correct,
           }}
         />
       </Container>
@@ -189,6 +192,7 @@ export function CourseCarousel({
         text: 'Got it!',
         marker: '🍾',
         onHold: onComplete,
+        vibrationMethod: correct,
       }}
     />,
   ]

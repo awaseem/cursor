@@ -20,7 +20,7 @@ export function useVibrations(): VibrationMethods {
   }
 
   return {
-    correct: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy),
+    correct: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium),
     incorrect: Haptics.notificationAsync,
   }
 }

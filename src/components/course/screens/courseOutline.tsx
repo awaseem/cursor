@@ -7,6 +7,7 @@ import { CodeMessage } from '../components/codeMessage'
 import { CourseButton } from '../components/courseButton'
 import { colors } from '../../../styles/color'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
+import { useVibrations } from '../../../hooks/useVibrations'
 
 export interface CourseOutlineProps {
   title: string
@@ -27,6 +28,7 @@ export function CourseOutline({
   onHold,
 }: CourseOutlineProps) {
   const { bottom } = useSafeAreaWithPadding()
+  const { correct } = useVibrations()
 
   return (
     <View style={[styles.Container, { paddingBottom: bottom }]}>
@@ -39,6 +41,7 @@ export function CourseOutline({
         finalColor={colors.buttonSucessColor}
         text={buttonText}
         marker={marker}
+        vibrationMethod={correct}
         onHold={onHold}
       />
     </View>

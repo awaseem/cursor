@@ -9,6 +9,7 @@ import { CourseInput } from '../../course/components/courseInput'
 import { CourseButton } from '../../course/components/courseButton'
 import { useNavigation } from '@react-navigation/native'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
+import { useVibrations } from '../../../hooks/useVibrations'
 
 const ANIMATION_DURATION = 800
 
@@ -19,6 +20,7 @@ export interface WelcomeReduxDispatch {
 export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
   const { bottom } = useSafeAreaWithPadding()
   const { font, colors } = useTheme()
+  const { correct } = useVibrations()
   const navigation = useNavigation()
 
   const animatedEmoji = useRef(new Animated.Value(0)).current
@@ -133,6 +135,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
           reset={reset}
           additionalText={additionalText}
           finalColor={buttonColor}
+          vibrationMethod={correct}
           onHold={() => {
             if (name) {
               setFirstTimeProfile(name)
