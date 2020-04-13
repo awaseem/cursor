@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.awaseem.cursor",
-      "buildNumber": "1.0.1"
+      "buildNumber": "1.0.2"
     }
   }
 }
