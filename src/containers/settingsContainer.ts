@@ -14,6 +14,7 @@ function mapStateToProps(state: AppState): SettingsReduxProps {
     outOfOrder: state.profile.outOfOrder,
     disableCompletePopups: state.profile.disableCompletePopup,
     notifications: Boolean(state.profile.notificationId),
+    disableVibrations: state.profile.disableVibrations,
   }
 }
 
@@ -23,6 +24,7 @@ function mapDispatchToProps(dispatch: AppDispatch): SettingsReduxDispatch {
       toggleOutOfOrder,
       toggleNotifications,
       setDisableCompletePopups: profile.actions.setDisableCompletePopup,
+      setDisableVibrations: profile.actions.setDisableVibrations,
     },
     dispatch,
   )

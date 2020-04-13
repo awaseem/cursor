@@ -11,18 +11,22 @@ export interface SettingsReduxProps {
   outOfOrder: boolean
   disableCompletePopups: boolean
   notifications: boolean
+  disableVibrations: boolean
 }
 
 export interface SettingsReduxDispatch {
   toggleOutOfOrder: (value: boolean) => void
   toggleNotifications: (value: boolean) => void
   setDisableCompletePopups: (value: boolean) => void
+  setDisableVibrations: (value: boolean) => void
 }
 
 export function Settings({
   outOfOrder,
   toggleOutOfOrder,
   notifications,
+  disableVibrations,
+  setDisableVibrations,
   toggleNotifications,
   disableCompletePopups,
   setDisableCompletePopups,
@@ -57,6 +61,12 @@ export function Settings({
           description={'Setup weekly notifications for practice.'}
           enabled={notifications}
           onValueChange={toggleNotifications}
+        />
+        <Toggle
+          text={'Disable Vibrations'}
+          description={'Disable vibrations when you hold a course button.'}
+          enabled={disableVibrations}
+          onValueChange={setDisableVibrations}
         />
       </Content>
     </Container>

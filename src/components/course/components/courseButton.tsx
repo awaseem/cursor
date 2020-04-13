@@ -19,6 +19,7 @@ export interface CourseButtonProps {
 
   additionalText?: string
   reset?: boolean
+  vibrationMethod?: () => void
 }
 
 export function CourseButton({
@@ -26,6 +27,7 @@ export function CourseButton({
   marker,
   finalColor,
   onHold,
+  vibrationMethod,
   additionalText,
   reset,
 }: CourseButtonProps) {
@@ -180,6 +182,8 @@ export function CourseButton({
   function animationActionComplete() {
     if (_value.current === 1) {
       setCompleted(true)
+
+      vibrationMethod && vibrationMethod()
 
       if (additionalText) {
         Animated.timing(completeAction, {
