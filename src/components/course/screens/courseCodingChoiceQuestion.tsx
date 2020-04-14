@@ -39,6 +39,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 40,
     alignItems: 'center',
-    marginHorizontal: -20,
   },
 })
