@@ -3,7 +3,10 @@
   "scripts": {
     "start": "expo start",
     "ios": "expo start --ios",
-    "build": "expo build:ios"
+    "publish:dev": "expo publish --release-channel dev",
+    "publish:prod": "expo publish --release-channel production",
+    "build:dev": "expo build:ios --release-channel dev",
+    "build:prod": "expo build:ios --release-channel production"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.5",
