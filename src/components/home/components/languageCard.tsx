@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     width: 350,
     height: 150,
     marginHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 20,
-    borderRadius: 15,
+    borderRadius: 10,
     justifyContent: 'space-around',
   },
   DescriptionContainer: {
