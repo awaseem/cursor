@@ -1,5 +1,9 @@
 import { iOSUIKit } from 'react-native-typography'
 import { colors } from './color'
+import {
+  tomorrowNightBright,
+  tomorrow,
+} from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 export interface FontTheme {
   welcomeHeading: Object
@@ -15,6 +19,7 @@ export interface FontTheme {
   courseRowHeading: Object
   courseRowText: Object
   codeMessage: Object
+  syntax: Object
   toggleHeading: Object
   toggleDescription: Object
   helperHeading: Object
@@ -73,6 +78,7 @@ export const fontsLightTheme: FontTheme = {
     fontSize: BASE_FONT_SIZE * 1.1,
     color: colors.codingColor,
   },
+  syntax: tomorrow,
   toggleHeading: {
     ...iOSUIKit.bodyEmphasizedObject,
   },
@@ -135,6 +141,7 @@ export const fontsDarkTheme: FontTheme = {
     fontSize: BASE_FONT_SIZE * 1.1,
     color: colors.codingColor,
   },
+  syntax: tomorrowNightBright,
   toggleHeading: {
     ...iOSUIKit.bodyEmphasizedWhiteObject,
   },
