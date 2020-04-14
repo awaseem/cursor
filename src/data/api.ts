@@ -1,8 +1,8 @@
 import { isProd } from '../utils/env'
 
 const PUBLIC_URL = isProd()
-  ? 'https://teacher.getcursor.app/data'
-  : 'https://teacher-dev.getcursor.app/data'
+  ? 'https://teacher.getcursor.app/data/v1'
+  : 'https://teacher-dev.getcursor.app/data/v1'
 const PUBLIC_URL_SUBJECT_LIST = `${PUBLIC_URL}/subjects/subjectList.json`
 
 const GET_FETCH_OPTIONS: RequestInit = {
