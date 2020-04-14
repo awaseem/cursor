@@ -1,7 +1,5 @@
-const S3_PUBLIC_URL_SUBJECT =
-  'https://cursor-development-project.s3-us-west-2.amazonaws.com'
-const S3_PUBLIC_URL_SUBJECT_LIST =
-  'https://cursor-development-project.s3-us-west-2.amazonaws.com/subjects/subjectList.json'
+const PUBLIC_URL = 'https://teacher.getcursor.app/data'
+const PUBLIC_URL_SUBJECT_LIST = `${PUBLIC_URL}/subjects/subjectList.json`
 
 const GET_FETCH_OPTIONS: RequestInit = {
   method: 'GET',
@@ -45,25 +43,19 @@ export interface CourseItem extends CourseItemBody {
 export type CourseItems = CourseItem[]
 
 export async function getSubjects() {
-  const response = await fetch(S3_PUBLIC_URL_SUBJECT_LIST, GET_FETCH_OPTIONS)
+  const response = await fetch(PUBLIC_URL_SUBJECT_LIST, GET_FETCH_OPTIONS)
 
   return response.json() as Promise<SubjectList>
 }
 
 export async function getCoursesByPath(path: string) {
-  const response = await fetch(
-    `${S3_PUBLIC_URL_SUBJECT}${path}`,
-    GET_FETCH_OPTIONS,
-  )
+  const response = await fetch(`${PUBLIC_URL}${path}`, GET_FETCH_OPTIONS)
 
   return response.json() as Promise<CourseList>
 }
 
 export async function getCourseByPath(path: string) {
-  const response = await fetch(
-    `${S3_PUBLIC_URL_SUBJECT}${path}`,
-    GET_FETCH_OPTIONS,
-  )
+  const response = await fetch(`${PUBLIC_URL}${path}`, GET_FETCH_OPTIONS)
 
   return response.json() as Promise<CourseItems>
 }
