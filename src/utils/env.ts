@@ -7,6 +7,10 @@ export enum Environment {
 
 export function getEnv(): Environment {
   const env = Constants.manifest.releaseChannel
+  if (!env) {
+    return Environment.dev
+  }
+
   if (env.indexOf('dev') !== -1) {
     return Environment.dev
   }
