@@ -2,7 +2,7 @@ import { Alert, Linking } from 'react-native'
 import { Notifications } from 'expo'
 import Constants from 'expo-constants'
 import { askAsync, PermissionStatus, NOTIFICATIONS } from 'expo-permissions'
-import { startOfWeek, setHours } from 'date-fns'
+import { startOfWeek, setHours, addDays } from 'date-fns'
 import { AppDispatch, AppState } from './rootReducer'
 import { profile } from './profileSlice'
 import { stats } from './statsSlices'
@@ -63,14 +63,16 @@ export function toggleNotifications(value: boolean) {
 
     if (Constants.isDevice && result.status === PermissionStatus.GRANTED) {
       const recentMonday = startOfWeek(new Date(), { weekStartsOn: 1 })
-      const mondayAtNoon = setHours(recentMonday, 12)
+      const nextMonday = addDays(recentMonday, 7)
+      const nextMondayAtNoon = setHours(nextMonday, 12)
+
       const notificationId = await Notifications.scheduleLocalNotificationAsync(
         {
           title: NOTIFICATION_TITLE,
           body: NOTIFICATION_BODY,
         },
         {
-          time: mondayAtNoon,
+          time: nextMondayAtNoon,
           repeat: 'week',
         },
       )
