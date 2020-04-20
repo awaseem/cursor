@@ -1,13 +1,13 @@
-import { Alert } from 'react-native'
+import { Alert, Linking } from 'react-native'
 import { Notifications } from 'expo'
 import Constants from 'expo-constants'
 import { askAsync, PermissionStatus, NOTIFICATIONS } from 'expo-permissions'
+import { startOfWeek, setHours } from 'date-fns'
 import { AppDispatch, AppState } from './rootReducer'
 import { profile } from './profileSlice'
 import { stats } from './statsSlices'
 import { getCourses } from './courseThunks'
 
-const NOTIFICATION_TWO_MINUTES = 120000
 const NOTIFICATION_TITLE = 'Practice makes perfect'
 const NOTIFICATION_BODY =
   'Come back and practice courses so you can perfect the art of code!'
@@ -62,17 +62,36 @@ export function toggleNotifications(value: boolean) {
     const result = await askAsync(NOTIFICATIONS)
 
     if (Constants.isDevice && result.status === PermissionStatus.GRANTED) {
+      const recentMonday = startOfWeek(new Date(), { weekStartsOn: 1 })
+      const mondayAtNoon = setHours(recentMonday, 12)
       const notificationId = await Notifications.scheduleLocalNotificationAsync(
         {
           title: NOTIFICATION_TITLE,
           body: NOTIFICATION_BODY,
         },
         {
-          time: new Date().getTime() + NOTIFICATION_TWO_MINUTES,
+          time: mondayAtNoon,
           repeat: 'week',
         },
       )
       dispatch(setNotificationId(notificationId))
+    } else if (
+      Constants.isDevice &&
+      result.status === PermissionStatus.DENIED
+    ) {
+      Alert.alert(
+        'Error',
+        `It seems you've turned off notifications for this app, you can enable them within the settings`,
+        [
+          {
+            text: 'Go to settings',
+            onPress: () => Linking.openURL('app-settings:'),
+          },
+        ],
+        { cancelable: true },
+      )
+    } else {
+      Alert.alert('Error', 'Failed to set weekly notifications')
     }
   }
 }
