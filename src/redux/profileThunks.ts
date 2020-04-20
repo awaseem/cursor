@@ -77,10 +77,7 @@ export function toggleNotifications(value: boolean) {
         },
       )
       dispatch(setNotificationId(notificationId))
-    } else if (
-      Constants.isDevice &&
-      result.status === PermissionStatus.DENIED
-    ) {
+    } else if (Constants.isDevice) {
       Alert.alert(
         'Error',
         `It seems you've turned off notifications for this app, you can enable them within the settings`,
@@ -92,8 +89,6 @@ export function toggleNotifications(value: boolean) {
         ],
         { cancelable: true },
       )
-    } else {
-      Alert.alert('Error', 'Failed to set weekly notifications')
     }
   }
 }
