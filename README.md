@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/cursor_mockup.png">
+</p>
+
 <h1 align="center">Cursor</h1>
 
 <p align="center">Learning with no barriers.</p>
@@ -7,10 +11,6 @@
   <img src="https://github.com/awaseem/cursor/workflows/Expo%20Dev%20Build/badge.svg">
 </p>
 
-<p align="center">
-  <img src="./assets/cursor_mockup.png">
-</p>
-
 Learning to code should be easy, fun and especially free! Cursor is here to solve just that. Learn JavaScript, Python (Coming soon!) and much more. Courses are short, sweet and to the point, requiring no prior knowledge to get started.
 
 - No sign up required
@@ -18,6 +18,8 @@ Learning to code should be easy, fun and especially free! Cursor is here to solv
 - Always free, never a paid tier
 - Learn at your own pace
 - New courses every week
+
+Read more about as to why I created this app [here](https://aliw.ca/cursor/)
 
 # Getting Started
 
@@ -36,7 +38,7 @@ To run the app, just use the following command:
 npm start
 ```
 
-This will open the Expo portal, from there scan the QR code and the app should lode with no issues.
+This will open the Expo portal, from there scan the QR code and the app should load with no issues. If you're confused about expo, you can get started here: [Expo](https://docs.expo.io/versions/v37.0.0/introduction/walkthrough/)
 
 ## Testing
 
