@@ -50,17 +50,17 @@ npm run test
 
 # Data
 
-All the data lives within a separate repo called [Teacher](https://github.com/awaseem/teacher). The app in development mode takes to the default dev environment here [teacher-dev.getcursor.app](https://teacher-dev.getcursor.app/). If you need to make changes to the content itself, follow the contribution guide within that repo.
+All the data lives within a separate repo called [Teacher](https://github.com/awaseem/teacher). The app in development mode talks to the default dev environment here [teacher-dev.getcursor.app](https://teacher-dev.getcursor.app/). If you need to make any changes to the content itself, follow the contribution guide within [Teacher](https://github.com/awaseem/teacher).
 
 # Contributing
 
 Cursor is an open source project, and contributions of any kind are welcome and appreciated. Open issues, bugs, and feature requests are all listed on the issues tab and labeled accordingly. Feel free to open bug tickets and make feature requests. Please follow these small rules to ensure everything can produced smoothly, can't wait to see your work!
 
-- When submitting work, please ensure to create a pull request with pictures or videos showcasing the changes to the app.
-- Ensure to run the linter and eslint within you text editor
+- When submitting work, please ensure to create a pull request with pictures or videos showcasing the changes to the app (if any visual changes).
+- Ensure to run the prettier and eslint within you text editor
 
 Have fun and don't be afraid to reach out for any questions or concerns.
 
 # License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License.](https://github.com/awaseem/cursor/blob/master/LICENSE.md)
