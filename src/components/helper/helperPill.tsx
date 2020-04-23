@@ -5,21 +5,53 @@ import { useSafeAreaWithPadding } from '../../hooks/useSafeArea'
 
 const SHOW_ANIMATION_DURATION = 250
 
+const styles = StyleSheet.create({
+  Container: {
+    position: 'absolute',
+    maxWidth: 250,
+    right: 10,
+    zIndex: 10,
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+  HeadingContainer: {
+    marginBottom: 10,
+  },
+})
+
 export interface HelperPillReduxProps {
-  heading: string
-  message: string
-  animation: boolean
+  readonly heading: string
+  readonly message: string
+  readonly animation: boolean
 }
 
 export function HelperPill({
   heading,
   message,
   animation = false,
-}: HelperPillReduxProps) {
+}: HelperPillReduxProps): JSX.Element {
   const { top } = useSafeAreaWithPadding()
   const { font, colors } = useTheme()
 
   const showAnimation = useRef(new Animated.Value(0)).current
+
+  function startAnimation(): void {
+    Animated.timing(showAnimation, {
+      duration: SHOW_ANIMATION_DURATION,
+      delay: SHOW_ANIMATION_DURATION,
+      toValue: 1,
+      useNativeDriver: true,
+    }).start()
+  }
+
+  function stopAnimation(): void {
+    Animated.timing(showAnimation, {
+      duration: SHOW_ANIMATION_DURATION,
+      toValue: 0,
+      useNativeDriver: true,
+    }).start()
+  }
 
   useEffect(() => {
     if (animation) {
@@ -29,24 +61,7 @@ export function HelperPill({
     }
   }, [animation])
 
-  function startAnimation() {
-    Animated.timing(showAnimation, {
-      duration: SHOW_ANIMATION_DURATION,
-      delay: SHOW_ANIMATION_DURATION,
-      toValue: 1,
-      useNativeDriver: true,
-    }).start()
-  }
-
-  function stopAnimation() {
-    Animated.timing(showAnimation, {
-      duration: SHOW_ANIMATION_DURATION,
-      toValue: 0,
-      useNativeDriver: true,
-    }).start()
-  }
-
-  function getShowAnimationStyles() {
+  function getShowAnimationStyles(): Record<string, unknown> {
     const opacity = showAnimation.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
@@ -82,18 +97,3 @@ export function HelperPill({
     </Animated.View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    position: 'absolute',
-    maxWidth: 250,
-    right: 10,
-    zIndex: 10,
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 20,
-  },
-  HeadingContainer: {
-    marginBottom: 10,
-  },
-})

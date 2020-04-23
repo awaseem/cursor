@@ -2,27 +2,7 @@ import React from 'react'
 import { View, ActivityIndicator, StyleSheet } from 'react-native'
 import { useTheme } from '../../hooks/themeHooks'
 
-interface LoaderProps {
-  extraTopSpacing?: number
-  disableBackground?: boolean
-}
-
-export function Loader({ extraTopSpacing, disableBackground }: LoaderProps) {
-  const { colors } = useTheme()
-  return (
-    <View
-      style={[
-        styles.Container,
-        {
-          marginTop: extraTopSpacing ?? 0,
-          backgroundColor: disableBackground ? undefined : colors.background,
-        },
-      ]}
-    >
-      <ActivityIndicator size={'large'} />
-    </View>
-  )
-}
+const ZERO_SPACING = 0
 
 const styles = StyleSheet.create({
   Container: {
@@ -31,3 +11,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 })
+
+interface LoaderProps {
+  readonly extraTopSpacing?: number
+  readonly disableBackground?: boolean
+}
+
+export function Loader({
+  extraTopSpacing,
+  disableBackground,
+}: LoaderProps): JSX.Element {
+  const { colors } = useTheme()
+  return (
+    <View
+      style={[
+        styles.Container,
+        {
+          marginTop: extraTopSpacing ?? ZERO_SPACING,
+          backgroundColor: disableBackground ? undefined : colors.background,
+        },
+      ]}
+    >
+      <ActivityIndicator size={'large'} />
+    </View>
+  )
+}

@@ -6,7 +6,8 @@
     "publish:dev": "expo publish --release-channel dev",
     "publish:prod": "expo publish --release-channel production",
     "build:dev": "expo build:ios --release-channel dev",
-    "build:prod": "expo build:ios --release-channel production"
+    "build:prod": "expo build:ios --release-channel production",
+    "lint": "eslint '*/**/*.{ts,tsx}' --ignore-pattern node_modules/"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
@@ -38,11 +39,14 @@
     "@types/react-native": "^0.60.22",
     "@types/react-redux": "^7.1.7",
     "@types/react-syntax-highlighter": "^11.0.4",
+    "@typescript-eslint/eslint-plugin": "~2.14.0",
+    "@typescript-eslint/parser": "~2.14.0",
     "babel-preset-expo": "^8.1.0",
     "eslint": "~6.8.0",
     "eslint-config-prettier": "~6.9.0",
     "eslint-plugin-functional": "^3.0.1",
     "eslint-plugin-jest": "~23.2.0",
+    "eslint-plugin-react": "^7.19.0",
     "prettier": "~1.19.1",
     "typescript": "^3.8.3"
   },

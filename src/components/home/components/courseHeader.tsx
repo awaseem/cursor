@@ -3,12 +3,22 @@ import { Animated, StyleSheet, Text } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
+const styles = StyleSheet.create({
+  HeaderContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    justifyContent: 'space-between',
+  },
+})
+
 export interface CourseHeaderProps {
-  height: number
-  opacity: Animated.AnimatedInterpolation
-  title: string
-  description: string
-  translateY: Animated.AnimatedInterpolation
+  readonly height: number
+  readonly opacity: Animated.AnimatedInterpolation
+  readonly title: string
+  readonly description: string
+  readonly translateY: Animated.AnimatedInterpolation
 }
 
 export function CourseHeader({
@@ -17,7 +27,7 @@ export function CourseHeader({
   title,
   description,
   translateY,
-}: CourseHeaderProps) {
+}: CourseHeaderProps): JSX.Element {
   const { font, colors } = useTheme()
   const { top } = useSafeAreaWithPadding()
 
@@ -58,13 +68,3 @@ export function CourseHeader({
     </Animated.View>
   )
 }
-
-const styles = StyleSheet.create({
-  HeaderContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    justifyContent: 'space-between',
-  },
-})

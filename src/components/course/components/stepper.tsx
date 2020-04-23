@@ -1,14 +1,24 @@
 import React, { useRef, useEffect } from 'react'
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList, ListRenderItemInfo } from 'react-native'
 import { StepperButton } from './stepperButton'
 import { useTheme } from '../../../hooks/themeHooks'
 
-export interface StepperProps {
-  completed: boolean
-  steps: number
-  activeStep: number
+const styles = StyleSheet.create({
+  InnerContainer: {
+    marginBottom: 20,
+  },
+  Container: {
+    marginHorizontal: -20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+})
 
-  onStepperPress?: (index: number) => void
+export interface StepperProps {
+  readonly completed: boolean
+  readonly steps: number
+  readonly activeStep: number
+
+  readonly onStepperPress?: (index: number) => void
 }
 
 export function Stepper({
@@ -16,7 +26,7 @@ export function Stepper({
   activeStep,
   completed = false,
   onStepperPress,
-}: StepperProps) {
+}: StepperProps): JSX.Element {
   const flatListRef = useRef<FlatList<number> | null>(null)
   const { colors } = useTheme()
   const stepButton = Array.from(Array(steps).keys())
@@ -34,47 +44,59 @@ export function Stepper({
     }
   }, [activeStep])
 
+  function handleStepperButton(item: number) {
+    return (): void => {
+      if (completed && onStepperPress) {
+        onStepperPress(item)
+      }
+    }
+  }
+
+  function renderItem({ item }: ListRenderItemInfo<number>): JSX.Element {
+    return (
+      <StepperButton
+        onPress={handleStepperButton(item)}
+        active={activeStep === item}
+        text={(item + 1).toString()}
+      />
+    )
+  }
+
+  function keyExtractor(item: number): string {
+    return item.toString()
+  }
+
+  function onScrollToIndexFailed(info: {
+    readonly index: number
+    readonly highestMeasuredFrameIndex: number
+    readonly averageItemLength: number
+  }): void {
+    setTimeout(() => {
+      flatListRef.current?.scrollToIndex({
+        index: info.index,
+        animated: true,
+      })
+    }, 0)
+  }
+
   return (
     <View>
       <FlatList
         ref={flatListRef}
         data={stepButton}
-        renderItem={({ item }) => (
-          <StepperButton
-            onPress={() => completed && onStepperPress && onStepperPress(item)}
-            active={activeStep === item}
-            text={(item + 1).toString()}
-          />
-        )}
-        keyExtractor={item => item.toString()}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
         style={[
           styles.Container,
           { borderBottomColor: colors.primary.separtorColor },
         ]}
-        onScrollToIndexFailed={async info => {
-          setTimeout(() => {
-            flatListRef.current?.scrollToIndex({
-              index: info.index,
-              animated: true,
-            })
-          }, 0)
-        }}
+        onScrollToIndexFailed={onScrollToIndexFailed}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.InnerContainer}
-        horizontal={true}
+        horizontal
       >
         {stepButton}
       </FlatList>
     </View>
   )
 }
-
-export const styles = StyleSheet.create({
-  InnerContainer: {
-    marginBottom: 20,
-  },
-  Container: {
-    marginHorizontal: -20,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-})

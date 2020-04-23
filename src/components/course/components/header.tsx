@@ -2,12 +2,21 @@ import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
+const styles = StyleSheet.create({
+  Container: {
+    paddingVertical: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+})
+
 export interface HeaderProps {
-  title?: string
-  onPress?: () => void
+  readonly title?: string
+  readonly onPress?: () => void
 }
 
-export function Header({ title, onPress }: HeaderProps) {
+export function Header({ title, onPress }: HeaderProps): JSX.Element {
   const { font } = useTheme()
   return (
     <View style={styles.Container}>
@@ -22,12 +31,3 @@ export function Header({ title, onPress }: HeaderProps) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    paddingVertical: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-})

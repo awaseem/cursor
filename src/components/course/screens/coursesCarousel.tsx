@@ -14,21 +14,30 @@ import { useVibrations } from '../../../hooks/useVibrations'
 
 const ANIMATION_DURATION = 300
 
+const styles = StyleSheet.create({
+  FlexContainer: {
+    flex: 1,
+  },
+})
+
 export interface CourseCarouselReduxProps {
-  loading: boolean
-  error: boolean
-  selectedCourse?: CourseListItem
-  selectedCourseItems: CourseItems
-  activeIndex: number
-  completed: boolean
+  readonly loading: boolean
+  readonly error: boolean
+  readonly selectedCourse?: CourseListItem
+  readonly selectedCourseItems: CourseItems
+  readonly activeIndex: number
+  readonly completed: boolean
 }
 
 export interface CourseCarouselDispatchProps {
-  setCompletedAndRefresh: (id: string) => void
-  setInProgressAndRefresh: (id: string, index: number) => void
-  setInProgress: (args: { id: string; index: number }) => void
-  nextCourseItem: () => void
-  manuallySetCourseItem: (index: number) => void
+  readonly setCompletedAndRefresh: (id: string) => void
+  readonly setInProgressAndRefresh: (id: string, index: number) => void
+  readonly setInProgress: (args: {
+    readonly id: string
+    readonly index: number
+  }) => void
+  readonly nextCourseItem: () => void
+  readonly manuallySetCourseItem: (index: number) => void
 }
 
 export function CourseCarousel({
@@ -42,7 +51,7 @@ export function CourseCarousel({
   completed,
   manuallySetCourseItem,
   nextCourseItem,
-}: CourseCarouselReduxProps & CourseCarouselDispatchProps) {
+}: CourseCarouselReduxProps & CourseCarouselDispatchProps): JSX.Element {
   const { colors } = useTheme()
   const navigation = useNavigation()
   const { correct } = useVibrations()
@@ -50,25 +59,13 @@ export function CourseCarousel({
   const animatedTransitionIn = useRef(new Animated.Value(0)).current
   const [visible, setVisible] = useState(true)
 
-  function resetAnimationTimings() {
+  function resetAnimationTimings(): void {
     setVisible(true)
     animatedTransitionAway.setValue(0)
     animatedTransitionIn.setValue(0)
   }
 
-  function transitionAway() {
-    Animated.timing(animatedTransitionAway, {
-      duration: ANIMATION_DURATION,
-      toValue: 1,
-      useNativeDriver: true,
-    }).start(() => {
-      nextCourseItem()
-      setVisible(false)
-      transitionIn()
-    })
-  }
-
-  function transitionIn() {
+  function transitionIn(): void {
     Animated.timing(animatedTransitionIn, {
       duration: ANIMATION_DURATION,
       toValue: 1,
@@ -80,7 +77,19 @@ export function CourseCarousel({
     })
   }
 
-  function transitionAwayAnimation() {
+  function transitionAway(): void {
+    Animated.timing(animatedTransitionAway, {
+      duration: ANIMATION_DURATION,
+      toValue: 1,
+      useNativeDriver: true,
+    }).start(() => {
+      nextCourseItem()
+      setVisible(false)
+      transitionIn()
+    })
+  }
+
+  function transitionAwayAnimation(): Record<string, unknown> {
     const opacity = animatedTransitionAway.interpolate({
       inputRange: [0, 1],
       outputRange: [1, 0],
@@ -100,7 +109,7 @@ export function CourseCarousel({
     }
   }
 
-  function transitionInAnimation() {
+  function transitionInAnimation(): Record<string, unknown> {
     const opacity = animatedTransitionIn.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
@@ -120,11 +129,11 @@ export function CourseCarousel({
     }
   }
 
-  function handleStepperPress(index: number) {
+  function handleStepperPress(index: number): void {
     manuallySetCourseItem(index)
   }
 
-  function onComplete() {
+  function onComplete(): void {
     if (completed) {
       navigation.goBack()
       return
@@ -136,7 +145,29 @@ export function CourseCarousel({
     navigation.goBack()
   }
 
-  function onExit() {
+  const courses = [
+    ...selectedCourseItems.map((course, index) => (
+      <CourseRenderer
+        key={course.type + index}
+        courseItem={course}
+        successHandler={transitionAway}
+      />
+    )),
+    <InfoScreenWithButton
+      key={selectedCourseItems.length}
+      emoji={'👍'}
+      heading={'All Done!'}
+      buttonProps={{
+        finalColor: colors.primary.buttonSucessColor,
+        text: 'Got it!',
+        marker: '🍾',
+        onHold: onComplete,
+        vibrationMethod: correct,
+      }}
+    />,
+  ]
+
+  function onExit(): void {
     if (completed) {
       navigation.goBack()
       return
@@ -164,7 +195,7 @@ export function CourseCarousel({
             finalColor: colors.primary.buttonSucessColor,
             text: 'Hold to dismiss',
             marker: '🙇‍♂️',
-            onHold: () => navigation.goBack(),
+            onHold: navigation.goBack,
             vibrationMethod: correct,
           }}
         />
@@ -175,27 +206,6 @@ export function CourseCarousel({
   if (loading) {
     return <Loader />
   }
-
-  const courses = [
-    ...selectedCourseItems.map((course, index) => (
-      <CourseRenderer
-        key={course.type + index}
-        courseItem={course}
-        successHandler={transitionAway}
-      />
-    )),
-    <InfoScreenWithButton
-      emoji={'👍'}
-      heading={'All Done!'}
-      buttonProps={{
-        finalColor: colors.primary.buttonSucessColor,
-        text: 'Got it!',
-        marker: '🍾',
-        onHold: onComplete,
-        vibrationMethod: correct,
-      }}
-    />,
-  ]
 
   return (
     <Container>
@@ -218,9 +228,3 @@ export function CourseCarousel({
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  FlexContainer: {
-    flex: 1,
-  },
-})

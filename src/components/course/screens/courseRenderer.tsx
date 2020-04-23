@@ -13,14 +13,14 @@ import {
 import { CourseItem, CourseType } from '../../../data/api'
 
 export interface CourseRendererProps {
-  courseItem: CourseItem
-  successHandler: () => void
+  readonly courseItem: CourseItem
+  readonly successHandler: () => void
 }
 
 export function CourseRenderer({
   courseItem,
   successHandler,
-}: CourseRendererProps) {
+}: CourseRendererProps): JSX.Element {
   const { type, ...otherProps } = courseItem
 
   if (type === CourseType.outline) {
@@ -43,7 +43,7 @@ export function CourseRenderer({
 
   if (type === CourseType.choice) {
     const props = otherProps as CodingChoiceQuestionProps
-    const answers: AnswerButtonProps[] = props.answers.map(answer => ({
+    const answers: readonly AnswerButtonProps[] = props.answers.map(answer => ({
       ...answer,
       onHold: answer.correct ? successHandler : undefined,
     }))

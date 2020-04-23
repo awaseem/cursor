@@ -1,15 +1,22 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { BASE_FONT_SIZE } from '../../../styles/fonts'
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import SyntaxHighlighter from 'react-native-syntax-highlighter'
 import { useTheme } from '../../../hooks/themeHooks'
 
 export interface CodeMessageProps {
-  message: string
+  readonly message: string
 }
 
-export function CodeMessage({ message }: CodeMessageProps) {
+const styles = StyleSheet.create({
+  Container: {
+    marginTop: 30,
+  },
+})
+
+export function CodeMessage({ message }: CodeMessageProps): JSX.Element {
   const { font } = useTheme()
   return (
     <View style={styles.Container}>
@@ -24,9 +31,3 @@ export function CodeMessage({ message }: CodeMessageProps) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    marginTop: 30,
-  },
-})

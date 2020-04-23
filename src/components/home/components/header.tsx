@@ -3,16 +3,27 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+const styles = StyleSheet.create({
+  Container: {
+    marginTop: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  SubtitleContainer: {
+    marginTop: 20,
+  },
+})
+
 export interface HeaderProps {
-  title: string
-  subtitle?: string
-  icon?: {
-    emoji: string
-    onPress: () => void
+  readonly title: string
+  readonly subtitle?: string
+  readonly icon?: {
+    readonly emoji: string
+    readonly onPress: () => void
   }
 }
 
-export function Header({ title, subtitle, icon }: HeaderProps) {
+export function Header({ title, subtitle, icon }: HeaderProps): JSX.Element {
   const { font } = useTheme()
   return (
     <View style={styles.Container}>
@@ -32,14 +43,3 @@ export function Header({ title, subtitle, icon }: HeaderProps) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    marginTop: 40,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  SubtitleContainer: {
-    marginTop: 20,
-  },
-})

@@ -2,12 +2,23 @@ import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
+const styles = StyleSheet.create({
+  Input: {
+    marginTop: 40,
+    height: 40,
+    borderColor: 'gray',
+  },
+})
+
 export interface CourseInputProps {
-  placeholder?: string
-  onChange: (text: string) => void
+  readonly placeholder?: string
+  readonly onChange: (text: string) => void
 }
 
-export function CourseInput({ placeholder, onChange }: CourseInputProps) {
+export function CourseInput({
+  placeholder,
+  onChange,
+}: CourseInputProps): JSX.Element {
   const { font } = useTheme()
   return (
     <TextInput
@@ -18,11 +29,3 @@ export function CourseInput({ placeholder, onChange }: CourseInputProps) {
     />
   )
 }
-
-const styles = StyleSheet.create({
-  Input: {
-    marginTop: 40,
-    height: 40,
-    borderColor: 'gray',
-  },
-})

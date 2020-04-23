@@ -1,20 +1,16 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
 export interface CourseHeaderProps {
-  title: string
+  readonly title: string
 }
 
-export function CourseHeader({ title }: CourseHeaderProps) {
+export function CourseHeader({ title }: CourseHeaderProps): JSX.Element {
   const { font } = useTheme()
   return (
-    <View style={styles.Container}>
+    <View>
       <Text style={font.courseHeading}>{title}</Text>
     </View>
   )
 }
-
-export const styles = StyleSheet.create({
-  Container: {},
-})

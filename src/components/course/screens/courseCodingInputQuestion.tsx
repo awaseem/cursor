@@ -11,15 +11,21 @@ import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 
 const SUBMIT_BUTTON_TEXT = 'Submit'
 
-export interface CodingInputQuestionProps {
-  title: string
-  content: string
-  code: string
-  expectedResponse: string
-  onSuccess: () => void
+const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+  },
+})
 
-  placeholder?: string
-  additionalText?: string
+export interface CodingInputQuestionProps {
+  readonly title: string
+  readonly content: string
+  readonly code: string
+  readonly expectedResponse: string
+  readonly onSuccess: () => void
+
+  readonly placeholder?: string
+  readonly additionalText?: string
 }
 
 export function CodingInputQuestion({
@@ -31,7 +37,7 @@ export function CodingInputQuestion({
 
   placeholder,
   additionalText,
-}: CodingInputQuestionProps) {
+}: CodingInputQuestionProps): JSX.Element {
   const { bottom } = useSafeAreaWithPadding()
   const [text, setText] = useState('')
   const [finalColor, setFinalColor] = useState(colors.buttonErrorColor)
@@ -50,16 +56,23 @@ export function CodingInputQuestion({
     }
   }, [text])
 
+  function onCourseInputChange(courseInput: string): void {
+    setText(courseInput)
+  }
+
+  function onHold(): void {
+    if (text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()) {
+      onSuccess()
+    }
+  }
+
   return (
     <View style={[styles.Container, { paddingBottom: bottom }]}>
       <Content enableOffset>
         <CourseHeader title={title} />
         <CourseMessage message={content} />
         <CodeMessage message={code} />
-        <CourseInput
-          onChange={text => setText(text)}
-          placeholder={placeholder}
-        />
+        <CourseInput onChange={onCourseInputChange} placeholder={placeholder} />
       </Content>
       <CourseButton
         finalColor={finalColor}
@@ -67,20 +80,8 @@ export function CodingInputQuestion({
         additionalText={additionalText}
         marker={marker}
         reset={reset}
-        onHold={() => {
-          if (
-            text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()
-          ) {
-            onSuccess()
-          }
-        }}
+        onHold={onHold}
       />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-  },
-})

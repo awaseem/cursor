@@ -2,11 +2,17 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
+const styles = StyleSheet.create({
+  Container: {
+    marginTop: 30,
+  },
+})
+
 export interface CourseMessageProps {
-  message: string
+  readonly message: string
 }
 
-export function CourseMessage({ message }: CourseMessageProps) {
+export function CourseMessage({ message }: CourseMessageProps): JSX.Element {
   const { font } = useTheme()
   return (
     <View style={styles.Container}>
@@ -14,9 +20,3 @@ export function CourseMessage({ message }: CourseMessageProps) {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    marginTop: 30,
-  },
-})

@@ -19,29 +19,43 @@ const HEADER_MAX_HEIGHT = 300
 const HEADER_MIN_HEIGHT = 100
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT - 40
 
+const styles = StyleSheet.create({
+  HeadingContainer: {
+    position: 'absolute',
+    left: 20,
+    right: 20,
+  },
+  LanguagesContainer: {
+    marginTop: 40,
+  },
+  LanguagesScrollContainer: {
+    marginHorizontal: -20,
+  },
+})
+
 export interface HomeReduxProps {
-  firstTime: boolean
-  showEnjoyNotification: boolean
-  name: string
-  courses: {
-    loading: boolean
-    error: boolean
-    courseSections: Sections
+  readonly firstTime: boolean
+  readonly showEnjoyNotification: boolean
+  readonly name: string
+  readonly courses: {
+    readonly loading: boolean
+    readonly error: boolean
+    readonly courseSections: Sections
   }
-  subjects: {
-    loading: boolean
-    error: boolean
-    subjects: SubjectList
+  readonly subjects: {
+    readonly loading: boolean
+    readonly error: boolean
+    readonly subjects: SubjectList
   }
-  selectedSubject: SubjectListItem
+  readonly selectedSubject: SubjectListItem
 }
 
 export interface HomeReduxDispatch {
-  getAllSubjects: () => void
-  getCourses: (path: string) => void
-  setSelectedCourse: (course: CourseListItem) => void
-  setShowEnjoyNotification: (value: boolean) => void
-  setSelectedSubject: (item: SubjectListItem) => void
+  readonly getAllSubjects: () => void
+  readonly getCourses: (path: string) => void
+  readonly setSelectedCourse: (course: CourseListItem) => void
+  readonly setShowEnjoyNotification: (value: boolean) => void
+  readonly setSelectedSubject: (item: SubjectListItem) => void
 }
 
 export function Home({
@@ -56,7 +70,7 @@ export function Home({
   setShowEnjoyNotification,
   firstTime,
   name,
-}: HomeReduxProps & HomeReduxDispatch) {
+}: HomeReduxProps & HomeReduxDispatch): JSX.Element {
   const navigation = useNavigation()
   const { colors } = useTheme()
   const { top } = useSafeAreaWithPadding()
@@ -115,7 +129,7 @@ export function Home({
     }
   }, [showEnjoyNotification])
 
-  function renderHomeCourses() {
+  function renderHomeCourses(): JSX.Element {
     if (courses.error) {
       return (
         <InfoScreenWithButton
@@ -241,17 +255,3 @@ export function Home({
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  HeadingContainer: {
-    position: 'absolute',
-    left: 20,
-    right: 20,
-  },
-  LanguagesContainer: {
-    marginTop: 40,
-  },
-  LanguagesScrollContainer: {
-    marginHorizontal: -20,
-  },
-})

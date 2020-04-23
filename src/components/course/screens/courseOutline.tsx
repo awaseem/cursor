@@ -9,14 +9,20 @@ import { colors } from '../../../styles/color'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 import { useVibrations } from '../../../hooks/useVibrations'
 
-export interface CourseOutlineProps {
-  title: string
-  content: string
-  marker: string
-  buttonText: string
-  code?: string
+const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+  },
+})
 
-  onHold: () => void
+export interface CourseOutlineProps {
+  readonly title: string
+  readonly content: string
+  readonly marker: string
+  readonly buttonText: string
+  readonly code?: string
+
+  readonly onHold: () => void
 }
 
 export function CourseOutline({
@@ -26,7 +32,7 @@ export function CourseOutline({
   buttonText,
   code,
   onHold,
-}: CourseOutlineProps) {
+}: CourseOutlineProps): JSX.Element {
   const { bottom } = useSafeAreaWithPadding()
   const { correct } = useVibrations()
 
@@ -47,9 +53,3 @@ export function CourseOutline({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-  },
-})

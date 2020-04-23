@@ -4,11 +4,11 @@ import { useTheme } from '../../../hooks/themeHooks'
 import { useVibrations } from '../../../hooks/useVibrations'
 
 export interface AnswerButtonProps {
-  content: string
-  correct: boolean
-  explanation?: string
+  readonly content: string
+  readonly correct: boolean
+  readonly explanation?: string
 
-  onHold?: () => void
+  readonly onHold?: () => void
 }
 
 export function AnswerButton({
@@ -16,7 +16,7 @@ export function AnswerButton({
   correct,
   explanation,
   onHold,
-}: AnswerButtonProps) {
+}: AnswerButtonProps): JSX.Element {
   const { colors } = useTheme()
   const vibrations = useVibrations()
 
@@ -25,6 +25,8 @@ export function AnswerButton({
     : colors.primary.buttonErrorColor
   const marker = correct ? '🙌' : '😞'
 
+  const nonHold = (): void => undefined
+
   return (
     <CourseButton
       finalColor={buttonColor}
@@ -32,7 +34,7 @@ export function AnswerButton({
       additionalText={explanation}
       marker={marker}
       vibrationMethod={correct ? vibrations.correct : vibrations.incorrect}
-      onHold={onHold ?? (() => undefined)}
+      onHold={onHold ?? nonHold}
     />
   )
 }

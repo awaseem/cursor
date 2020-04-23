@@ -8,11 +8,26 @@ import {
 } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
+const styles = StyleSheet.create({
+  Container: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginHorizontal: 20,
+  },
+  ActiveIndicator: {
+    position: 'absolute',
+    width: 5,
+    height: 5,
+    right: 0,
+    borderRadius: 5,
+  },
+})
+
 export interface StepperButtonProps {
-  text: string
-  active?: boolean
-  onLayout?: (event: LayoutChangeEvent) => void
-  onPress?: () => void
+  readonly text: string
+  readonly active?: boolean
+  readonly onLayout?: (event: LayoutChangeEvent) => void
+  readonly onPress?: () => void
 }
 
 export function StepperButton({
@@ -20,8 +35,9 @@ export function StepperButton({
   active,
   onLayout,
   onPress,
-}: StepperButtonProps) {
+}: StepperButtonProps): JSX.Element {
   const { colors, font } = useTheme()
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -40,18 +56,3 @@ export function StepperButton({
     </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginHorizontal: 20,
-  },
-  ActiveIndicator: {
-    position: 'absolute',
-    width: 5,
-    height: 5,
-    right: 0,
-    borderRadius: 5,
-  },
-})

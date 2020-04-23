@@ -3,13 +3,28 @@ import { StyleSheet, View, Text } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+const styles = StyleSheet.create({
+  CardContainer: {
+    width: 350,
+    height: 150,
+    marginHorizontal: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    justifyContent: 'space-around',
+  },
+  DescriptionContainer: {
+    paddingTop: 15,
+  },
+})
+
 export interface LanguageCardProps {
-  color: string
-  title: string
-  description: string
-  emoji: string
-  selected: boolean
-  onPress: () => void
+  readonly color: string
+  readonly title: string
+  readonly description: string
+  readonly emoji: string
+  readonly selected: boolean
+  readonly onPress: () => void
 }
 
 export function LanguageCard({
@@ -19,7 +34,7 @@ export function LanguageCard({
   emoji,
   selected,
   onPress,
-}: LanguageCardProps) {
+}: LanguageCardProps): JSX.Element {
   const { font } = useTheme()
 
   const cardColorStyle = selected
@@ -40,18 +55,3 @@ export function LanguageCard({
     </TouchableOpacity>
   )
 }
-
-const styles = StyleSheet.create({
-  CardContainer: {
-    width: 350,
-    height: 150,
-    marginHorizontal: 20,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    justifyContent: 'space-around',
-  },
-  DescriptionContainer: {
-    paddingTop: 15,
-  },
-})
