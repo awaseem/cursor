@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/cursor_mockup.png">
+  <img src="./assets/cursor-mockup.png">
 </p>
 
 <h1 align="center">Cursor</h1>
