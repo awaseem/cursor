@@ -3,7 +3,7 @@ import { subjectList, selectedSubject } from './subjectsSlice'
 import { getSubjects } from '../data/api'
 
 export function getAllSubjects() {
-  return async (dispatch: AppDispatch) => {
+  return async (dispatch: AppDispatch): Promise<void> => {
     const { setError, setLoading, setList } = subjectList.actions
     const { setSelectedSubject } = selectedSubject.actions
 

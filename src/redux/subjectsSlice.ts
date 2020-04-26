@@ -10,17 +10,34 @@ export const subjectList = createSlice({
     error: false,
   } as GenericApiDataState<SubjectList>,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoading: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<SubjectList> => {
       state.loading = action.payload
-    },
-    setError: (state, action: PayloadAction<boolean>) => {
-      if (action.payload) {
-        state.data = []
+      return {
+        ...state,
+        loading: action.payload,
       }
-      state.error = action.payload
     },
-    setList: (state, action: PayloadAction<SubjectList>) => {
-      state.data = action.payload
+    setError: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<SubjectList> => {
+      return {
+        ...state,
+        data: action.payload ? [] : state.data,
+        error: action.payload,
+      }
+    },
+    setList: (
+      state,
+      action: PayloadAction<SubjectList>,
+    ): GenericApiDataState<SubjectList> => {
+      return {
+        ...state,
+        data: action.payload,
+      }
     },
   },
 })
@@ -36,13 +53,11 @@ export const selectedSubject = createSlice({
     color: '',
   } as SubjectListItem,
   reducers: {
-    setSelectedSubject: (state, action: PayloadAction<SubjectListItem>) => {
-      state.id = action.payload.id
-      state.name = action.payload.name
-      state.description = action.payload.description
-      state.emoji = action.payload.emoji
-      state.path = action.payload.path
-      state.color = action.payload.color
+    setSelectedSubject: (
+      state,
+      action: PayloadAction<SubjectListItem>,
+    ): SubjectListItem => {
+      return action.payload
     },
   },
 })

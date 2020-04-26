@@ -8,7 +8,7 @@ export function showAndResetHelperPill(
   message: string,
   duration: number = HIDE_TIMEOUT_ANIMATION,
 ) {
-  return (dispatch: AppDispatch) => {
+  return (dispatch: AppDispatch): void => {
     dispatch(helperPill.actions.setHeading(heading))
     dispatch(helperPill.actions.setMessage(message))
 

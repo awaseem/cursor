@@ -11,14 +11,23 @@ export const helperPill = createSlice({
     animation: false,
   } as HelperPillState,
   reducers: {
-    setHeading: (state, action: PayloadAction<string>) => {
-      state.heading = action.payload
+    setHeading: (state, action: PayloadAction<string>): HelperPillState => {
+      return {
+        ...state,
+        heading: action.payload,
+      }
     },
-    setMessage: (state, action: PayloadAction<string>) => {
-      state.message = action.payload
+    setMessage: (state, action: PayloadAction<string>): HelperPillState => {
+      return {
+        ...state,
+        message: action.payload,
+      }
     },
-    setAnimation: (state, action: PayloadAction<boolean>) => {
-      state.animation = action.payload
+    setAnimation: (state, action: PayloadAction<boolean>): HelperPillState => {
+      return {
+        ...state,
+        animation: action.payload,
+      }
     },
   },
 })

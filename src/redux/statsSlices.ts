@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface StatsState {
-  completedCourseIds: { [id: string]: boolean }
-  inProgressCourseIds: { [id: string]: number }
+  readonly completedCourseIds: { readonly [id: string]: boolean }
+  readonly inProgressCourseIds: { readonly [id: string]: number }
 }
 
 export const stats = createSlice({
@@ -12,30 +12,46 @@ export const stats = createSlice({
     inProgressCourseIds: {},
   } as StatsState,
   reducers: {
-    completedCourses: (state, action: PayloadAction<string>) => {
-      state.completedCourseIds = {
-        ...state.completedCourseIds,
-        [action.payload]: true,
+    completedCourses: (state, action: PayloadAction<string>): StatsState => {
+      return {
+        ...state,
+        completedCourseIds: {
+          ...state.completedCourseIds,
+          [action.payload]: true,
+        },
       }
     },
     inProgressCourse: (
       state,
-      action: PayloadAction<{ id: string; index: number }>,
-    ) => {
-      state.inProgressCourseIds = {
-        ...state.inProgressCourseIds,
-        [action.payload.id]: action.payload.index,
+      action: PayloadAction<{ readonly id: string; readonly index: number }>,
+    ): StatsState => {
+      return {
+        ...state,
+        inProgressCourseIds: {
+          ...state.inProgressCourseIds,
+          [action.payload.id]: action.payload.index,
+        },
       }
     },
-    removeIdFromInProgressCourse: (state, action: PayloadAction<string>) => {
+    removeIdFromInProgressCourse: (
+      state,
+      action: PayloadAction<string>,
+    ): StatsState => {
       const {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         [action.payload]: value,
         ...withOutIdCourses
       } = state.inProgressCourseIds
-      state.inProgressCourseIds = withOutIdCourses
+      return {
+        ...state,
+        inProgressCourseIds: withOutIdCourses,
+      }
     },
-    resetInProgress: state => {
-      state.inProgressCourseIds = {}
+    resetInProgress: (state): StatsState => {
+      return {
+        ...state,
+        inProgressCourseIds: {},
+      }
     },
   },
 })

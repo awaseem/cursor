@@ -30,8 +30,14 @@ export const courseSectionList = createSlice({
     error: false,
   } as GenericApiDataState<Sections>,
   reducers: {
-    setList: (state, action: PayloadAction<Sections>) => {
-      state.data = action.payload
+    setList: (
+      state,
+      action: PayloadAction<Sections>,
+    ): GenericApiDataState<Sections> => {
+      return {
+        ...state,
+        data: action.payload,
+      }
     },
   },
 })
@@ -44,17 +50,33 @@ export const courseList = createSlice({
     error: false,
   } as GenericApiDataState<CourseList>,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload
-    },
-    setError: (state, action: PayloadAction<boolean>) => {
-      if (action.payload) {
-        state.data = []
+    setLoading: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<CourseList> => {
+      return {
+        ...state,
+        loading: action.payload,
       }
-      state.error = action.payload
     },
-    setList: (state, action: PayloadAction<CourseList>) => {
-      state.data = action.payload
+    setError: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<CourseList> => {
+      return {
+        ...state,
+        data: action.payload ? [] : state.data,
+        error: action.payload,
+      }
+    },
+    setList: (
+      state,
+      action: PayloadAction<CourseList>,
+    ): GenericApiDataState<CourseList> => {
+      return {
+        ...state,
+        data: action.payload,
+      }
     },
   },
 })
@@ -72,23 +94,71 @@ export const selectedCourse = createSlice({
     error: false,
   } as GenericApiDataState<SelectedCourse>,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload
+    setLoading: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        loading: action.payload,
+      }
     },
-    setError: (state, action: PayloadAction<boolean>) => {
-      state.error = action.payload
+    setError: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        error: action.payload,
+      }
     },
-    setItems: (state, action: PayloadAction<CourseItems>) => {
-      state.data.items = action.payload
+    setItems: (
+      state,
+      action: PayloadAction<CourseItems>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          items: action.payload,
+        },
+      }
     },
-    setCourse: (state, action: PayloadAction<CourseListItem>) => {
-      state.data.course = action.payload
+    setCourse: (
+      state,
+      action: PayloadAction<CourseListItem>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          course: action.payload,
+        },
+      }
     },
-    setItemIndex: (state, action: PayloadAction<number>) => {
-      state.data.itemIndex = action.payload
+    setItemIndex: (
+      state,
+      action: PayloadAction<number>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          itemIndex: action.payload,
+        },
+      }
     },
-    setCompleted: (state, action: PayloadAction<boolean>) => {
-      state.data.completed = action.payload
+    setCompleted: (
+      state,
+      action: PayloadAction<boolean>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          completed: action.payload,
+        },
+      }
     },
   },
 })

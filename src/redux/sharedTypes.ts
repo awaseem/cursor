@@ -1,5 +1,5 @@
 export interface GenericApiDataState<T> {
-  loading: boolean
-  data: T
-  error: boolean
+  readonly loading: boolean
+  readonly data: T
+  readonly error: boolean
 }

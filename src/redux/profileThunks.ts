@@ -13,21 +13,21 @@ const NOTIFICATION_BODY =
   'Come back and practice courses so you can perfect the art of code!'
 
 export function setFirstTimeProfile(name: string) {
-  return async (dispatch: AppDispatch) => {
+  return (dispatch: AppDispatch): void => {
     dispatch(profile.actions.setFirstTime(false))
     dispatch(profile.actions.setName(name))
   }
 }
 
 export function toggleOutOfOrder(value: boolean) {
-  return async (dispatch: AppDispatch, getState: () => AppState) => {
+  return (dispatch: AppDispatch, getState: () => AppState): void => {
     const {
       subjects: { selectedSubject },
     } = getState()
     const { setOutOfOrder } = profile.actions
     const { resetInProgress } = stats.actions
 
-    const successHandler = () => {
+    function successHandler(): void {
       dispatch(setOutOfOrder(value))
 
       dispatch(resetInProgress())
@@ -50,7 +50,7 @@ export function toggleOutOfOrder(value: boolean) {
 }
 
 export function toggleNotifications(value: boolean) {
-  return async (dispatch: AppDispatch) => {
+  return async (dispatch: AppDispatch): Promise<void> => {
     const { setNotificationId, removeNotificationId } = profile.actions
 
     if (!value) {
@@ -60,6 +60,10 @@ export function toggleNotifications(value: boolean) {
     }
 
     const result = await askAsync(NOTIFICATIONS)
+
+    function goToSettings(): void {
+      Linking.openURL('app-settings:')
+    }
 
     if (Constants.isDevice && result.status === PermissionStatus.GRANTED) {
       const recentMonday = startOfWeek(new Date(), { weekStartsOn: 1 })
@@ -84,7 +88,7 @@ export function toggleNotifications(value: boolean) {
         [
           {
             text: 'Go to settings',
-            onPress: () => Linking.openURL('app-settings:'),
+            onPress: goToSettings,
           },
         ],
         { cancelable: true },

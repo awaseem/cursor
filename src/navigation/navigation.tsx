@@ -9,7 +9,7 @@ import { EnjoyNotificationContainer } from '../containers/enjoyNotificationConta
 
 const RootStack = createStackNavigator()
 
-export function RootStackScreen() {
+export function RootStackScreen(): JSX.Element {
   const screenOptions = { headerShown: false, gestureEnabled: false }
   return (
     <RootStack.Navigator mode="modal">
