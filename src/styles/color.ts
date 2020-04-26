@@ -1,17 +1,17 @@
 export interface Colors {
-  indicatorColor: string
-  separtorColor: string
-  buttonMainColor: string
-  buttonSucessColor: string
-  buttonSelectionColor: string
-  buttonErrorColor: string
-  codingColor: string
-  backgroundPillColor: string
+  readonly indicatorColor: string
+  readonly separtorColor: string
+  readonly buttonMainColor: string
+  readonly buttonSucessColor: string
+  readonly buttonSelectionColor: string
+  readonly buttonErrorColor: string
+  readonly codingColor: string
+  readonly backgroundPillColor: string
 }
 
 export interface ColorTheme {
-  background: string
-  primary: Colors
+  readonly background: string
+  readonly primary: Colors
 }
 
 export const colors: Colors = {

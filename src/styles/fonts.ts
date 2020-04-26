@@ -6,24 +6,24 @@ import {
 } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 export interface FontTheme {
-  welcomeHeading: Object
-  greetingHeading: Object
-  languageHeading: Object
-  languageDescription: Object
-  languageAcronym: Object
-  subtitleHeading: Object
-  titleHeading: Object
-  closeButton: Object
-  courseHeading: Object
-  courseMessage: Object
-  courseRowHeading: Object
-  courseRowText: Object
-  codeMessage: Object
-  syntax: Object
-  toggleHeading: Object
-  toggleDescription: Object
-  helperHeading: Object
-  helperDescription: Object
+  readonly welcomeHeading: Record<string, unknown>
+  readonly greetingHeading: Record<string, unknown>
+  readonly languageHeading: Record<string, unknown>
+  readonly languageDescription: Record<string, unknown>
+  readonly languageAcronym: Record<string, unknown>
+  readonly subtitleHeading: Record<string, unknown>
+  readonly titleHeading: Record<string, unknown>
+  readonly closeButton: Record<string, unknown>
+  readonly courseHeading: Record<string, unknown>
+  readonly courseMessage: Record<string, unknown>
+  readonly courseRowHeading: Record<string, unknown>
+  readonly courseRowText: Record<string, unknown>
+  readonly codeMessage: Record<string, unknown>
+  readonly syntax: Record<string, unknown>
+  readonly toggleHeading: Record<string, unknown>
+  readonly toggleDescription: Record<string, unknown>
+  readonly helperHeading: Record<string, unknown>
+  readonly helperDescription: Record<string, unknown>
 }
 
 export const BASE_FONT_SIZE = 16

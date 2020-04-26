@@ -13,24 +13,35 @@ import { useTheme } from '../../../hooks/themeHooks'
 import { useSafeAreaWithPadding } from '../../../hooks/useSafeArea'
 import { useVibrations } from '../../../hooks/useVibrations'
 
+const styles = StyleSheet.create({
+  ButtonContainer: {
+    alignItems: 'center',
+  },
+})
+
 export interface EnjoyNotificationReduxProps {
-  notifications: boolean
+  readonly notifications: boolean
 }
 
 export interface EnjoyNotificationReduxDispatch {
-  toggleNotifications: (value: boolean) => void
+  readonly toggleNotifications: (value: boolean) => void
 }
 
 export function EnjoyNotification({
   notifications,
   toggleNotifications,
-}: EnjoyNotificationReduxProps & EnjoyNotificationReduxDispatch) {
+}: EnjoyNotificationReduxProps & EnjoyNotificationReduxDispatch): JSX.Element {
   const navigation = useNavigation()
   const { correct } = useVibrations()
   const { bottom } = useSafeAreaWithPadding()
   const { colors } = useTheme()
 
-  function onExit() {
+  function onExit(): void {
+    navigation.goBack()
+  }
+
+  function onHold(): void {
+    requestReview()
     navigation.goBack()
   }
 
@@ -56,18 +67,9 @@ export function EnjoyNotification({
           marker={'🤩'}
           finalColor={colors.primary.buttonSucessColor}
           vibrationMethod={correct}
-          onHold={() => {
-            requestReview()
-            navigation.goBack()
-          }}
+          onHold={onHold}
         />
       </View>
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  ButtonContainer: {
-    alignItems: 'center',
-  },
-})

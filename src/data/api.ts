@@ -15,15 +15,15 @@ const GET_FETCH_OPTIONS: RequestInit = {
 }
 
 export interface CourseListItem {
-  id: string
-  name: string
-  description: string
-  emoji: string
-  path: string
+  readonly id: string
+  readonly name: string
+  readonly description: string
+  readonly emoji: string
+  readonly path: string
 }
 
 export interface SubjectListItem extends CourseListItem {
-  color: string
+  readonly color: string
 }
 
 export enum CourseType {
@@ -32,33 +32,33 @@ export enum CourseType {
   codingInputChoice = 'codingInputChoice',
 }
 
-export type SubjectList = SubjectListItem[]
+export type SubjectList = readonly SubjectListItem[]
 
-export type CourseList = CourseListItem[]
+export type CourseList = readonly CourseListItem[]
 
 export interface CourseItemBody {
-  [prop: string]: any
+  readonly [prop: string]: any
 }
 
 export interface CourseItem extends CourseItemBody {
-  type: CourseType
+  readonly type: CourseType
 }
 
-export type CourseItems = CourseItem[]
+export type CourseItems = readonly CourseItem[]
 
-export async function getSubjects() {
+export async function getSubjects(): Promise<SubjectList> {
   const response = await fetch(PUBLIC_URL_SUBJECT_LIST, GET_FETCH_OPTIONS)
 
   return response.json() as Promise<SubjectList>
 }
 
-export async function getCoursesByPath(path: string) {
+export async function getCoursesByPath(path: string): Promise<CourseList> {
   const response = await fetch(`${PUBLIC_URL}${path}`, GET_FETCH_OPTIONS)
 
   return response.json() as Promise<CourseList>
 }
 
-export async function getCourseByPath(path: string) {
+export async function getCourseByPath(path: string): Promise<CourseItems> {
   const response = await fetch(`${PUBLIC_URL}${path}`, GET_FETCH_OPTIONS)
 
   return response.json() as Promise<CourseItems>

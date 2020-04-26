@@ -8,17 +8,17 @@ import { Toggle } from '../components/toggle'
 import { HairlineSeparator } from '../../common/hairlineSeparator'
 
 export interface SettingsReduxProps {
-  outOfOrder: boolean
-  disableCompletePopups: boolean
-  notifications: boolean
-  disableVibrations: boolean
+  readonly outOfOrder: boolean
+  readonly disableCompletePopups: boolean
+  readonly notifications: boolean
+  readonly disableVibrations: boolean
 }
 
 export interface SettingsReduxDispatch {
-  toggleOutOfOrder: (value: boolean) => void
-  toggleNotifications: (value: boolean) => void
-  setDisableCompletePopups: (value: boolean) => void
-  setDisableVibrations: (value: boolean) => void
+  readonly toggleOutOfOrder: (value: boolean) => void
+  readonly toggleNotifications: (value: boolean) => void
+  readonly setDisableCompletePopups: (value: boolean) => void
+  readonly setDisableVibrations: (value: boolean) => void
 }
 
 export function Settings({
@@ -30,10 +30,10 @@ export function Settings({
   toggleNotifications,
   disableCompletePopups,
   setDisableCompletePopups,
-}: SettingsReduxProps & SettingsReduxDispatch) {
+}: SettingsReduxProps & SettingsReduxDispatch): JSX.Element {
   const navigation = useNavigation()
 
-  function onExit() {
+  function onExit(): void {
     navigation.goBack()
   }
 

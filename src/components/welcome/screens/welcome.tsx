@@ -13,11 +13,30 @@ import { useVibrations } from '../../../hooks/useVibrations'
 
 const ANIMATION_DURATION = 800
 
+const styles = StyleSheet.create({
+  emojiContainer: {
+    marginTop: 120,
+    alignItems: 'center',
+  },
+  titleContainer: {
+    marginTop: 30,
+    alignItems: 'center',
+  },
+  nameContainer: {
+    paddingHorizontal: 40,
+  },
+  buttonContainer: {
+    alignItems: 'center',
+  },
+})
+
 export interface WelcomeReduxDispatch {
-  setFirstTimeProfile: (name: string) => void
+  readonly setFirstTimeProfile: (name: string) => void
 }
 
-export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
+export function Welcome({
+  setFirstTimeProfile,
+}: WelcomeReduxDispatch): JSX.Element {
   const { bottom } = useSafeAreaWithPadding()
   const { font, colors } = useTheme()
   const { correct } = useVibrations()
@@ -36,7 +55,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
     'Please enter your first name',
   )
 
-  function getAnimatedEmojiStyles() {
+  function getAnimatedEmojiStyles(): Record<string, unknown> {
     const opacity = animatedEmoji.interpolate({
       inputRange: [0, 0.5, 1],
       outputRange: [0, 1, 1],
@@ -57,7 +76,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
     }
   }
 
-  function getAnimatedOpacityStyles() {
+  function getAnimatedOpacityStyles(): Record<string, unknown> {
     const opacity = animatedWelcomeText.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
@@ -118,7 +137,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
         >
           <CourseInput
             placeholder={'Enter you first name'}
-            onChange={text => setName(text)}
+            onChange={(text: string): void => setName(text)}
           />
         </Animated.View>
       </Content>
@@ -136,7 +155,7 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
           additionalText={additionalText}
           finalColor={buttonColor}
           vibrationMethod={correct}
-          onHold={() => {
+          onHold={(): void => {
             if (name) {
               setFirstTimeProfile(name)
               navigation.goBack()
@@ -147,20 +166,3 @@ export function Welcome({ setFirstTimeProfile }: WelcomeReduxDispatch) {
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  emojiContainer: {
-    marginTop: 120,
-    alignItems: 'center',
-  },
-  titleContainer: {
-    marginTop: 30,
-    alignItems: 'center',
-  },
-  nameContainer: {
-    paddingHorizontal: 40,
-  },
-  buttonContainer: {
-    alignItems: 'center',
-  },
-})

@@ -141,7 +141,7 @@ export function Home({
             text: 'Hold to refresh',
             marker: '🔄',
             finalColor: colors.primary.buttonSucessColor,
-            onHold: () => getCourses(selectedSubject.path),
+            onHold: (): void => getCourses(selectedSubject.path),
           }}
         />
       )
@@ -168,7 +168,7 @@ export function Home({
         subjectColor={selectedSubject.color}
         maxHeight={HEADER_MAX_HEIGHT}
         scrollAnimationValue={scrollYAnimated}
-        getCourses={() => getCourses(selectedSubject.path)}
+        getCourses={(): void => getCourses(selectedSubject.path)}
         setSelectedCourse={setSelectedCourse}
         courseSections={courses.courseSections}
         loading={courses.loading}
@@ -228,7 +228,7 @@ export function Home({
           subtitle={`Welcome back, ${name}`}
           icon={{
             emoji: 'Settings',
-            onPress: () => navigation.navigate(Screens.Settings),
+            onPress: (): void => navigation.navigate(Screens.Settings),
           }}
         />
         <View style={styles.LanguagesContainer}>
@@ -241,7 +241,7 @@ export function Home({
               <LanguageCard
                 key={subject.id}
                 selected={subject.id === selectedSubject.id}
-                onPress={() => setSelectedSubject(subject)}
+                onPress={(): void => setSelectedSubject(subject)}
                 title={subject.name}
                 description={subject.description}
                 emoji={subject.emoji}

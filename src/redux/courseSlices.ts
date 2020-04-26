@@ -3,10 +3,10 @@ import { CourseList, CourseItems, CourseListItem } from '../data/api'
 import { GenericApiDataState } from './sharedTypes'
 
 export interface SelectedCourse {
-  items: CourseItems
-  course?: CourseListItem
-  itemIndex: number
-  completed: boolean
+  readonly items: CourseItems
+  readonly course?: CourseListItem
+  readonly itemIndex: number
+  readonly completed: boolean
 }
 
 export enum SectionTitle {
@@ -16,11 +16,11 @@ export enum SectionTitle {
 }
 
 export interface SectionCourseList {
-  title: SectionTitle
-  data: CourseList
+  readonly title: SectionTitle
+  readonly data: CourseList
 }
 
-export type Sections = SectionCourseList[]
+export type Sections = readonly SectionCourseList[]
 
 export const courseSectionList = createSlice({
   name: 'courseSectionList',

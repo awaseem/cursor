@@ -3,8 +3,8 @@ import * as Haptics from 'expo-haptics'
 import { AppState } from '../redux/rootReducer'
 
 export interface VibrationMethods {
-  correct: () => void
-  incorrect: () => void
+  readonly correct: () => void
+  readonly incorrect: () => void
 }
 
 export function useVibrations(): VibrationMethods {
@@ -14,13 +14,14 @@ export function useVibrations(): VibrationMethods {
 
   if (vibrationsDisabled) {
     return {
-      correct: () => undefined,
-      incorrect: () => undefined,
+      correct: (): void => undefined,
+      incorrect: (): void => undefined,
     }
   }
 
   return {
-    correct: () => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium),
+    correct: (): Promise<void> =>
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium),
     incorrect: Haptics.notificationAsync,
   }
 }

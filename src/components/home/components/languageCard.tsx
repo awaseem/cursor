@@ -40,9 +40,18 @@ export function LanguageCard({
   const cardColorStyle = selected
     ? { backgroundColor: color }
     : { borderWidth: 2.5, borderColor: color }
+
+  function onPressHandler(): void {
+    if (selected) {
+      return
+    }
+
+    onPress()
+  }
+
   return (
     <TouchableOpacity
-      onPress={selected ? () => undefined : onPress}
+      onPress={onPressHandler}
       style={[styles.CardContainer, cardColorStyle]}
     >
       <Text style={font.languageHeading}>{title}</Text>

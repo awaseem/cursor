@@ -2,11 +2,23 @@ import React from 'react'
 import { StyleSheet, View, Switch, Text } from 'react-native'
 import { useTheme } from '../../../hooks/themeHooks'
 
+const styles = StyleSheet.create({
+  SwitchContainer: {
+    marginBottom: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  Description: {
+    marginTop: 10,
+  },
+})
+
 export interface ToggleProps {
-  text: string
-  description: string
-  enabled: boolean
-  onValueChange: (value: boolean) => void
+  readonly text: string
+  readonly description: string
+  readonly enabled: boolean
+  readonly onValueChange: (value: boolean) => void
 }
 
 export function Toggle({
@@ -14,7 +26,7 @@ export function Toggle({
   onValueChange,
   text,
   description,
-}: ToggleProps) {
+}: ToggleProps): JSX.Element {
   const { colors, font } = useTheme()
 
   return (
@@ -38,15 +50,3 @@ export function Toggle({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  SwitchContainer: {
-    marginBottom: 40,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  Description: {
-    marginTop: 10,
-  },
-})

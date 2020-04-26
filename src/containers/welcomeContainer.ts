@@ -7,7 +7,7 @@ import {
 } from '../components/welcome/screens/welcome'
 import { setFirstTimeProfile } from '../redux/profileThunks'
 
-function mapStateToProps() {
+function mapStateToProps(): Record<string, unknown> {
   return {}
 }
 
