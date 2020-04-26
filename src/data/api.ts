@@ -37,7 +37,7 @@ export type SubjectList = readonly SubjectListItem[]
 export type CourseList = readonly CourseListItem[]
 
 export interface CourseItemBody {
-  readonly [prop: string]: unknown
+  readonly [prop: string]: any
 }
 
 export interface CourseItem extends CourseItemBody {
