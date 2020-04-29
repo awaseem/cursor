@@ -1,11 +1,12 @@
-name: Expo Daily CI
+name: Expo Dev Publish
 on:
-  schedule:
-    - cron: 0 21 * * *
+  push:
+    branches:
+      - master
 
 jobs:
   build:
-    name: Daily Continuous Integration
+    name: Install and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -21,4 +22,4 @@ jobs:
       - run: npm install
       - run: npm run lint
       - run: npm run test
-      - run: expo build:ios --release-channel="dev-${GITHUB_SHA}"
+      - run: expo publish --release-channel="dev-${GITHUB_SHA}"
