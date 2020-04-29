@@ -19,4 +19,6 @@ jobs:
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
       - run: npm install
-      - run: expo build:ios --release-channel="dev-${GITHUB_SHA}"
+      - run: npm run lint
+      - run: npm run test
+      - run: expo publish --release-channel="dev-${GITHUB_SHA}"
