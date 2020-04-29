@@ -8,7 +8,7 @@ import { RootStackScreen } from './src/navigation/navigation'
 import { store, persistedStore } from './src/redux/rootReducer'
 import { Loader } from './src/components/common/loader'
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={<Loader />} persistor={persistedStore}>
