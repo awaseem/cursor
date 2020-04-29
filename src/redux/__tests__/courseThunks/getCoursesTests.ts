@@ -1,38 +1,17 @@
-import configureMockStore from 'redux-mock-store'
-import thunk, { ThunkDispatch } from 'redux-thunk'
 import * as fetchMock from 'fetch-mock'
-import { AnyAction } from '@reduxjs/toolkit'
 import { getCourses } from '../../courseThunks'
-
-type DispatchExts = ThunkDispatch<{}, void, AnyAction>
-
-const middlewares = [thunk]
-const mockStore = configureMockStore<{}, DispatchExts>(middlewares)
+import { createMockStore, testCourses } from '../../../utils/testHelpers'
 
 const path = '/javascript'
-const testCourses = [
-  {
-    id: '1',
-    name: 'testCourse',
-    description: 'used for testing only!',
-    emoji: '💩',
-    path: '/some-path',
-  },
-  {
-    id: '2',
-    name: 'testCourse2',
-    description: 'used for testing only!',
-    emoji: '💩',
-    path: '/some-path-2',
-  },
-]
 
 describe('getCourses ', () => {
+  const mockStore = createMockStore()
+
   afterEach(() => {
     fetchMock.restore()
   })
 
-  it('get in order courses for path with no completed or in progress courses', () => {
+  it('should get in order courses for path with no completed or in progress courses', () => {
     const store = mockStore({
       stats: {
         completedCourseIds: {},
@@ -63,7 +42,7 @@ describe('getCourses ', () => {
     })
   })
 
-  it('get out of order courses for path with no completed or in progress courses', () => {
+  it('should get out of order courses for path with no completed or in progress courses', () => {
     const store = mockStore({
       stats: {
         completedCourseIds: {},
@@ -94,29 +73,25 @@ describe('getCourses ', () => {
     })
   })
 
-  it('get out of order courses for path with no completed or in progress courses', () => {
+  it('should fail to get course due to request error', () => {
     const store = mockStore({
       stats: {
         completedCourseIds: {},
         inProgressCourseIds: {},
       },
       profile: {
-        outOfOrder: true,
+        outOfOrder: false,
       },
     })
 
     fetchMock.getOnce(`https://teacher-dev.getcursor.app/data/v1${path}`, {
-      body: testCourses,
+      status: 404,
     })
 
     const expectedActions = [
       { type: 'courseList/setError', payload: false },
       { type: 'courseList/setLoading', payload: true },
-      { type: 'courseList/setList', payload: testCourses },
-      {
-        type: 'courseSectionList/setList',
-        payload: [{ title: 'Incomplete', data: testCourses }],
-      },
+      { type: 'courseList/setError', payload: true },
       { type: 'courseList/setLoading', payload: false },
     ]
 
