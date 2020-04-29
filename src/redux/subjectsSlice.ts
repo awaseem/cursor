@@ -14,7 +14,6 @@ export const subjectList = createSlice({
       state,
       action: PayloadAction<boolean>,
     ): GenericApiDataState<SubjectList> => {
-      state.loading = action.payload
       return {
         ...state,
         loading: action.payload,
