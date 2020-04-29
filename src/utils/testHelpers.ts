@@ -4,6 +4,25 @@ import { AnyAction } from '@reduxjs/toolkit'
 
 export type DispatchExts = ThunkDispatch<{}, void, AnyAction>
 
+export const testSubjects = [
+  {
+    id: '1',
+    name: 'testSubjects',
+    description: 'used for testing only!',
+    emoji: '💩',
+    path: '/some-path',
+    color: 'red',
+  },
+  {
+    id: '2',
+    name: 'testSubjects2',
+    description: 'used for testing only 2!',
+    emoji: '💩',
+    path: '/some-path-2',
+    color: 'pink',
+  },
+]
+
 export const testCourses = [
   {
     id: '1',
