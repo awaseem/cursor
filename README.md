@@ -7,8 +7,9 @@
 <p align="center">Learning with no barriers.</p>
 
 <p align="center">
- <img src="https://img.shields.io/badge/License-MIT-blue.svg">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg">
   <img src="https://github.com/awaseem/cursor/workflows/Expo%20Dev%20Build/badge.svg">
+  <img src="https://github.com/awaseem/cursor/workflows/Expo%20Dev%20Publish/badge.svg">
 </p>
 
 Learning to code should be easy, fun and especially free! Cursor is here to solve just that. Learn JavaScript, Python (Coming soon!) and much more. Courses are short, sweet and to the point, requiring no prior knowledge to get started.
@@ -46,6 +47,14 @@ To run tests, simply run the following command:
 
 ```
 npm run test
+```
+
+## Linting
+
+Check if your code is up to the linting standard, run the following command:
+
+```
+npm run lint
 ```
 
 # Data
