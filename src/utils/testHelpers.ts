@@ -35,6 +35,35 @@ export const testCourses = [
   },
 ]
 
+export const testCourseItems = [
+  {
+    type: 'outline',
+    title: 'True or False!',
+    content:
+      "At this point, you have a pretty good understanding of Strings and Number in JavaScripts. Let's move on to something much easier to understand: Booleans!",
+    buttonText: "Let's go",
+    marker: '👍',
+  },
+
+  {
+    type: 'outline',
+    title: 'True or False!',
+    content:
+      'In JavaScript, Strings can be anything within a single or double quote. A Number can be any number you wish. Booleans, on the other hand, can only have two values symbolizing a truthful or false value.',
+    buttonText: 'Hmm...',
+    marker: '🤔',
+  },
+
+  {
+    type: 'outline',
+    title: 'Truthful',
+    content: 'A truthful value in JavaScript is represented as the following:',
+    code: 'true',
+    buttonText: 'Okay',
+    marker: '👌',
+  },
+]
+
 export function createMockStore(): MockStoreCreator<any, any> {
   const middlewares = [thunk]
   return configureMockStore<{}, DispatchExts>(middlewares)
