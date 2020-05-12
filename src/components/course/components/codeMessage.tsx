@@ -24,6 +24,7 @@ export function CodeMessage({ message }: CodeMessageProps): JSX.Element {
         fontSize={BASE_FONT_SIZE * 0.875}
         language={'javascript'}
         style={font.syntax}
+        customStyle={{ paddingHorizontal: -15 }}
         highlighter={'hljs'}
       >
         {message}
