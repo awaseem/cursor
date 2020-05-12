@@ -21,7 +21,7 @@ export function CodeMessage({ message }: CodeMessageProps): JSX.Element {
   return (
     <View style={styles.Container}>
       <SyntaxHighlighter
-        fontSize={BASE_FONT_SIZE}
+        fontSize={BASE_FONT_SIZE * 0.875}
         language={'javascript'}
         style={font.syntax}
         highlighter={'hljs'}
