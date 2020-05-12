@@ -9,7 +9,7 @@ const GET_FETCH_OPTIONS: RequestInit = {
   method: 'GET',
   headers: {
     Accpet: 'application/json',
-    'Cache-Control': 'no-cache',
+    'Cache-Control': isProd() ? 'max-age=600' : 'no-cache',
     'Content-Type': 'application/json',
   },
 }
