@@ -72,7 +72,7 @@ export function HomeCourseList({
     if (title === SectionTitle.incomplete) {
       return colors.primary.buttonErrorColor
     }
-    return colors.primary.buttonSucessColor
+    return colors.primary.buttonSuccessColor
   }
 
   function keyExtractor(item: CourseListItem): string {

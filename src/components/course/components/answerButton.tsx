@@ -21,7 +21,7 @@ export function AnswerButton({
   const vibrations = useVibrations()
 
   const buttonColor = correct
-    ? colors.primary.buttonSucessColor
+    ? colors.primary.buttonSuccessColor
     : colors.primary.buttonErrorColor
   const marker = correct ? '🙌' : '😞'
 

@@ -89,7 +89,7 @@ export function Welcome({
 
   useEffect(() => {
     if (name) {
-      setButtonColor(colors.primary.buttonSucessColor)
+      setButtonColor(colors.primary.buttonSuccessColor)
       setMarker('👍')
       setReset(false)
       setAdditionalText(undefined)

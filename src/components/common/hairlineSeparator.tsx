@@ -25,7 +25,7 @@ export function HairlineSeparator({
       style={[
         styles.HairlineWidth,
         {
-          borderColor: colors.primary.separtorColor,
+          borderColor: colors.primary.separatorColor,
           backgroundColor: colors.background,
           marginTop: extraSpacing ? EXTRA_SPACING : ZERO_SPACING,
         },

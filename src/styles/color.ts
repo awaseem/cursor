@@ -1,8 +1,8 @@
 export interface Colors {
   readonly indicatorColor: string
-  readonly separtorColor: string
+  readonly separatorColor: string
   readonly buttonMainColor: string
-  readonly buttonSucessColor: string
+  readonly buttonSuccessColor: string
   readonly buttonSelectionColor: string
   readonly buttonErrorColor: string
   readonly codingColor: string
@@ -17,11 +17,11 @@ export interface ColorTheme {
 export const colors: Colors = {
   indicatorColor: '#EF476F',
 
-  separtorColor: '#4C5454',
+  separatorColor: '#4C5454',
 
   buttonMainColor: '#758282',
 
-  buttonSucessColor: '#1EA896',
+  buttonSuccessColor: '#1EA896',
 
   buttonSelectionColor: '#105E53',
 
