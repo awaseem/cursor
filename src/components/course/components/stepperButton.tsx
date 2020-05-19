@@ -51,7 +51,7 @@ export function StepperButton({
             styles.ActiveIndicator,
             { backgroundColor: colors.primary.indicatorColor },
           ]}
-        ></View>
+        />
       )}
     </TouchableOpacity>
   )
