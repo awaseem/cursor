@@ -18,7 +18,7 @@ export interface StepperProps {
   readonly steps: number
   readonly activeStep: number
 
-  readonly onStepperPress?: (index: number) => void
+  readonly onStepperPress: (index: number) => void
 }
 
 export function Stepper({
@@ -46,7 +46,14 @@ export function Stepper({
 
   function handleStepperButton(item: number) {
     return (): void => {
-      if (completed && onStepperPress) {
+      // courses can be moved throughout when completed
+      if (completed) {
+        onStepperPress(item)
+        return
+      }
+
+      // Allow user to navigate back to any ongoing course
+      if (!completed && item <= activeStep) {
         onStepperPress(item)
       }
     }

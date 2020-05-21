@@ -80,6 +80,11 @@ export function CourseCarousel({
   }
 
   function transitionAway(): void {
+    // Only continue to the next course if the user is on the active course
+    if (itemIndex !== activeIndex) {
+      return
+    }
+
     Animated.timing(animatedTransitionAway, {
       duration: ANIMATION_DURATION,
       toValue: 1,
@@ -175,13 +180,13 @@ export function CourseCarousel({
       return
     }
 
-    if (itemIndex === courses.length - 1) {
+    if (activeIndex === courses.length - 1) {
       onComplete()
       return
     }
 
     if (selectedCourse) {
-      setInProgressAndRefresh(selectedCourse.id, itemIndex)
+      setInProgressAndRefresh(selectedCourse.id, activeIndex)
     }
     navigation.goBack()
   }
