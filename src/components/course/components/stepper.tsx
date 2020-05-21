@@ -17,6 +17,7 @@ export interface StepperProps {
   readonly completed: boolean
   readonly steps: number
   readonly activeStep: number
+  readonly itemStep: number
 
   readonly onStepperPress: (index: number) => void
 }
@@ -24,6 +25,7 @@ export interface StepperProps {
 export function Stepper({
   steps,
   activeStep,
+  itemStep,
   completed = false,
   onStepperPress,
 }: StepperProps): JSX.Element {
@@ -64,6 +66,7 @@ export function Stepper({
       <StepperButton
         onPress={handleStepperButton(item)}
         active={activeStep === item}
+        currentView={itemStep === item}
         text={(item + 1).toString()}
       />
     )

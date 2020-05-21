@@ -81,7 +81,7 @@ export function CourseCarousel({
 
   function transitionAway(): void {
     // Only continue to the next course if the user is on the active course
-    if (itemIndex !== activeIndex) {
+    if (!completed && itemIndex !== activeIndex) {
       return
     }
 
@@ -221,6 +221,7 @@ export function CourseCarousel({
       <Stepper
         completed={completed}
         activeStep={activeIndex}
+        itemStep={itemIndex}
         steps={courses.length}
         onStepperPress={handleStepperPress}
       />
