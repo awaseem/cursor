@@ -20,6 +20,7 @@ describe('nextCourseItem ', () => {
 
     const expectedActions = [
       { type: 'stats/inProgressCourse', payload: { id: '1', index: 1 } },
+      { type: 'selectedCourse/setActiveIndex', payload: 1 },
       { type: 'selectedCourse/setItemIndex', payload: 1 },
     ]
 
@@ -41,6 +42,7 @@ describe('nextCourseItem ', () => {
     })
 
     const expectedActions = [
+      { type: 'selectedCourse/setActiveIndex', payload: 1 },
       { type: 'selectedCourse/setItemIndex', payload: 1 },
     ]
 

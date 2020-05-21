@@ -25,6 +25,7 @@ export interface CourseCarouselReduxProps {
   readonly error: boolean
   readonly selectedCourse?: CourseListItem
   readonly selectedCourseItems: CourseItems
+  readonly itemIndex: number
   readonly activeIndex: number
   readonly completed: boolean
 }
@@ -43,6 +44,7 @@ export interface CourseCarouselDispatchProps {
 export function CourseCarousel({
   loading,
   error,
+  itemIndex,
   activeIndex,
   selectedCourseItems,
   selectedCourse,
@@ -173,13 +175,13 @@ export function CourseCarousel({
       return
     }
 
-    if (activeIndex === courses.length - 1) {
+    if (itemIndex === courses.length - 1) {
       onComplete()
       return
     }
 
     if (selectedCourse) {
-      setInProgressAndRefresh(selectedCourse.id, activeIndex)
+      setInProgressAndRefresh(selectedCourse.id, itemIndex)
     }
     navigation.goBack()
   }
@@ -223,7 +225,7 @@ export function CourseCarousel({
           visible ? transitionAwayAnimation() : transitionInAnimation(),
         ]}
       >
-        {courses[activeIndex]}
+        {courses[itemIndex]}
       </Animated.View>
     </Container>
   )

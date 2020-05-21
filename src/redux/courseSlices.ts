@@ -6,6 +6,7 @@ export interface SelectedCourse {
   readonly items: CourseItems
   readonly course?: CourseListItem
   readonly itemIndex: number
+  readonly activeIndex: number
   readonly completed: boolean
 }
 
@@ -89,6 +90,7 @@ export const selectedCourse = createSlice({
       items: [],
       course: undefined,
       itemIndex: 0,
+      activeIndex: 0,
       completed: false,
     },
     error: false,
@@ -145,6 +147,18 @@ export const selectedCourse = createSlice({
         data: {
           ...state.data,
           itemIndex: action.payload,
+        },
+      }
+    },
+    setActiveIndex: (
+      state,
+      action: PayloadAction<number>,
+    ): GenericApiDataState<SelectedCourse> => {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          activeIndex: action.payload,
         },
       }
     },
