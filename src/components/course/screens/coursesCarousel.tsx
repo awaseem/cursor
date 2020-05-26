@@ -165,7 +165,7 @@ export function CourseCarousel({
       emoji={'👍'}
       heading={'All Done!'}
       buttonProps={{
-        finalColor: colors.primary.buttonSucessColor,
+        finalColor: colors.primary.buttonSuccessColor,
         text: 'Got it!',
         marker: '🍾',
         onHold: onComplete,
@@ -199,7 +199,7 @@ export function CourseCarousel({
           heading={'Error'}
           description={'Failed to get selected course'}
           buttonProps={{
-            finalColor: colors.primary.buttonSucessColor,
+            finalColor: colors.primary.buttonSuccessColor,
             text: 'Hold to dismiss',
             marker: '🙇‍♂️',
             onHold: navigation.goBack,

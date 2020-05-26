@@ -65,7 +65,7 @@ export function EnjoyNotification({
         <CourseButton
           text={'Hold to rate'}
           marker={'🤩'}
-          finalColor={colors.primary.buttonSucessColor}
+          finalColor={colors.primary.buttonSuccessColor}
           vibrationMethod={correct}
           onHold={onHold}
         />

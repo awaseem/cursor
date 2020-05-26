@@ -3,7 +3,7 @@ export interface Colors {
   readonly secondaryIndicatorColor: string
   readonly separtorColor: string
   readonly buttonMainColor: string
-  readonly buttonSucessColor: string
+  readonly buttonSuccessColor: string
   readonly buttonSelectionColor: string
   readonly buttonErrorColor: string
   readonly codingColor: string
@@ -24,7 +24,7 @@ export const colors: Colors = {
 
   buttonMainColor: '#758282',
 
-  buttonSucessColor: '#1EA896',
+  buttonSuccessColor: '#1EA896',
 
   buttonSelectionColor: '#105E53',
 

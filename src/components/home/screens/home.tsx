@@ -140,7 +140,7 @@ export function Home({
           buttonProps={{
             text: 'Hold to refresh',
             marker: '🔄',
-            finalColor: colors.primary.buttonSucessColor,
+            finalColor: colors.primary.buttonSuccessColor,
             onHold: (): void => getCourses(selectedSubject.path),
           }}
         />
@@ -195,7 +195,7 @@ export function Home({
           buttonProps={{
             text: 'Hold to refresh',
             marker: '🔄',
-            finalColor: colors.primary.buttonSucessColor,
+            finalColor: colors.primary.buttonSuccessColor,
             onHold: getAllSubjects,
           }}
         />

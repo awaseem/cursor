@@ -41,7 +41,7 @@ export function Toggle({
         <Switch
           trackColor={{
             false: colors.primary.buttonErrorColor,
-            true: colors.primary.buttonSucessColor,
+            true: colors.primary.buttonSuccessColor,
           }}
           onValueChange={onValueChange}
           value={enabled}

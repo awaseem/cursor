@@ -98,7 +98,7 @@ export function Stepper({
         keyExtractor={keyExtractor}
         style={[
           styles.Container,
-          { borderBottomColor: colors.primary.separtorColor },
+          { borderBottomColor: colors.primary.separatorColor },
         ]}
         onScrollToIndexFailed={onScrollToIndexFailed}
         showsHorizontalScrollIndicator={false}

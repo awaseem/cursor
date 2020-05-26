@@ -44,7 +44,7 @@ export function CourseOutline({
         {code && <CodeMessage message={code} />}
       </Content>
       <CourseButton
-        finalColor={colors.buttonSucessColor}
+        finalColor={colors.buttonSuccessColor}
         text={buttonText}
         marker={marker}
         vibrationMethod={correct}

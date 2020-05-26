@@ -34,7 +34,6 @@ export function CodingInputQuestion({
   expectedResponse,
   code,
   onSuccess,
-
   placeholder,
   additionalText,
 }: CodingInputQuestionProps): JSX.Element {
@@ -46,7 +45,7 @@ export function CodingInputQuestion({
 
   useEffect(() => {
     if (text.trim().toLowerCase() === expectedResponse.trim().toLowerCase()) {
-      setFinalColor(colors.buttonSucessColor)
+      setFinalColor(colors.buttonSuccessColor)
       setMarker('🤗')
       setReset(false)
     } else {

@@ -39,7 +39,7 @@ export function CourseHeader({
           top,
           height,
           backgroundColor: colors.background,
-          borderColor: colors.primary.separtorColor,
+          borderColor: colors.primary.separatorColor,
           opacity,
           transform: [
             {
