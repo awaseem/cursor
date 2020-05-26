@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { BASE_FONT_SIZE } from '../../../styles/fonts'
 import { CodeView } from '../../common/codeView'
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
