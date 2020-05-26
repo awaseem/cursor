@@ -68,6 +68,7 @@ describe('setSelectedCourse ', () => {
         type: 'selectedCourse/setItems',
         payload: testCourseItems,
       },
+      { type: 'selectedCourse/setActiveIndex', payload: 0 },
       { type: 'selectedCourse/setItemIndex', payload: 0 },
       {
         type: 'selectedCourse/setCourse',
@@ -113,6 +114,7 @@ describe('setSelectedCourse ', () => {
         type: 'selectedCourse/setItems',
         payload: testCourseItems,
       },
+      { type: 'selectedCourse/setActiveIndex', payload: 3 },
       { type: 'selectedCourse/setItemIndex', payload: 3 },
       {
         type: 'selectedCourse/setCourse',
@@ -158,6 +160,7 @@ describe('setSelectedCourse ', () => {
         type: 'selectedCourse/setItems',
         payload: testCourseItems,
       },
+      { type: 'selectedCourse/setActiveIndex', payload: 0 },
       { type: 'selectedCourse/setItemIndex', payload: 0 },
       {
         type: 'selectedCourse/setCourse',
@@ -203,6 +206,7 @@ describe('setSelectedCourse ', () => {
         type: 'selectedCourse/setItems',
         payload: testCourseItems,
       },
+      { type: 'selectedCourse/setActiveIndex', payload: 0 },
       { type: 'selectedCourse/setItemIndex', payload: 0 },
       {
         type: 'selectedCourse/setCourse',

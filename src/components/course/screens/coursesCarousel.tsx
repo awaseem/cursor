@@ -25,6 +25,7 @@ export interface CourseCarouselReduxProps {
   readonly error: boolean
   readonly selectedCourse?: CourseListItem
   readonly selectedCourseItems: CourseItems
+  readonly itemIndex: number
   readonly activeIndex: number
   readonly completed: boolean
 }
@@ -43,6 +44,7 @@ export interface CourseCarouselDispatchProps {
 export function CourseCarousel({
   loading,
   error,
+  itemIndex,
   activeIndex,
   selectedCourseItems,
   selectedCourse,
@@ -78,6 +80,11 @@ export function CourseCarousel({
   }
 
   function transitionAway(): void {
+    // Only continue to the next course if the user is on the active course
+    if (!completed && itemIndex !== activeIndex) {
+      return
+    }
+
     Animated.timing(animatedTransitionAway, {
       duration: ANIMATION_DURATION,
       toValue: 1,
@@ -214,6 +221,7 @@ export function CourseCarousel({
       <Stepper
         completed={completed}
         activeStep={activeIndex}
+        itemStep={itemIndex}
         steps={courses.length}
         onStepperPress={handleStepperPress}
       />
@@ -223,7 +231,7 @@ export function CourseCarousel({
           visible ? transitionAwayAnimation() : transitionInAnimation(),
         ]}
       >
-        {courses[activeIndex]}
+        {courses[itemIndex]}
       </Animated.View>
     </Container>
   )

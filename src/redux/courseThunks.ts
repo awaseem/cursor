@@ -134,6 +134,7 @@ export function setSelectedCourse(course: CourseListItem) {
       const activeIndex = inProgressCourseIds[course.id] ?? 0
 
       dispatch(selectedCourse.actions.setItems(courseItems))
+      dispatch(selectedCourse.actions.setActiveIndex(activeIndex))
       dispatch(selectedCourse.actions.setItemIndex(activeIndex))
       dispatch(selectedCourse.actions.setCourse(course))
 
@@ -178,6 +179,7 @@ export function nextCourseItem() {
         }),
       )
     }
+    dispatch(selectedCourse.actions.setActiveIndex(newIndex))
     dispatch(selectedCourse.actions.setItemIndex(newIndex))
   }
 }

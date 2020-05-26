@@ -21,11 +21,20 @@ const styles = StyleSheet.create({
     right: 0,
     borderRadius: 5,
   },
+  ItemIndicator: {
+    position: 'absolute',
+    width: 5,
+    height: 5,
+    left: 0,
+    bottom: 0,
+    borderRadius: 5,
+  },
 })
 
 export interface StepperButtonProps {
   readonly text: string
   readonly active?: boolean
+  readonly currentView?: boolean
   readonly onLayout?: (event: LayoutChangeEvent) => void
   readonly onPress?: () => void
 }
@@ -33,6 +42,7 @@ export interface StepperButtonProps {
 export function StepperButton({
   text,
   active,
+  currentView,
   onLayout,
   onPress,
 }: StepperButtonProps): JSX.Element {
@@ -50,6 +60,14 @@ export function StepperButton({
           style={[
             styles.ActiveIndicator,
             { backgroundColor: colors.primary.indicatorColor },
+          ]}
+        />
+      )}
+      {currentView && (
+        <View
+          style={[
+            styles.ItemIndicator,
+            { backgroundColor: colors.primary.secondaryIndicatorColor },
           ]}
         />
       )}
