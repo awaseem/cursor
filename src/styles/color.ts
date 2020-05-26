@@ -1,7 +1,7 @@
 export interface Colors {
   readonly indicatorColor: string
   readonly secondaryIndicatorColor: string
-  readonly separtorColor: string
+  readonly separatorColor: string
   readonly buttonMainColor: string
   readonly buttonSuccessColor: string
   readonly buttonSelectionColor: string
@@ -20,7 +20,7 @@ export const colors: Colors = {
 
   secondaryIndicatorColor: '#10B890',
 
-  separtorColor: '#4C5454',
+  separatorColor: '#4C5454',
 
   buttonMainColor: '#758282',
 
